@@ -1,9 +1,1316 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
 <head>
-  <title>我的个人博客</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLA-Arena</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWV023WWP4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-VWV023WWP4');
+    </script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/AlpacaFarm_small.png">
+    <link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background: linear-gradient(90deg, #e8f4f8 0%, #ffffff 25%, #ffffff 60%, #f0e8f8 100%);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: baseline;
+            border-bottom: 2px solid #e2e2e2;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #424242;
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: auto;
+        }
+
+        .logo:hover {
+            color: #555555;
+        }
+
+        .navlink {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #424242;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .navlink:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .navlink.active {
+            color: #0073a8;
+            font-weight: 600;
+            border-bottom: 3px solid #0073a8;
+        }
+
+        /* 内容区域 */
+        .content-wrapper {
+            min-height: calc(100vh - 80px);
+            padding: 50px 20px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* 首页样式 */
+        .home-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .paper-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+            text-align: center;
+            background: linear-gradient(90deg, 
+                rgba(220, 100, 100, 0.8) 0%, 
+                rgba(100, 150, 220, 0.8) 25%, 
+                rgba(100, 180, 120, 0.8) 50%, 
+                rgba(200, 140, 60, 0.8) 75%, 
+                rgba(150, 100, 200, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .author-line {
+            font-size: 1.15rem;
+            color: #666;
+            margin: 1rem auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .author-line a {
+            color: #2c5aa0;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .author-line a:hover {
+            color: #4a90e2;
+            text-decoration: underline;
+        }
+
+        .author-affiliation {
+            font-size: 1.05rem;
+            color: #888;
+            margin: 0.5rem auto 2rem;
+            text-align: center;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .author-affiliation img {
+            height: 30px;
+            width: auto;
+        }
+
+        .abstract-section {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 2.5rem 3rem;
+            background: #fafafa;
+            border-left: 5px solid #2c3e50;
+            border-right: 1px solid #e0e0e0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .abstract-section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 0 0 1.5rem 0;
+            color: #2c3e50;
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 0.5px;
+        }
+
+        .abstract-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin: 0;
+            text-align: justify;
+            color: #2c3e50;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .structure-image {
+            display: block;
+            width: 100%;
+            max-width: 1100px;
+            margin: 3rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 60px;
+            text-decoration: none;
+            background-color: #E8F9FF;
+            color: #333;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .button:hover {
+            background-color: #4F75FF;
+            color: #FBFBFB;
+            transform: scale(1.05);
+        }
+
+        .material-icons {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .citation-section {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 1.5rem;
+        }
+
+        .citation-section h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            text-align: center;
+            color: #424242;
+        }
+
+        .citation-section pre {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            text-align: left;
+            margin: 0;
+        }
+
+        /* Leaderboard 页面样式 */
+        .leaderboard-page {
+            max-width: 98%;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .vla-arena-table-wrapper {
+            width: 100%;
+            margin: 2rem auto;
+            overflow-x: auto;
+            overflow-y: visible;
+            position: relative;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .vla-arena-table-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .vla-arena-table-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .vla-arena-table-wrapper::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .vla-arena-table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .vla-arena-table {
+            width: auto;
+            min-width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 0;
+            font-size: 0.95rem;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            table-layout: auto;
+        }
+
+        .vla-arena-table th {
+            background: #f5f5f5;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+            min-width: 150px;
+        }
+
+        .vla-arena-table th:first-child {
+            border-left: 1px solid #ddd;
+        }
+
+        .vla-arena-table th.model-name {
+            width: 180px;
+            min-width: 180px;
+            max-width: 180px;
+        }
+
+        .vla-arena-table td {
+            padding: 1rem 0.75rem;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            min-width: 150px;
+        }
+
+        .vla-arena-table td:first-child {
+            border-left: 1px solid #ddd;
+        }
+
+        .vla-arena-table td.model-name {
+            width: 180px;
+            min-width: 180px;
+            max-width: 180px;
+        }
+
+        .vla-arena-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .task-category-header {
+            background: #e8e8e8 !important;
+            font-weight: 700;
+            font-size: 1rem;
+            white-space: nowrap;
+            padding: 0.75rem 0.5rem;
+            text-align: center !important;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .safety-category { background: rgba(220, 100, 100, 0.15) !important; color: rgb(220, 100, 100); }
+        .distractor-category { background: rgba(100, 150, 220, 0.15) !important; color: rgb(100, 150, 220); }
+        .extrapolation-category { background: rgba(100, 180, 120, 0.15) !important; color: rgb(100, 180, 120); }
+        .long-horizon-category { background: rgba(200, 140, 60, 0.15) !important; color: rgb(200, 140, 60); }
+
+        .model-name {
+            font-weight: 600;
+            text-align: left;
+            padding-left: 1rem;
+            width: 180px;
+            min-width: 180px;
+            max-width: 180px;
+            white-space: nowrap;
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+            margin-left: 0;
+        }
+
+        .vla-arena-table th.model-name {
+            background-color: #f5f5f5;
+            z-index: 30;
+        }
+
+        .vla-arena-table tbody .model-name {
+            background-color: white;
+            z-index: 20;
+        }
+
+        .vla-arena-table tbody tr:hover .model-name {
+            background-color: #f9f9f9;
+        }
+
+        .model-name.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .model-name.sortable:hover {
+            background-color: #e0e0e0 !important;
+        }
+
+        .sparkline-container {
+            display: inline-block;
+            position: relative;
+            width: 140px;
+            height: 80px;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        .sparkline-svg {
+            width: 140px;
+            height: 80px;
+        }
+
+        .dual-chart-container {
+            display: inline-block;
+            position: relative;
+            width: 140px;
+            height: 80px;
+            margin: 0 auto;
+            flex-shrink: 0;
+        }
+
+        .sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .sortable:hover {
+            background-color: #e0e0e0;
+        }
+
+        .sort-indicator {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 0.8em;
+        }
+
+        .dual-chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .chart-label {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .cc-label {
+            color: rgb(255, 140, 0);
+        }
+
+        .sr-label {
+            color: rgb(0, 150, 200);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        #branding {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #branding h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #777;
+        }
+
+        table {
+            max-width: 700px;
+            width: 100%;
+            table-layout: fixed;
+            margin: auto;
+            font-size: 1em;
+        }
+
+        table th,
+        table td {
+            padding: 6px;
+            word-wrap: break-word;
+            vertical-align: middle;
+        }
+
+        table th {
+            border-bottom: 2px solid #000;
+        }
+
+        th.rank, td.rank {
+            width: 9%;
+            padding-left: 10px;
+            text-align: left;
+        }
+
+        th.name, td.name {
+            width: 55%;
+            padding-left: 30px;
+            text-align: left;
+        }
+
+        th:not(.rank):not(.name),
+        td:not(.rank):not(.name) {
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        th.winRate, td.winRate {
+            width: 17%;
+            padding-right: 30px;
+        }
+
+        th {
+            text-align: right;
+            padding-bottom: 15px;
+        }
+
+        td {
+            padding-bottom: 10px;
+        }
+
+        #leaderboard tr th.winRate,
+        #leaderboard tr td.winRate {
+            color: #999999;
+        }
+
+        #leaderboard tr th.rank,
+        #leaderboard tr td.rank {
+            color: #999999;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #E8E8E8;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #F8F8F8;
+        }
+
+        .switch-toggle {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .switch-toggle input + label {
+            padding: 2px;
+            padding-left: 7px;
+            padding-right: 7px;
+            cursor: pointer;
+            background-color: lightgrey;
+            border: 1px solid transparent;
+            font-size: 16px;
+        }
+
+        .switch-toggle input:checked + label {
+            border-color: green;
+            color: green;
+        }
+
+        .switch-toggle input:not(:checked) + label {
+            color: black;
+            box-shadow: none !important;
+            user-select: none;
+        }
+
+        .toggle-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .toggle-line .switch-toggle {
+            margin: 0 10px;
+        }
+
+        /* 第三个页面样式 */
+        .page3 {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .page3 h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #424242;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
+
 <body>
-  <h1>欢迎访问我的个人博客</h1>
-  <p>这里是我的个人博客，我会分享一些我感兴趣的话题和经验，希望您能喜欢。</p>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <a href="#" class="logo" onclick="showPage('home'); return false;">VLA-Arena</a>
+        <a href="#" class="navlink" id="nav-home" onclick="showPage('home'); return false;">首页</a>
+        <a href="#" class="navlink" id="nav-leaderboard" onclick="showPage('leaderboard'); return false;">Leaderboard</a>
+        <a href="#" class="navlink" id="nav-page3" onclick="showPage('page3'); return false;">页面3</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <!-- 首页 -->
+        <div id="home-page" class="page active">
+            <div class="home-page">
+                <h1 class="paper-title">VLA-Arena: Benchmarking Vision-Language-Action Models via Structured Task Design</h1>
+                
+                <p class="author-line">
+                    <a href="https://github.com/muchvo" target="_blank">Borong Zhang</a>, 
+                    <a href="https://github.com/learnerljh" target="_blank">Jiahao Li</a>, 
+                    <a href="https://github.com/propellanesjc" target="_blank">Jiachen Shen</a>, 
+                    <a href="https://caiyishuai.github.io/" target="_blank">Yishuai Cai</a>, 
+                    <a href="https://yuhaozhang.me/" target="_blank">Yuhao Zhang</a>, 
+                    <a href=" https://jijiaming.com/" target="_blank">Jiaming Ji</a>, 
+                    and <a href="https://www.yangyaodong.com/" target="_blank">Yaodong Yang</a>
+                </p>
+                
+                <p class="author-affiliation">
+                    <img src="figures/pekinglogo.png" alt="Peking University Logo">
+                    <span>Institute for AI, Peking University</span>
+                </p>
+
+                <div class="button-container">
+                    <a class="button" href="#paper" target="_blank">
+                        <span class="material-icons">description</span>
+                        paper
+                    </a>
+                    <a class="button" href="https://github.com/PKU-Alignment/VLA-Arena" target="_blank">
+                        <span class="material-icons">code</span>
+                        github
+                    </a>
+                    <a class="button" href="#data" target="_blank">
+                        <span class="material-icons">folder</span>
+                        data
+                    </a>
+                    <a class="button" href="#model" target="_blank">
+                        <span class="material-icons">download</span>
+                        model
+                    </a>
+                    <a class="button" href="#faq">
+                        <span class="material-icons">quiz</span>
+                        FAQ
+        </a>
+    </div>
+
+                <img src="figures/structure.png" alt="Structure" class="structure-image">
+
+                <div class="abstract-section">
+                    <h2>Abstract:</h2>
+                    <p>
+                        While Vision-Language-Action models (VLAs) are rapidly advancing towards generalist robot policies, it remains difficult to quantitatively understand their limits and failure modes. To address this, we introduce a comprehensive benchmark called VLA-Arena. We propose a novel structured task design framework to quantify difficulty across three orthogonal axes: (1) Task Structure, (2) Language Command, and (3) Visual Observation. This allows us to systematically design tasks with fine-grained difficulty levels, enabling a precise measurement of model capability frontiers. For Task Structure, VLA-Arena's 170 tasks are grouped into four dimensions: Safety, Distractor, Extrapolation, and Long-Horizon. Each task is designed with three difficulty levels (L0-L2), with fine-tuning performed exclusively on L0 to test for extrapolation. Orthogonal to this, language (W0-W4) and visual (V0-V4) perturbations can be applied to any task to enable a decoupled analysis of robustness. Our extensive evaluation of state-of-the-art VLAs reveals several critical limitations, including a strong tendency toward memorization over generalization, asymmetric robustness, a lack of consideration for safety constraints, and an inability to compose learned skills for long-horizon tasks. To foster research addressing these challenges and ensure reproducibility, we provide the complete VLA-Arena framework, including an end-to-end toolchain from task definition to automated evaluation and the VLA-Arena-S/M/L datasets for fine-tuning.
+                    </p>
+        </div>
+
+                <div class="citation-section">
+                    <h2>引用</h2>
+                    <pre>@misc{vla-arena2025,
+  title={VLA-Arena},
+  author={Jiahao Li, Borong Zhang, Jiachen Shen, Yishuai Cai, Yuhao Zhang, Jiaming Ji, and Yaodong Yang},
+  journal={GitHub repository},
+  year={2025}
+}</pre>
+        </div>
+    </div>
+    </div>
+
+        <!-- Leaderboard 页面 -->
+        <div id="leaderboard-page" class="page">
+            <div class="leaderboard-page">
+                <h1 style="text-align: center; margin-bottom: 1rem;">VLA-Arena Benchmark Results</h1>
+                <p style="text-align: center; color: #666; margin-bottom: 2rem;">
+                    Performance trends across three difficulty levels (L0, L1, L2) with unified y-axis (0.0 to 1.0) for direct cross-model comparison.
+                </p>
+                
+                <div class="vla-arena-table-wrapper">
+                    <table id="vla-arena-table" class="vla-arena-table">
+                        <thead id="vla-table-head"></thead>
+                        <tbody id="vla-table-body"></tbody>
+    </table>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+                    <h3 style="margin-bottom: 0.5rem;">Legend</h3>
+                    <p style="margin: 0.25rem 0;"><strong>SR</strong> (Success Rate): Blue line, shown below sparkline</p>
+                    <p style="margin: 0.25rem 0;"><strong>CC</strong> (Cumulative Cost): Orange line, shown above sparkline (Safety tasks only)</p>
+                    <p style="margin: 0.25rem 0;"><strong>Bold numbers</strong> indicate the best performance at that difficulty level</p>
+                    <p style="margin: 0.25rem 0;">Click on column headers to sort by that task's average performance</p>
+        </div>
+            </div>
+    </div>
+
+        <!-- 第三个页面 -->
+        <div id="page3" class="page">
+            <div class="page3">
+                <h2>页面3</h2>
+                <p>这是第三个页面，您可以在这里添加内容。</p>
+    </div>
+        </div>
+</div>
+
+<script>
+        // 页面切换功能
+        function showPage(pageId) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 移除所有导航链接的 active 状态
+            document.querySelectorAll('.navlink').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // 显示选中的页面
+            let pageElementId;
+            if (pageId === 'home') {
+                pageElementId = 'home-page';
+            } else if (pageId === 'leaderboard') {
+                pageElementId = 'leaderboard-page';
+            } else if (pageId === 'page3') {
+                pageElementId = 'page3';
+            }
+            
+            const pageElement = document.getElementById(pageElementId);
+            if (pageElement) {
+                pageElement.classList.add('active');
+            }
+
+            // 添加对应导航链接的 active 状态
+            const navId = 'nav-' + pageId;
+            const navLink = document.getElementById(navId);
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+
+            // 如果是 leaderboard 页面，初始化表格
+            if (pageId === 'leaderboard') {
+                // 延迟初始化，确保页面已显示
+                setTimeout(() => {
+                    initVLArenaTable();
+                }, 100);
+            }
+        }
+
+        // VLA-Arena 表格数据（从 JSON 文件加载）
+        let vlaArenaData = null;
+
+        let currentSortColumn = null;
+        let sortDirection = 'desc';
+
+        // 加载 VLA-Arena 数据
+        async function loadVLArenaData() {
+            if (vlaArenaData) {
+                return vlaArenaData; // 如果已经加载，直接返回
+            }
+            
+            console.log('Starting to load VLA-Arena data...');
+            console.log('Current URL:', window.location.href);
+            
+            // 尝试多个路径，确保在不同环境下都能工作
+            // GitHub Pages 上相对路径 'data/vla-arena-data.json' 应该能正常工作
+            const paths = [
+                'data/vla-arena-data.json',      // 相对路径（GitHub Pages 和本地服务器都支持）
+                './data/vla-arena-data.json',    // 当前目录
+                '/data/vla-arena-data.json'      // 绝对路径（某些配置下可能需要）
+            ];
+            
+            for (const path of paths) {
+                try {
+                    console.log(`Trying to load from: ${path}`);
+                    const fullUrl = new URL(path, window.location.href).href;
+                    console.log(`Full URL: ${fullUrl}`);
+                    
+                    const response = await fetch(path);
+                    console.log(`Response status: ${response.status} ${response.statusText}`);
+                    
+                    if (!response.ok) {
+                        console.warn(`Failed with status ${response.status}, trying next path...`);
+                           continue; // 尝试下一个路径
+                    }
+                    
+                    const jsonData = await response.json();
+                    console.log('Successfully loaded data from:', path);
+                    console.log('Data structure:', {
+                        models: jsonData.models?.length || 0,
+                        tasks: jsonData.tasks?.length || 0
+                    });
+                    
+                    vlaArenaData = jsonData;
+                    return vlaArenaData;
+                } catch (error) {
+                    console.warn(`Failed to load from ${path}:`, error.message);
+                    console.warn('Error details:', error);
+                    continue; // 尝试下一个路径
+                }
+            }
+            
+            // 所有路径都失败
+            console.error('Failed to load data from all paths. Make sure you are running a local server (e.g., python -m http.server)');
+            console.error('Please check:');
+            console.error('1. Server is running on http://localhost:8000');
+            console.error('2. You are accessing http://localhost:8000 (not file://)');
+            console.error('3. data/vla-arena-data.json file exists');
+            return null;
+        }
+
+        // 初始化 VLA-Arena 表格
+        async function initVLArenaTable() {
+            const thead = document.getElementById('vla-table-head');
+            const tbody = document.getElementById('vla-table-body');
+            
+            if (!thead || !tbody) return;
+
+            // 加载数据
+            const data = await loadVLArenaData();
+            if (!data) {
+                const errorMsg = `
+                    <tr>
+                        <td colspan="100%" style="text-align: center; padding: 2rem; color: #d32f2f;">
+                            <h3>Failed to load data</h3>
+                            <p>Unable to load data/vla-arena-data.json</p>
+                            <p style="font-size: 0.9rem; margin-top: 1rem;">
+                                <strong>Solution:</strong> Please run a local server instead of opening the file directly.<br>
+                                Use: <code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px;">python -m http.server 8000</code><br>
+                                Then open: <code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px;">http://localhost:8000</code>
+                            </p>
+                            <p style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
+                                Check the browser console (F12) for more details.
+                            </p>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML = errorMsg;
+                return;
+            }
+
+            // 确保 vlaArenaData 已设置（供其他函数使用）
+            vlaArenaData = data;
+
+            // 清空表格
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            // 计算每个类别的任务数量
+            const categoryCounts = {};
+            data.tasks.forEach(task => {
+                if (!categoryCounts[task.category]) {
+                    categoryCounts[task.category] = 0;
+                }
+                categoryCounts[task.category]++;
+            });
+
+            // 创建第一行表头（类别行）
+            const categoryRow = document.createElement('tr');
+            const modelCategoryCell = document.createElement('th');
+            modelCategoryCell.className = 'model-name sortable';
+            modelCategoryCell.rowSpan = 2;
+            modelCategoryCell.textContent = 'Model';
+            modelCategoryCell.onclick = () => sortByModel();
+            categoryRow.appendChild(modelCategoryCell);
+
+            let currentCategory = '';
+            data.tasks.forEach((task, idx) => {
+                if (task.category !== currentCategory) {
+                    currentCategory = task.category;
+                    const categoryCell = document.createElement('th');
+                    const categoryClass = task.category.toLowerCase().replace(/\s+/g, '-');
+                    categoryCell.className = `task-category-header ${categoryClass}-category`;
+                    categoryCell.colSpan = categoryCounts[task.category];
+                    categoryCell.textContent = task.category;
+                    categoryRow.appendChild(categoryCell);
+                }
+            });
+
+            thead.appendChild(categoryRow);
+
+            // 创建第二行表头（任务行）
+            const taskRow = document.createElement('tr');
+            data.tasks.forEach((task, idx) => {
+                const taskHeader = document.createElement('th');
+                taskHeader.className = 'sortable';
+                taskHeader.textContent = task.name;
+                taskHeader.dataset.taskIndex = idx;
+                taskHeader.onclick = () => sortByTask(idx);
+                taskRow.appendChild(taskHeader);
+            });
+
+            thead.appendChild(taskRow);
+
+            // 创建表格行
+            data.models.forEach(model => {
+                const row = document.createElement('tr');
+                
+                // 模型名称列
+                const nameCell = document.createElement('td');
+                nameCell.className = 'model-name';
+                nameCell.textContent = model.name;
+                row.appendChild(nameCell);
+
+                // 任务数据列
+                data.tasks.forEach((task, taskIdx) => {
+                    const taskCell = document.createElement('td');
+                    const taskData = task.data[model.id];
+                    
+                    if (taskData) {
+                        if (task.hasCC) {
+                            // Safety 任务：显示双线图（CC 和 SR）
+                            taskCell.appendChild(createDualSparkline(taskData, task.name));
+                            } else {
+                            // 其他任务：只显示 SR
+                            taskCell.appendChild(createSingleSparkline(taskData, task.name));
+                        }
+                    } else {
+                        taskCell.textContent = 'N/A';
+                    }
+                    
+                    row.appendChild(taskCell);
+                });
+
+                tbody.appendChild(row);
+            });
+
+            // 确保表格容器滚动到最左侧，显示第一列
+            const wrapper = document.querySelector('.vla-arena-table-wrapper');
+            if (wrapper) {
+                wrapper.scrollLeft = 0;
+                // 延迟执行，确保表格已完全渲染
+                setTimeout(() => {
+                    wrapper.scrollLeft = 0;
+                }, 100);
+            }
+        }
+
+        // 创建单线 sparkline（SR only）
+        function createSingleSparkline(data, taskName) {
+            const container = document.createElement('div');
+            container.className = 'sparkline-container';
+            
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('class', 'sparkline-svg');
+            svg.setAttribute('viewBox', '0 0 140 80');
+            svg.setAttribute('width', '140');
+            svg.setAttribute('height', '80');
+            
+            const width = 140;
+            const height = 80;
+            const margin = 12;
+            const chartWidth = width - 2 * margin;
+            const chartHeight = height - 2 * margin;
+            
+            // 背景
+            const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            bg.setAttribute('x', margin);
+            bg.setAttribute('y', margin);
+            bg.setAttribute('width', chartWidth);
+            bg.setAttribute('height', chartHeight);
+            bg.setAttribute('fill', '#f0f0f0');
+            bg.setAttribute('rx', '3');
+            svg.appendChild(bg);
+            
+            // 50% 参考线
+            const refLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            refLine.setAttribute('x1', margin);
+            refLine.setAttribute('y1', margin + chartHeight / 2);
+            refLine.setAttribute('x2', margin + chartWidth);
+            refLine.setAttribute('y2', margin + chartHeight / 2);
+            refLine.setAttribute('stroke', '#999');
+            refLine.setAttribute('stroke-width', '1');
+            refLine.setAttribute('stroke-dasharray', '2,2');
+            refLine.setAttribute('opacity', '0.5');
+            svg.appendChild(refLine);
+            
+            // 计算点位置
+            const points = data.sr.map((val, i) => {
+                const x = margin + (i * chartWidth) / 2;
+                const y = margin + chartHeight - (val * chartHeight);
+                return { x, y, val };
+            });
+            
+            // 绘制折线
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const pathData = `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y}`;
+            path.setAttribute('d', pathData);
+            path.setAttribute('stroke', 'rgb(0, 150, 200)');
+            path.setAttribute('stroke-width', '2');
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(path);
+            
+            // 绘制点和标签
+            points.forEach((point, i) => {
+                const isMax = point.val === Math.max(...data.sr);
+                const isMin = point.val === Math.min(...data.sr);
+                const isBold = data.srBold && data.srBold[i] === 1;
+                
+                // 外圈（最大值/最小值）
+                if (isMax || isMin) {
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', point.x);
+                    circle.setAttribute('cy', point.y);
+                    circle.setAttribute('r', '5');
+                    circle.setAttribute('fill', 'none');
+                    circle.setAttribute('stroke', isMax ? 'rgb(0, 100, 150)' : 'rgb(200, 50, 50)');
+                    circle.setAttribute('stroke-width', '1');
+                    circle.setAttribute('opacity', '0.5');
+                    svg.appendChild(circle);
+                }
+                
+                // 点
+                const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                dot.setAttribute('cx', point.x);
+                dot.setAttribute('cy', point.y);
+                dot.setAttribute('r', '3');
+                dot.setAttribute('fill', isMax ? 'rgb(0, 100, 150)' : isMin ? 'rgb(200, 50, 50)' : 'rgb(0, 150, 200)');
+                svg.appendChild(dot);
+                
+                // 标签
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', point.x);
+                text.setAttribute('y', height - 3);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', isBold ? '#000' : '#666');
+                text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
+                text.textContent = point.val.toFixed(2);
+                svg.appendChild(text);
+            });
+            
+            container.appendChild(svg);
+            return container;
+        }
+
+        // 创建双线 sparkline（CC 和 SR）
+        function createDualSparkline(data, taskName) {
+            const container = document.createElement('div');
+            container.className = 'dual-chart-container';
+            
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('class', 'sparkline-svg');
+            svg.setAttribute('viewBox', '0 0 140 80');
+            svg.setAttribute('width', '140');
+            svg.setAttribute('height', '80');
+            
+            const width = 140;
+            const height = 80;
+            const margin = 12;
+            const chartWidth = width - 2 * margin;
+            const chartHeight = height - 2 * margin;
+            
+            // 背景
+            const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            bg.setAttribute('x', margin);
+            bg.setAttribute('y', margin);
+            bg.setAttribute('width', chartWidth);
+            bg.setAttribute('height', chartHeight);
+            bg.setAttribute('fill', '#f0f0f0');
+            bg.setAttribute('rx', '3');
+            svg.appendChild(bg);
+            
+            // 50% 参考线
+            const refLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            refLine.setAttribute('x1', margin);
+            refLine.setAttribute('y1', margin + chartHeight / 2);
+            refLine.setAttribute('x2', margin + chartWidth);
+            refLine.setAttribute('y2', margin + chartHeight / 2);
+            refLine.setAttribute('stroke', '#999');
+            refLine.setAttribute('stroke-width', '1');
+            refLine.setAttribute('stroke-dasharray', '2,2');
+            refLine.setAttribute('opacity', '0.5');
+            svg.appendChild(refLine);
+            
+            // 计算 CC 归一化值
+            const ccMax = Math.max(...data.cc);
+            const ccNormalized = data.cc.map(cc => cc / (ccMax + 0.0001));
+            
+            // CC 点
+            const ccPoints = ccNormalized.map((val, i) => {
+                const x = margin + (i * chartWidth) / 2;
+                const y = margin + chartHeight - (val * chartHeight);
+                return { x, y, val: data.cc[i] };
+            });
+            
+            // 绘制 CC 折线
+            const ccPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const ccPathData = `M ${ccPoints[0].x} ${ccPoints[0].y} L ${ccPoints[1].x} ${ccPoints[1].y} L ${ccPoints[2].x} ${ccPoints[2].y}`;
+            ccPath.setAttribute('d', ccPathData);
+            ccPath.setAttribute('stroke', 'rgb(255, 140, 0)');
+            ccPath.setAttribute('stroke-width', '1.5');
+            ccPath.setAttribute('fill', 'none');
+            ccPath.setAttribute('opacity', '0.8');
+            svg.appendChild(ccPath);
+            
+            // SR 点
+            const srPoints = data.sr.map((val, i) => {
+                const x = margin + (i * chartWidth) / 2;
+                const y = margin + chartHeight - (val * chartHeight);
+                return { x, y, val };
+            });
+            
+            // 绘制 SR 折线
+            const srPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            const srPathData = `M ${srPoints[0].x} ${srPoints[0].y} L ${srPoints[1].x} ${srPoints[1].y} L ${srPoints[2].x} ${srPoints[2].y}`;
+            srPath.setAttribute('d', srPathData);
+            srPath.setAttribute('stroke', 'rgb(0, 150, 200)');
+            srPath.setAttribute('stroke-width', '2');
+            srPath.setAttribute('fill', 'none');
+            srPath.setAttribute('stroke-linecap', 'round');
+            svg.appendChild(srPath);
+            
+            // CC 点和标签
+            ccPoints.forEach((point, i) => {
+                const isBold = data.ccBold && data.ccBold[i] === 1;
+                
+                const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                dot.setAttribute('cx', point.x);
+                dot.setAttribute('cy', point.y);
+                dot.setAttribute('r', '2.5');
+                dot.setAttribute('fill', 'rgb(255, 140, 0)');
+                dot.setAttribute('opacity', '0.9');
+                svg.appendChild(dot);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', point.x);
+                text.setAttribute('y', margin - 3);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('font-size', '10');
+                text.setAttribute('fill', isBold ? '#000' : '#666');
+                text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
+                text.textContent = point.val.toFixed(1);
+                svg.appendChild(text);
+            });
+            
+            // SR 点和标签
+            srPoints.forEach((point, i) => {
+                const isMax = point.val === Math.max(...data.sr);
+                const isMin = point.val === Math.min(...data.sr);
+                const isBold = data.srBold && data.srBold[i] === 1;
+                
+                if (isMax || isMin) {
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('cx', point.x);
+                    circle.setAttribute('cy', point.y);
+                    circle.setAttribute('r', '5');
+                    circle.setAttribute('fill', 'none');
+                    circle.setAttribute('stroke', isMax ? 'rgb(0, 100, 150)' : 'rgb(200, 50, 50)');
+                    circle.setAttribute('stroke-width', '1');
+                    circle.setAttribute('opacity', '0.5');
+                    svg.appendChild(circle);
+                }
+                
+                const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                dot.setAttribute('cx', point.x);
+                dot.setAttribute('cy', point.y);
+                dot.setAttribute('r', '3');
+                dot.setAttribute('fill', isMax ? 'rgb(0, 100, 150)' : isMin ? 'rgb(200, 50, 50)' : 'rgb(0, 150, 200)');
+                svg.appendChild(dot);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', point.x);
+                text.setAttribute('y', height - 3);
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', isBold ? '#000' : '#666');
+                text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
+                text.textContent = point.val.toFixed(2);
+                svg.appendChild(text);
+            });
+            
+            container.appendChild(svg);
+            return container;
+        }
+
+        let currentModelSortDirection = 'asc';
+
+        // 按模型排序
+        function sortByModel() {
+            const tbody = document.getElementById('vla-table-body');
+            
+            if (!tbody) return;
+            
+            // 切换排序方向
+            currentModelSortDirection = currentModelSortDirection === 'asc' ? 'desc' : 'asc';
+            
+            // 获取所有行
+            const rows = Array.from(tbody.children);
+            
+            // 按模型名称排序
+            rows.sort((a, b) => {
+                const nameA = a.firstChild.textContent.trim();
+                const nameB = b.firstChild.textContent.trim();
+                if (currentModelSortDirection === 'asc') {
+                    return nameA.localeCompare(nameB);
+                } else {
+                    return nameB.localeCompare(nameA);
+                }
+            });
+            
+            // 重新排列
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+            
+            // 更新排序指示器
+            const modelHeader = document.querySelector('.model-name.sortable');
+            if (modelHeader) {
+                modelHeader.textContent = 'Model' + (currentModelSortDirection === 'desc' ? ' ↓' : ' ↑');
+            }
+            
+            // 清除任务列的排序指示器
+            document.querySelectorAll('[data-task-index]').forEach(th => {
+                if (th.dataset.taskIndex) {
+                    const task = vlaArenaData.tasks[parseInt(th.dataset.taskIndex)];
+                    th.textContent = task.name;
+                }
+            });
+            
+            currentSortColumn = null;
+        }
+
+        // 按任务排序
+        function sortByTask(taskIndex) {
+            if (!vlaArenaData) {
+                console.error('Data not loaded yet');
+                return;
+            }
+            
+            const task = vlaArenaData.tasks[taskIndex];
+            const tbody = document.getElementById('vla-table-body');
+            
+            if (!tbody || !task) return;
+            
+            // 切换排序方向
+            if (currentSortColumn === taskIndex) {
+                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortColumn = taskIndex;
+                sortDirection = 'desc';
+            }
+            
+            // 计算每个模型的平均性能
+            const modelScores = vlaArenaData.models.map(model => {
+                const taskData = task.data[model.id];
+                if (!taskData) return { model, score: 0 };
+                
+                const avgScore = taskData.sr.reduce((a, b) => a + b, 0) / taskData.sr.length;
+                return { model, score: avgScore };
+            });
+            
+            // 排序
+            modelScores.sort((a, b) => {
+                return sortDirection === 'desc' ? b.score - a.score : a.score - b.score;
+            });
+            
+            // 重新排列表格行
+            const rows = Array.from(tbody.children);
+            const sortedRows = modelScores.map(ms => {
+                return rows.find(row => row.firstChild.textContent === ms.model.name);
+            }).filter(row => row);
+            
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+            
+            // 更新排序指示器
+            const modelHeader = document.querySelector('.model-name.sortable');
+            if (modelHeader) {
+                modelHeader.textContent = 'Model';
+            }
+            
+            document.querySelectorAll('[data-task-index]').forEach(th => {
+                if (th.dataset.taskIndex && vlaArenaData) {
+                    const task = vlaArenaData.tasks[parseInt(th.dataset.taskIndex)];
+                    if (task) {
+                        th.textContent = task.name;
+                    }
+                }
+            });
+            
+            const sortTh = document.querySelector(`[data-task-index="${taskIndex}"]`);
+            if (sortTh) {
+                sortTh.textContent = task.name + (sortDirection === 'desc' ? ' ↓' : ' ↑');
+            }
+        }
+
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 默认显示首页
+            showPage('home');
+        });
+</script>
+
 </body>
+
 </html>

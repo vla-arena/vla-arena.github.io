@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>服务器连接测试</h1>
+    <p>当前访问地址: <strong id="current-url"></strong></p>
+    
+    <button onclick="runTests()">运行测试</button>
+    
+    <div id="results"></div>
+
+    <script>
+        document.getElementById('current-url').textContent = window.location.href;
+        
+        async function runTests() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+            
+            function addResult(message, type) {
+                const div = document.createElement('div');
+                div.className = `test-result ${type}`;
+                div.textContent = message;
+                resultsDiv.appendChild(div);
+            }
+            
+            // 测试 1: 检查协议
+            if (window.location.protocol === 'file:') {
+                addResult('❌ 错误: 您正在使用 file:// 协议打开页面。请使用 http://localhost:8000 访问', 'error');
+                return;
+            } else {
+                addResult('✅ 协议检查通过: 使用 ' + window.location.protocol + ' 协议', 'success');
+            }
+            
+            // 测试 2: 尝试加载 JSON 文件
+            const paths = [
+                'data/vla-arena-data.json',
+                './data/vla-arena-data.json',
+                '/data/vla-arena-data.json'
+            ];
+            
+            let success = false;
+            for (const path of paths) {
+                try {
+                    addResult(`🔄 尝试加载: ${path}`, 'info');
+                    const response = await fetch(path);
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        addResult(`✅ 成功! 从 ${path} 加载数据`, 'success');
+                        addResult(`📊 数据包含 ${data.models?.length || 0} 个模型和 ${data.tasks?.length || 0} 个任务`, 'info');
+                        success = true;
+                        break;
+                    } else {
+                        addResult(`❌ ${path} 返回状态码: ${response.status}`, 'error');
+                    }
+                } catch (error) {
+                    addResult(`❌ ${path} 加载失败: ${error.message}`, 'error');
+                }
+            }
+            
+            if (!success) {
+                addResult('', 'error');
+                addResult('💡 解决方案:', 'info');
+                addResult('1. 确保在项目根目录运行: python -m http.server 8000', 'info');
+                addResult('2. 在浏览器中访问: http://localhost:8000/test-server.html', 'info');
+                addResult('3. 检查 data/vla-arena-data.json 文件是否存在', 'info');
+            }
+        }
+        
+        // 页面加载时自动运行测试
+        window.onload = function() {
+            setTimeout(runTests, 500);
+        };
+    </script>
+</body>
+</html>
+

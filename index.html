@@ -266,7 +266,8 @@
         }
 
         .vla-arena-table-wrapper {
-            width: 100%;
+            width: fit-content;
+            max-width: 100%;
             margin: 2rem auto;
             overflow-x: auto;
             overflow-y: visible;
@@ -301,6 +302,11 @@
             background: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             table-layout: auto;
+        }
+
+        .vla-arena-table-wrapper {
+            width: fit-content;
+            max-width: 100%;
         }
 
         .vla-arena-table th {
@@ -353,6 +359,28 @@
 
         .vla-arena-table tr:hover {
             background-color: #f9f9f9;
+        }
+
+        /* 行和列高亮效果 */
+        .vla-arena-table tbody tr.row-highlight {
+            background-color: #f0f7ff !important;
+        }
+
+        .vla-arena-table tbody tr.row-highlight:hover {
+            background-color: #e6f2ff !important;
+        }
+
+        .vla-arena-table th.column-highlight,
+        .vla-arena-table td.column-highlight {
+            background-color: #f0f7ff !important;
+        }
+
+        .vla-arena-table th.column-highlight {
+            background-color: #e0edff !important;
+        }
+
+        .vla-arena-table tbody tr.row-highlight td.column-highlight {
+            background-color: #d9e9ff !important;
         }
 
         .task-category-header {
@@ -609,6 +637,263 @@
             margin-bottom: 1rem;
             color: #424242;
         }
+
+        /* Leaderboard Header Styles */
+        .leaderboard-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .leaderboard-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .leaderboard-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .leaderboard-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(135deg, #0073a8 0%, #005a87 50%, #004066 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .leaderboard-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* 控制面板样式 */
+        .control-panel {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .control-panel h2 {
+            font-size: 1.15rem;
+            margin: 0 0 1rem 0;
+            color: #424242;
+            border-bottom: 2px solid #0073a8;
+            padding-bottom: 0.4rem;
+        }
+
+        .control-section {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .control-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .control-section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-section-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: #0073a8;
+            border-radius: 2px;
+        }
+
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+            margin-bottom: 0.6rem;
+        }
+
+        .control-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            font-size: 0.85rem;
+            color: #666;
+            min-width: 100px;
+            font-weight: 500;
+        }
+
+        .control-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .control-option {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-option input[type="radio"],
+        .control-option input[type="checkbox"] {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .control-option label {
+            font-size: 0.9rem;
+            color: #555;
+            cursor: pointer;
+            user-select: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .control-option input[type="radio"]:checked + label,
+        .control-option input[type="checkbox"]:checked + label {
+            background: linear-gradient(135deg, #0073a8 0%, #005a87 100%);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 115, 168, 0.3);
+        }
+
+        .control-option label:hover {
+            background-color: #e8f4f8;
+        }
+
+        .control-option input[type="radio"]:checked + label:hover,
+        .control-option input[type="checkbox"]:checked + label:hover {
+            background: linear-gradient(135deg, #005a87 0%, #004066 100%);
+            box-shadow: 0 2px 6px rgba(0, 115, 168, 0.4);
+        }
+
+        .category-groups-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .category-group {
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-bottom: 0;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .category-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #424242;
+        }
+
+        .category-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .category-toggle-btn {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border: 1px solid #0073a8;
+            background: white;
+            color: #0073a8;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .category-toggle-btn:hover {
+            background: #e8f4f8;
+        }
+
+        .task-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .task-item {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .task-item input[type="checkbox"] {
+            margin: 0;
+            margin-right: 0.25rem;
+            cursor: pointer;
+        }
+
+        .task-item label {
+            font-size: 0.85rem;
+            color: #555;
+            cursor: pointer;
+            user-select: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .task-item input[type="checkbox"]:checked + label {
+            background: linear-gradient(135deg, #0073a8 0%, #005a87 100%);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 115, 168, 0.3);
+        }
+
+        .task-item label:hover {
+            background-color: #e8f4f8;
+        }
+
+        .task-item input[type="checkbox"]:checked + label:hover {
+            background: linear-gradient(135deg, #005a87 0%, #004066 100%);
+            box-shadow: 0 2px 6px rgba(0, 115, 168, 0.4);
+        }
+
+        .safety-category .category-name { color: rgb(220, 100, 100); }
+        .distractor-category .category-name { color: rgb(100, 150, 220); }
+        .extrapolation-category .category-name { color: rgb(100, 180, 120); }
+        .long-horizon-category .category-name { color: rgb(200, 140, 60); }
+
+        .safety-category { border-left: 3px solid rgba(220, 100, 100, 0.3); }
+        .distractor-category { border-left: 3px solid rgba(100, 150, 220, 0.3); }
+        .extrapolation-category { border-left: 3px solid rgba(100, 180, 120, 0.3); }
+        .long-horizon-category { border-left: 3px solid rgba(200, 140, 60, 0.3); }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
@@ -690,10 +975,83 @@
         <!-- Leaderboard 页面 -->
         <div id="leaderboard-page" class="page">
             <div class="leaderboard-page">
-                <h1 style="text-align: center; margin-bottom: 1rem;">VLA-Arena Benchmark Results</h1>
-                <p style="text-align: center; color: #666; margin-bottom: 2rem;">
-                    Performance trends across three difficulty levels (L0, L1, L2) with unified y-axis (0.0 to 1.0) for direct cross-model comparison.
-                </p>
+                <div class="leaderboard-header">
+                    <div class="leaderboard-title-container">
+                        <span class="leaderboard-icon">📊</span>
+                        <h1 class="leaderboard-title">VLA-Arena Model Performance Leaderboard</h1>
+                    </div>
+                    <p class="leaderboard-description">
+                        Comprehensive evaluation of vision-language-action models across multiple difficulty levels and task categories. 
+                        Interactive filtering and sorting enable detailed performance analysis and cross-model comparison.
+                    </p>
+                </div>
+                
+                <!-- Control Panel -->
+                <div class="control-panel" id="control-panel">
+                    <h2>Filtering & Sorting Configuration</h2>
+                    
+                    <!-- Sorting Strategy -->
+                    <div class="control-section">
+                        <div class="control-section-title">Evaluation Metric</div>
+                        <div class="control-row">
+                            <div class="control-label">Difficulty Level:</div>
+                            <div class="control-options">
+                                <div class="control-option">
+                                    <input type="radio" name="difficulty" id="difficulty-l0" value="l0" checked>
+                                    <label for="difficulty-l0">Memorization (L0)</label>
+                                </div>
+                                <div class="control-option">
+                                    <input type="radio" name="difficulty" id="difficulty-l1l2" value="l1l2">
+                                    <label for="difficulty-l1l2">Generalization (L1+L2)</label>
+                                </div>
+                                <div class="control-option">
+                                    <input type="radio" name="difficulty" id="difficulty-l1" value="l1">
+                                    <label for="difficulty-l1">Generalization (L1)</label>
+                                </div>
+                                <div class="control-option">
+                                    <input type="radio" name="difficulty" id="difficulty-l2" value="l2">
+                                    <label for="difficulty-l2">Generalization (L2)</label>
+                                </div>
+                                <div class="control-option">
+                                    <input type="radio" name="difficulty" id="difficulty-avg" value="avg">
+                                    <label for="difficulty-avg">Average (L0+L1+L2)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-row" id="safety-metric-row" style="display: none;">
+                            <div class="control-label">Safety Metric:</div>
+                            <div class="control-options">
+                                <div class="control-option">
+                                    <input type="radio" name="safety-metric" id="metric-sr" value="sr" checked>
+                                    <label for="metric-sr">SR (Success Rate)</label>
+                                </div>
+                                <div class="control-option">
+                                    <input type="radio" name="safety-metric" id="metric-cc" value="cc">
+                                    <label for="metric-cc">CC (Cumulative Cost)</label>
+                                </div>
+                                <div class="control-option">
+                                    <input type="checkbox" id="show-other-safety-metric">
+                                    <label for="show-other-safety-metric">Show other metric (view only)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-row">
+                            <div class="control-label">Display:</div>
+                            <div class="control-options">
+                                <div class="control-option">
+                                    <input type="checkbox" id="show-other-data" checked>
+                                    <label for="show-other-data">Show unselected tasks (view only, excluded from sorting)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Category Selection -->
+                    <div class="control-section">
+                        <div class="control-section-title">Task Category Selection</div>
+                        <div id="category-groups" class="category-groups-container"></div>
+                    </div>
+                </div>
                 
                 <div class="vla-arena-table-wrapper">
                     <table id="vla-arena-table" class="vla-arena-table">
@@ -771,60 +1129,113 @@
         let currentSortColumn = null;
         let sortDirection = 'desc';
 
-        // 加载 VLA-Arena 数据
+        // 加载 VLA-Arena 数据（从多个模型文件合并）
         async function loadVLArenaData() {
             if (vlaArenaData) {
                 return vlaArenaData; // 如果已经加载，直接返回
             }
             
-            console.log('Starting to load VLA-Arena data...');
-            console.log('Current URL:', window.location.href);
+            console.log('Starting to load VLA-Arena data from model files...');
             
-            // 尝试多个路径，确保在不同环境下都能工作
-            // GitHub Pages 上相对路径 'data/vla-arena-data.json' 应该能正常工作
-            const paths = [
-                'data/vla-arena-data.json',      // 相对路径（GitHub Pages 和本地服务器都支持）
-                './data/vla-arena-data.json',    // 当前目录
-                '/data/vla-arena-data.json'      // 绝对路径（某些配置下可能需要）
+            // 模型文件列表（按模型ID）
+            const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla'];
+            const basePaths = [
+                'data/results/',      // 相对路径
+                './data/results/',    // 当前目录
+                '/data/results/'      // 绝对路径
             ];
             
-            for (const path of paths) {
+            let basePath = null;
+            const modelFiles = [];
+            
+            // 尝试找到正确的路径
+            for (const path of basePaths) {
                 try {
-                    console.log(`Trying to load from: ${path}`);
-                    const fullUrl = new URL(path, window.location.href).href;
-                    console.log(`Full URL: ${fullUrl}`);
-                    
-                    const response = await fetch(path);
-                    console.log(`Response status: ${response.status} ${response.statusText}`);
-                    
-                    if (!response.ok) {
-                        console.warn(`Failed with status ${response.status}, trying next path...`);
-                           continue; // 尝试下一个路径
+                    const testUrl = `${path}${modelIds[0]}.json`;
+                    const response = await fetch(testUrl);
+                    if (response.ok) {
+                        basePath = path;
+                        console.log(`Found base path: ${basePath}`);
+                        break;
                     }
-                    
-                    const jsonData = await response.json();
-                    console.log('Successfully loaded data from:', path);
-                    console.log('Data structure:', {
-                        models: jsonData.models?.length || 0,
-                        tasks: jsonData.tasks?.length || 0
-                    });
-                    
-                    vlaArenaData = jsonData;
-                    return vlaArenaData;
                 } catch (error) {
-                    console.warn(`Failed to load from ${path}:`, error.message);
-                    console.warn('Error details:', error);
-                    continue; // 尝试下一个路径
+                    continue;
                 }
             }
             
-            // 所有路径都失败
-            console.error('Failed to load data from all paths. Make sure you are running a local server (e.g., python -m http.server)');
-            console.error('Please check:');
-            console.error('1. Server is running on http://localhost:8000');
-            console.error('2. You are accessing http://localhost:8000 (not file://)');
-            console.error('3. data/vla-arena-data.json file exists');
-            return null;
+            if (!basePath) {
+                console.error('Failed to find data/results directory');
+                return null;
+            }
+            
+            // 读取所有模型文件
+            const modelDataList = [];
+            for (const modelId of modelIds) {
+                try {
+                    const filePath = `${basePath}${modelId}.json`;
+                    const response = await fetch(filePath);
+                    
+                    if (!response.ok) {
+                        console.warn(`Failed to load ${filePath}, skipping...`);
+                        continue;
+                    }
+                    
+                    const modelData = await response.json();
+                    modelDataList.push(modelData);
+                    console.log(`Successfully loaded ${modelId}.json`);
+                } catch (error) {
+                    console.warn(`Error loading ${modelId}.json:`, error.message);
+                    continue;
+                }
+            }
+            
+            if (modelDataList.length === 0) {
+                console.error('No model files were loaded');
+                return null;
+            }
+            
+            // 合并数据
+            // 首先收集所有任务信息（从第一个模型文件获取任务结构）
+            const firstModel = modelDataList[0];
+            const tasks = firstModel.tasks.map(task => ({
+                name: task.name,
+                category: task.category,
+                hasCC: task.hasCC,
+                data: {}
+            }));
+            
+            // 为每个模型填充数据
+            const models = [];
+            for (const modelData of modelDataList) {
+                models.push({
+                    name: modelData.name,
+                    id: modelData.id
+                });
+                
+                // 为每个任务填充该模型的数据
+                for (let i = 0; i < tasks.length; i++) {
+                    const task = tasks[i];
+                    const modelTask = modelData.tasks.find(t => t.name === task.name);
+                    if (modelTask && modelTask.data) {
+                        task.data[modelData.id] = modelTask.data;
+                    }
+                    // 如果没有数据，不设置 task.data[modelData.id]，这样在显示时会显示 "-"
+                }
+            }
+            
+            // 构建最终的数据结构
+            vlaArenaData = {
+                models: models,
+                tasks: tasks
+            };
+            
+            console.log('Successfully merged data from', modelDataList.length, 'model files');
+            console.log('Data structure:', {
+                models: vlaArenaData.models.length,
+                tasks: vlaArenaData.tasks.length
+            });
+            
+            return vlaArenaData;
         }
 
         // 初始化 VLA-Arena 表格
@@ -841,7 +1252,7 @@
                     <tr>
                         <td colspan="100%" style="text-align: center; padding: 2rem; color: #d32f2f;">
                             <h3>Failed to load data</h3>
-                            <p>Unable to load data/vla-arena-data.json</p>
+                            <p>Unable to load model files from data/results/</p>
                             <p style="font-size: 0.9rem; margin-top: 1rem;">
                                 <strong>Solution:</strong> Please run a local server instead of opening the file directly.<br>
                                 Use: <code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px;">python -m http.server 8000</code><br>
@@ -860,13 +1271,208 @@
             // 确保 vlaArenaData 已设置（供其他函数使用）
             vlaArenaData = data;
 
+            // 初始化控制面板
+            initControlPanel(data);
+
+            // 更新表格
+            updateTable();
+        }
+
+        // 控制面板状态
+        let controlState = {
+            difficulty: 'l0',
+            safetyMetric: 'sr',
+            showOtherSafetyMetric: false,
+            selectedTasks: new Set(),
+            showOtherData: true
+        };
+
+        // 标记是否已执行默认排序
+        let hasDefaultSorted = false;
+
+        // 初始化控制面板
+        function initControlPanel(data) {
+            const categoryGroups = document.getElementById('category-groups');
+            if (!categoryGroups) return;
+
+            categoryGroups.innerHTML = '';
+
+            // 按类别分组任务
+            const tasksByCategory = {};
+            data.tasks.forEach(task => {
+                if (!tasksByCategory[task.category]) {
+                    tasksByCategory[task.category] = [];
+                }
+                tasksByCategory[task.category].push(task);
+            });
+
+            // 为每个类别创建组
+            Object.keys(tasksByCategory).forEach(category => {
+                const categoryClass = category.toLowerCase().replace(/\s+/g, '-');
+                const group = document.createElement('div');
+                group.className = `category-group ${categoryClass}-category`;
+                
+                const header = document.createElement('div');
+                header.className = 'category-header';
+                
+                const name = document.createElement('div');
+                name.className = 'category-name';
+                name.textContent = category;
+                
+                const toggle = document.createElement('div');
+                toggle.className = 'category-toggle';
+                
+                const selectAll = document.createElement('button');
+                selectAll.className = 'category-toggle-btn';
+                selectAll.textContent = 'Select All';
+                selectAll.onclick = () => toggleCategoryTasks(category, true);
+                
+                const deselectAll = document.createElement('button');
+                deselectAll.className = 'category-toggle-btn';
+                deselectAll.textContent = 'Deselect All';
+                deselectAll.onclick = () => toggleCategoryTasks(category, false);
+                
+                toggle.appendChild(selectAll);
+                toggle.appendChild(deselectAll);
+                
+                header.appendChild(name);
+                header.appendChild(toggle);
+                
+                const taskList = document.createElement('div');
+                taskList.className = 'task-list';
+                
+                tasksByCategory[category].forEach(task => {
+                    const taskItem = document.createElement('div');
+                    taskItem.className = 'task-item';
+                    
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = `task-${task.name}`;
+                    checkbox.value = task.name;
+                    checkbox.checked = true; // 默认全选
+                    checkbox.onchange = () => {
+                        if (checkbox.checked) {
+                            controlState.selectedTasks.add(task.name);
+                        } else {
+                            controlState.selectedTasks.delete(task.name);
+                        }
+                        updateTable();
+                    };
+                    
+                    const label = document.createElement('label');
+                    label.htmlFor = `task-${task.name}`;
+                    label.textContent = task.name;
+                    
+                    taskItem.appendChild(checkbox);
+                    taskItem.appendChild(label);
+                    taskList.appendChild(taskItem);
+                    
+                    // 添加到选中集合
+                    controlState.selectedTasks.add(task.name);
+                });
+                
+                group.appendChild(header);
+                group.appendChild(taskList);
+                categoryGroups.appendChild(group);
+            });
+
+            // 绑定难度级别选择
+            document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
+                radio.onchange = () => {
+                    controlState.difficulty = radio.value;
+                    updateSafetyMetricVisibility();
+                    updateTable();
+                };
+            });
+
+            // 绑定Safety指标选择
+            document.querySelectorAll('input[name="safety-metric"]').forEach(radio => {
+                radio.onchange = () => {
+                    controlState.safetyMetric = radio.value;
+                    updateTable();
+                };
+            });
+
+            // 绑定显示其他Safety指标选项
+            const showOtherSafetyMetricCheckbox = document.getElementById('show-other-safety-metric');
+            if (showOtherSafetyMetricCheckbox) {
+                showOtherSafetyMetricCheckbox.onchange = () => {
+                    controlState.showOtherSafetyMetric = showOtherSafetyMetricCheckbox.checked;
+                    updateTable();
+                };
+            }
+
+            // 绑定显示其他数据选项
+            const showOtherDataCheckbox = document.getElementById('show-other-data');
+            if (showOtherDataCheckbox) {
+                showOtherDataCheckbox.onchange = () => {
+                    controlState.showOtherData = showOtherDataCheckbox.checked;
+                    updateTable();
+                };
+            }
+
+            // 初始化Safety指标显示
+            updateSafetyMetricVisibility();
+        }
+
+        // 切换类别任务选择
+        function toggleCategoryTasks(category, select) {
+            if (!vlaArenaData) return;
+            
+            vlaArenaData.tasks.forEach(task => {
+                if (task.category === category) {
+                    const checkbox = document.getElementById(`task-${task.name}`);
+                    if (checkbox) {
+                        checkbox.checked = select;
+                        if (select) {
+                            controlState.selectedTasks.add(task.name);
+                        } else {
+                            controlState.selectedTasks.delete(task.name);
+                        }
+                    }
+                }
+            });
+            updateTable();
+        }
+
+        // 更新Safety指标显示
+        function updateSafetyMetricVisibility() {
+            const safetyMetricRow = document.getElementById('safety-metric-row');
+            if (!safetyMetricRow || !vlaArenaData) return;
+            
+            // 检查是否有选中的Safety任务
+            const hasSafetyTask = Array.from(controlState.selectedTasks).some(taskName => {
+                const task = vlaArenaData.tasks.find(t => t.name === taskName);
+                return task && task.hasCC;
+            });
+            
+            safetyMetricRow.style.display = hasSafetyTask ? 'flex' : 'none';
+        }
+
+        // 更新表格显示
+        function updateTable() {
+            if (!vlaArenaData) return;
+
+            const thead = document.getElementById('vla-table-head');
+            const tbody = document.getElementById('vla-table-body');
+            
+            if (!thead || !tbody) return;
+
             // 清空表格
             thead.innerHTML = '';
             tbody.innerHTML = '';
 
-            // 计算每个类别的任务数量
+            // 筛选任务
+            const selectedTasks = vlaArenaData.tasks.filter(task => 
+                controlState.selectedTasks.has(task.name)
+            );
+            const otherTasks = vlaArenaData.tasks.filter(task => 
+                !controlState.selectedTasks.has(task.name)
+            );
+
+            // 计算每个类别的任务数量（仅选中的任务）
             const categoryCounts = {};
-            data.tasks.forEach(task => {
+            selectedTasks.forEach(task => {
                 if (!categoryCounts[task.category]) {
                     categoryCounts[task.category] = 0;
                 }
@@ -883,7 +1489,7 @@
             categoryRow.appendChild(modelCategoryCell);
 
             let currentCategory = '';
-            data.tasks.forEach((task, idx) => {
+            selectedTasks.forEach((task, idx) => {
                 if (task.category !== currentCategory) {
                     currentCategory = task.category;
                     const categoryCell = document.createElement('th');
@@ -895,24 +1501,48 @@
                 }
             });
 
+            // 如果显示其他数据，添加"其他"列
+            if (controlState.showOtherData && otherTasks.length > 0) {
+                const otherCell = document.createElement('th');
+                otherCell.className = 'task-category-header';
+                otherCell.colSpan = otherTasks.length;
+                otherCell.textContent = 'Other';
+                otherCell.style.background = '#e8e8e8';
+                otherCell.style.color = '#666';
+                categoryRow.appendChild(otherCell);
+            }
+
             thead.appendChild(categoryRow);
 
             // 创建第二行表头（任务行）
             const taskRow = document.createElement('tr');
-            data.tasks.forEach((task, idx) => {
+            selectedTasks.forEach((task, idx) => {
                 const taskHeader = document.createElement('th');
                 taskHeader.className = 'sortable';
                 taskHeader.textContent = task.name;
-                taskHeader.dataset.taskIndex = idx;
-                taskHeader.onclick = () => sortByTask(idx);
+                taskHeader.dataset.taskIndex = vlaArenaData.tasks.indexOf(task);
+                taskHeader.onclick = () => sortByTask(vlaArenaData.tasks.indexOf(task));
                 taskRow.appendChild(taskHeader);
             });
+
+            // 添加其他任务列头
+            if (controlState.showOtherData && otherTasks.length > 0) {
+                otherTasks.forEach((task, idx) => {
+                    const taskHeader = document.createElement('th');
+                    taskHeader.className = 'sortable';
+                    taskHeader.textContent = task.name;
+                    taskHeader.style.opacity = '0.6';
+                    taskHeader.style.cursor = 'default';
+                    taskRow.appendChild(taskHeader);
+                });
+            }
 
             thead.appendChild(taskRow);
 
             // 创建表格行
-            data.models.forEach(model => {
+            vlaArenaData.models.forEach((model, modelIdx) => {
                 const row = document.createElement('tr');
+                row.dataset.rowIndex = modelIdx;
                 
                 // 模型名称列
                 const nameCell = document.createElement('td');
@@ -920,37 +1550,99 @@
                 nameCell.textContent = model.name;
                 row.appendChild(nameCell);
 
-                // 任务数据列
-                data.tasks.forEach((task, taskIdx) => {
+                // 选中的任务数据列
+                selectedTasks.forEach((task, taskIdx) => {
                     const taskCell = document.createElement('td');
+                    taskCell.dataset.columnIndex = taskIdx;
                     const taskData = task.data[model.id];
                     
                     if (taskData) {
                         if (task.hasCC) {
-                            // Safety 任务：显示双线图（CC 和 SR）
-                            taskCell.appendChild(createDualSparkline(taskData, task.name));
-                            } else {
-                            // 其他任务：只显示 SR
+                            taskCell.appendChild(createDualSparkline(taskData, task.name, false));
+                        } else {
                             taskCell.appendChild(createSingleSparkline(taskData, task.name));
                         }
                     } else {
-                        taskCell.textContent = 'N/A';
+                        taskCell.textContent = '-';
                     }
+                    
+                    // 添加鼠标悬停事件
+                    taskCell.addEventListener('mouseenter', function() {
+                        highlightRowAndColumn(this);
+                    });
+                    taskCell.addEventListener('mouseleave', function() {
+                        removeRowAndColumnHighlight();
+                    });
                     
                     row.appendChild(taskCell);
                 });
 
+                // 其他任务数据列
+                if (controlState.showOtherData && otherTasks.length > 0) {
+                    otherTasks.forEach((task, taskIdx) => {
+                        const taskCell = document.createElement('td');
+                        taskCell.dataset.columnIndex = selectedTasks.length + taskIdx;
+                        const taskData = task.data[model.id];
+                        taskCell.style.opacity = '0.6';
+                        
+                        if (taskData) {
+                            if (task.hasCC) {
+                                // 对于未选中的 Safety 任务，显示所有指标（CC 和 SR）
+                                taskCell.appendChild(createDualSparkline(taskData, task.name, true));
+                            } else {
+                                taskCell.appendChild(createSingleSparkline(taskData, task.name));
+                            }
+                        } else {
+                            taskCell.textContent = '-';
+                        }
+                        
+                        // 添加鼠标悬停事件
+                        taskCell.addEventListener('mouseenter', function() {
+                            highlightRowAndColumn(this);
+                        });
+                        taskCell.addEventListener('mouseleave', function() {
+                            removeRowAndColumnHighlight();
+                        });
+                        
+                        row.appendChild(taskCell);
+                    });
+                }
+
                 tbody.appendChild(row);
             });
+            
+            // 为表头也添加悬停事件
+            const headerCells = thead.querySelectorAll('th[data-task-index]');
+            headerCells.forEach((headerCell, idx) => {
+                headerCell.addEventListener('mouseenter', function() {
+                    highlightColumnByIndex(idx);
+                });
+                headerCell.addEventListener('mouseleave', function() {
+                    removeRowAndColumnHighlight();
+                });
+            });
 
-            // 确保表格容器滚动到最左侧，显示第一列
+            // 确保表格容器滚动到最左侧
             const wrapper = document.querySelector('.vla-arena-table-wrapper');
             if (wrapper) {
                 wrapper.scrollLeft = 0;
-                // 延迟执行，确保表格已完全渲染
                 setTimeout(() => {
                     wrapper.scrollLeft = 0;
                 }, 100);
+            }
+
+            // 默认按第一个选中的任务排序（仅首次加载时）
+            if (selectedTasks.length > 0 && !hasDefaultSorted && currentSortColumn === null) {
+                const firstTaskIndex = vlaArenaData.tasks.indexOf(selectedTasks[0]);
+                if (firstTaskIndex >= 0) {
+                    hasDefaultSorted = true;
+                    currentSortColumn = firstTaskIndex;
+                    sortDirection = 'desc';
+                    // 触发排序
+                    setTimeout(() => {
+                        sortByTask(firstTaskIndex);
+                    }, 100);
+                }
             }
         }
 
@@ -1053,8 +1745,9 @@
             return container;
         }
 
-        // 创建双线 sparkline（CC 和 SR）
-        function createDualSparkline(data, taskName) {
+        // 创建双线 sparkline（CC 和 SR），根据控制面板选择显示
+        // showAllMetrics: 如果为 true，显示所有指标（CC 和 SR），用于未选中的任务
+        function createDualSparkline(data, taskName, showAllMetrics = false) {
             const container = document.createElement('div');
             container.className = 'dual-chart-container';
             
@@ -1070,6 +1763,14 @@
             const chartWidth = width - 2 * margin;
             const chartHeight = height - 2 * margin;
             
+            // 获取当前选择的指标（默认为 SR）
+            // 如果 showAllMetrics 为 true，则显示所有指标
+            // 如果 showOtherSafetyMetric 为 true，则同时显示另一个指标
+            let selectedMetric = showAllMetrics ? 'all' : (controlState.safetyMetric || 'sr');
+            if (!showAllMetrics && controlState.showOtherSafetyMetric) {
+                selectedMetric = 'all'; // 同时显示两个指标
+            }
+            
             // 背景
             const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             bg.setAttribute('x', margin);
@@ -1080,17 +1781,19 @@
             bg.setAttribute('rx', '3');
             svg.appendChild(bg);
             
-            // 50% 参考线
-            const refLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            refLine.setAttribute('x1', margin);
-            refLine.setAttribute('y1', margin + chartHeight / 2);
-            refLine.setAttribute('x2', margin + chartWidth);
-            refLine.setAttribute('y2', margin + chartHeight / 2);
-            refLine.setAttribute('stroke', '#999');
-            refLine.setAttribute('stroke-width', '1');
-            refLine.setAttribute('stroke-dasharray', '2,2');
-            refLine.setAttribute('opacity', '0.5');
-            svg.appendChild(refLine);
+            // 50% 参考线（仅当显示 SR 或显示所有指标时显示）
+            if (selectedMetric === 'sr' || selectedMetric === 'all') {
+                const refLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                refLine.setAttribute('x1', margin);
+                refLine.setAttribute('y1', margin + chartHeight / 2);
+                refLine.setAttribute('x2', margin + chartWidth);
+                refLine.setAttribute('y2', margin + chartHeight / 2);
+                refLine.setAttribute('stroke', '#999');
+                refLine.setAttribute('stroke-width', '1');
+                refLine.setAttribute('stroke-dasharray', '2,2');
+                refLine.setAttribute('opacity', '0.5');
+                svg.appendChild(refLine);
+            }
             
             // 计算 CC 归一化值
             const ccMax = Math.max(...data.cc);
@@ -1103,15 +1806,40 @@
                 return { x, y, val: data.cc[i] };
             });
             
-            // 绘制 CC 折线
-            const ccPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const ccPathData = `M ${ccPoints[0].x} ${ccPoints[0].y} L ${ccPoints[1].x} ${ccPoints[1].y} L ${ccPoints[2].x} ${ccPoints[2].y}`;
-            ccPath.setAttribute('d', ccPathData);
-            ccPath.setAttribute('stroke', 'rgb(255, 140, 0)');
-            ccPath.setAttribute('stroke-width', '1.5');
-            ccPath.setAttribute('fill', 'none');
-            ccPath.setAttribute('opacity', '0.8');
-            svg.appendChild(ccPath);
+            // 绘制 CC 折线（当选择 CC 或显示所有指标时显示）
+            if (selectedMetric === 'cc' || selectedMetric === 'all') {
+                const ccPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const ccPathData = `M ${ccPoints[0].x} ${ccPoints[0].y} L ${ccPoints[1].x} ${ccPoints[1].y} L ${ccPoints[2].x} ${ccPoints[2].y}`;
+                ccPath.setAttribute('d', ccPathData);
+                ccPath.setAttribute('stroke', 'rgb(255, 140, 0)');
+                ccPath.setAttribute('stroke-width', '1.5');
+                ccPath.setAttribute('fill', 'none');
+                ccPath.setAttribute('opacity', '0.8');
+                svg.appendChild(ccPath);
+                
+                // CC 点和标签
+                ccPoints.forEach((point, i) => {
+                    const isBold = data.ccBold && data.ccBold[i] === 1;
+                    
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '2.5');
+                    dot.setAttribute('fill', 'rgb(255, 140, 0)');
+                    dot.setAttribute('opacity', '0.9');
+                    svg.appendChild(dot);
+                    
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', point.x);
+                    text.setAttribute('y', margin - 3);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('font-size', '10');
+                    text.setAttribute('fill', isBold ? '#000' : '#666');
+                    text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
+                    text.textContent = point.val.toFixed(1);
+                    svg.appendChild(text);
+                });
+            }
             
             // SR 点
             const srPoints = data.sr.map((val, i) => {
@@ -1120,80 +1848,112 @@
                 return { x, y, val };
             });
             
-            // 绘制 SR 折线
-            const srPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const srPathData = `M ${srPoints[0].x} ${srPoints[0].y} L ${srPoints[1].x} ${srPoints[1].y} L ${srPoints[2].x} ${srPoints[2].y}`;
-            srPath.setAttribute('d', srPathData);
-            srPath.setAttribute('stroke', 'rgb(0, 150, 200)');
-            srPath.setAttribute('stroke-width', '2');
-            srPath.setAttribute('fill', 'none');
-            srPath.setAttribute('stroke-linecap', 'round');
-            svg.appendChild(srPath);
-            
-            // CC 点和标签
-            ccPoints.forEach((point, i) => {
-                const isBold = data.ccBold && data.ccBold[i] === 1;
+            // 绘制 SR 折线（当选择 SR 或显示所有指标时显示）
+            if (selectedMetric === 'sr' || selectedMetric === 'all') {
+                const srPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                const srPathData = `M ${srPoints[0].x} ${srPoints[0].y} L ${srPoints[1].x} ${srPoints[1].y} L ${srPoints[2].x} ${srPoints[2].y}`;
+                srPath.setAttribute('d', srPathData);
+                srPath.setAttribute('stroke', 'rgb(0, 150, 200)');
+                srPath.setAttribute('stroke-width', '2');
+                srPath.setAttribute('fill', 'none');
+                srPath.setAttribute('stroke-linecap', 'round');
+                svg.appendChild(srPath);
                 
-                const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                dot.setAttribute('cx', point.x);
-                dot.setAttribute('cy', point.y);
-                dot.setAttribute('r', '2.5');
-                dot.setAttribute('fill', 'rgb(255, 140, 0)');
-                dot.setAttribute('opacity', '0.9');
-                svg.appendChild(dot);
-                
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', point.x);
-                text.setAttribute('y', margin - 3);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('font-size', '10');
-                text.setAttribute('fill', isBold ? '#000' : '#666');
-                text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
-                text.textContent = point.val.toFixed(1);
-                svg.appendChild(text);
-            });
-            
-            // SR 点和标签
-            srPoints.forEach((point, i) => {
-                const isMax = point.val === Math.max(...data.sr);
-                const isMin = point.val === Math.min(...data.sr);
-                const isBold = data.srBold && data.srBold[i] === 1;
-                
-                if (isMax || isMin) {
-                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                    circle.setAttribute('cx', point.x);
-                    circle.setAttribute('cy', point.y);
-                    circle.setAttribute('r', '5');
-                    circle.setAttribute('fill', 'none');
-                    circle.setAttribute('stroke', isMax ? 'rgb(0, 100, 150)' : 'rgb(200, 50, 50)');
-                    circle.setAttribute('stroke-width', '1');
-                    circle.setAttribute('opacity', '0.5');
-                    svg.appendChild(circle);
-                }
-                
-                const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                dot.setAttribute('cx', point.x);
-                dot.setAttribute('cy', point.y);
-                dot.setAttribute('r', '3');
-                dot.setAttribute('fill', isMax ? 'rgb(0, 100, 150)' : isMin ? 'rgb(200, 50, 50)' : 'rgb(0, 150, 200)');
-                svg.appendChild(dot);
-                
-                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', point.x);
-                text.setAttribute('y', height - 3);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('font-size', '11');
-                text.setAttribute('fill', isBold ? '#000' : '#666');
-                text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
-                text.textContent = point.val.toFixed(2);
-                svg.appendChild(text);
-            });
+                // SR 点和标签
+                srPoints.forEach((point, i) => {
+                    const isMax = point.val === Math.max(...data.sr);
+                    const isMin = point.val === Math.min(...data.sr);
+                    const isBold = data.srBold && data.srBold[i] === 1;
+                    
+                    if (isMax || isMin) {
+                        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        circle.setAttribute('cx', point.x);
+                        circle.setAttribute('cy', point.y);
+                        circle.setAttribute('r', '5');
+                        circle.setAttribute('fill', 'none');
+                        circle.setAttribute('stroke', isMax ? 'rgb(0, 100, 150)' : 'rgb(200, 50, 50)');
+                        circle.setAttribute('stroke-width', '1');
+                        circle.setAttribute('opacity', '0.5');
+                        svg.appendChild(circle);
+                    }
+                    
+                    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    dot.setAttribute('cx', point.x);
+                    dot.setAttribute('cy', point.y);
+                    dot.setAttribute('r', '3');
+                    dot.setAttribute('fill', isMax ? 'rgb(0, 100, 150)' : isMin ? 'rgb(200, 50, 50)' : 'rgb(0, 150, 200)');
+                    svg.appendChild(dot);
+                    
+                    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    text.setAttribute('x', point.x);
+                    text.setAttribute('y', height - 3);
+                    text.setAttribute('text-anchor', 'middle');
+                    text.setAttribute('font-size', '11');
+                    text.setAttribute('fill', isBold ? '#000' : '#666');
+                    text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
+                    text.textContent = point.val.toFixed(2);
+                    svg.appendChild(text);
+                });
+            }
             
             container.appendChild(svg);
             return container;
         }
 
         let currentModelSortDirection = 'asc';
+
+        // 高亮行和列
+        function highlightRowAndColumn(cell) {
+            const row = cell.closest('tr');
+            const columnIndex = parseInt(cell.dataset.columnIndex);
+            
+            if (row) {
+                // 高亮整行
+                row.classList.add('row-highlight');
+                
+                // 高亮整列
+                const allRows = document.querySelectorAll('#vla-table-body tr');
+                allRows.forEach(r => {
+                    const cells = r.querySelectorAll('td');
+                    if (cells[columnIndex + 1]) { // +1 因为第一列是模型名称
+                        cells[columnIndex + 1].classList.add('column-highlight');
+                    }
+                });
+                
+                // 高亮表头
+                const headerCells = document.querySelectorAll('#vla-table-head th[data-task-index]');
+                if (headerCells[columnIndex]) {
+                    headerCells[columnIndex].classList.add('column-highlight');
+                }
+            }
+        }
+
+        // 高亮列（仅表头悬停时）
+        function highlightColumnByIndex(columnIndex) {
+            const allRows = document.querySelectorAll('#vla-table-body tr');
+            allRows.forEach(r => {
+                const cells = r.querySelectorAll('td');
+                if (cells[columnIndex + 1]) { // +1 因为第一列是模型名称
+                    cells[columnIndex + 1].classList.add('column-highlight');
+                }
+            });
+            
+            // 高亮表头
+            const headerCells = document.querySelectorAll('#vla-table-head th[data-task-index]');
+            if (headerCells[columnIndex]) {
+                headerCells[columnIndex].classList.add('column-highlight');
+            }
+        }
+
+        // 移除行和列高亮
+        function removeRowAndColumnHighlight() {
+            document.querySelectorAll('.row-highlight').forEach(el => {
+                el.classList.remove('row-highlight');
+            });
+            document.querySelectorAll('.column-highlight').forEach(el => {
+                el.classList.remove('column-highlight');
+            });
+        }
 
         // 按模型排序
         function sortByModel() {
@@ -1259,26 +2019,113 @@
                 sortDirection = 'desc';
             }
             
-            // 计算每个模型的平均性能
+            // 获取当前选择的 Safety Metric（如果任务有 CC）
+            // 从 DOM 中获取当前选中的 radio button 值
+            let currentSafetyMetric = 'sr';
+            if (task.hasCC) {
+                const selectedMetricRadio = document.querySelector('input[name="safety-metric"]:checked');
+                if (selectedMetricRadio) {
+                    currentSafetyMetric = selectedMetricRadio.value;
+                } else {
+                    // 如果没有找到，使用 controlState 的值
+                    currentSafetyMetric = controlState.safetyMetric || 'sr';
+                }
+            }
+            
+            // 获取当前选择的 difficulty（从 DOM 中获取）
+            const selectedDifficultyRadio = document.querySelector('input[name="difficulty"]:checked');
+            const currentDifficulty = selectedDifficultyRadio ? selectedDifficultyRadio.value : (controlState.difficulty || 'l0');
+            
+            console.log('Sorting by task:', task.name, 'Metric:', currentSafetyMetric, 'Difficulty:', currentDifficulty);
+            
+            // 计算每个模型的性能（根据控制面板设置）
             const modelScores = vlaArenaData.models.map(model => {
                 const taskData = task.data[model.id];
-                if (!taskData) return { model, score: 0 };
+                if (!taskData) return { model, score: -1, isCC: false }; // 缺失数据设为 -1，排序时排到最后
                 
-                const avgScore = taskData.sr.reduce((a, b) => a + b, 0) / taskData.sr.length;
-                return { model, score: avgScore };
+                let score;
+                let isCC = false;
+                
+                // 对于 Safety 任务，根据选择的指标排序
+                if (task.hasCC && currentSafetyMetric === 'cc') {
+                    // 使用CC指标
+                    isCC = true;
+                    if (currentDifficulty === 'l0') {
+                        score = taskData.cc[0];
+                    } else if (currentDifficulty === 'l1l2') {
+                        // L1+L2 平均
+                        score = (taskData.cc[1] + taskData.cc[2]) / 2;
+                    } else if (currentDifficulty === 'l1') {
+                        score = taskData.cc[1];
+                    } else if (currentDifficulty === 'l2') {
+                        score = taskData.cc[2];
+                    } else {
+                        // 平均 (L0+L1+L2)
+                        score = taskData.cc.reduce((a, b) => a + b, 0) / taskData.cc.length;
+                    }
+                } else {
+                    // 使用SR指标（默认或明确选择SR）
+                    if (currentDifficulty === 'l0') {
+                        score = taskData.sr[0];
+                    } else if (currentDifficulty === 'l1l2') {
+                        // L1+L2 平均
+                        score = (taskData.sr[1] + taskData.sr[2]) / 2;
+                    } else if (currentDifficulty === 'l1') {
+                        score = taskData.sr[1];
+                    } else if (currentDifficulty === 'l2') {
+                        score = taskData.sr[2];
+                    } else {
+                        // 平均 (L0+L1+L2)
+                        score = taskData.sr.reduce((a, b) => a + b, 0) / taskData.sr.length;
+                    }
+                }
+                
+                return { model, score: score, isCC: isCC };
             });
             
+            // 检查是否所有 score 都相同（无法排序）
+            const uniqueScores = new Set(modelScores.filter(ms => ms.score !== -1).map(ms => ms.score));
+            if (uniqueScores.size <= 1 && modelScores.some(ms => ms.score !== -1)) {
+                console.warn('All models have the same score, cannot sort meaningfully');
+            }
+            
             // 排序
+            // CC 越小越好，SR 越大越好
             modelScores.sort((a, b) => {
-                return sortDirection === 'desc' ? b.score - a.score : a.score - b.score;
+                if (a.score === -1) return 1; // 缺失数据排最后
+                if (b.score === -1) return -1;
+                
+                if (a.isCC && b.isCC) {
+                    // CC 排序：越小越好
+                    // 降序时：CC 从大到小排列（最差的在前），所以 b.score - a.score
+                    // 升序时：CC 从小到大排列（最好的在前），所以 a.score - b.score
+                    return sortDirection === 'desc' ? b.score - a.score : a.score - b.score;
+                } else {
+                    // SR 排序：越大越好
+                    // 降序时：SR 从大到小排列（最好的在前），所以 b.score - a.score
+                    // 升序时：SR 从小到大排列（最差的在前），所以 a.score - b.score
+                    return sortDirection === 'desc' ? b.score - a.score : a.score - b.score;
+                }
             });
             
             // 重新排列表格行
             const rows = Array.from(tbody.children);
-            const sortedRows = modelScores.map(ms => {
-                return rows.find(row => row.firstChild.textContent === ms.model.name);
-            }).filter(row => row);
+            if (rows.length === 0) {
+                console.warn('No rows found in table body');
+                return;
+            }
             
+            const sortedRows = modelScores.map(ms => {
+                const row = rows.find(row => row.firstChild && row.firstChild.textContent.trim() === ms.model.name);
+                return row;
+            }).filter(row => row !== undefined);
+            
+            if (sortedRows.length === 0) {
+                console.warn('No matching rows found for sorting');
+                return;
+            }
+            
+            console.log('Sorting', sortedRows.length, 'rows, scores:', modelScores.map(ms => ({name: ms.model.name, score: ms.score, isCC: ms.isCC})));
             tbody.innerHTML = '';
             sortedRows.forEach(row => tbody.appendChild(row));
             

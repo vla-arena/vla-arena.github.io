@@ -1,0 +1,243 @@
+{
+  "name": "UniVLA",
+  "id": "univla",
+  "tasks": [
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.84,
+          0.42,
+          0.18
+        ],
+        "cc": [
+          0,
+          9.7,
+          60.6
+        ],
+        "srBold": [
+          1,
+          0,
+          1
+        ],
+        "ccBold": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.8,
+          0.6,
+          0.0
+        ],
+        "cc": [
+          3.3,
+          52.1,
+          8.5
+        ],
+        "srBold": [
+          0,
+          0,
+          0
+        ],
+        "ccBold": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.7,
+          0.12,
+          0.04
+        ],
+        "cc": [
+          5.3,
+          18.3,
+          16.7
+        ],
+        "srBold": [
+          0,
+          0,
+          0
+        ],
+        "ccBold": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.9,
+          0.76,
+          0.54
+        ],
+        "cc": [
+          0,
+          7.6,
+          16.4
+        ],
+        "srBold": [
+          1,
+          1,
+          0
+        ],
+        "ccBold": [
+          0,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.26,
+          0.58,
+          0.08
+        ],
+        "cc": [
+          7.1,
+          16.3,
+          6.0
+        ],
+        "srBold": [
+          0,
+          0,
+          0
+        ],
+        "ccBold": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.12,
+          0.0
+        ],
+        "srBold": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.78,
+          0.54,
+          0.04
+        ],
+        "srBold": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.5,
+          0.02,
+          0.02
+        ],
+        "srBold": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.76,
+          0.04,
+          0.2
+        ],
+        "srBold": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.34,
+          0.76,
+          0.16
+        ],
+        "srBold": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.66,
+          0.0,
+          0.0
+        ],
+        "srBold": [
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  ]
+}

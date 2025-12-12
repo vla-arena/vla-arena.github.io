@@ -1,0 +1,243 @@
+{
+  "name": "OpenVLA-OFT",
+  "id": "openvla-oft",
+  "tasks": [
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          1.0,
+          0.2,
+          0.2
+        ],
+        "cc": [
+          0,
+          45.4,
+          49
+        ],
+        "srBold": [
+          1,
+          0,
+          0
+        ],
+        "ccBold": [
+          1,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.6,
+          0.5,
+          0.0
+        ],
+        "cc": [
+          3.3,
+          6.3,
+          2.1
+        ],
+        "srBold": [
+          0,
+          0,
+          0
+        ],
+        "ccBold": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.36,
+          0.0,
+          0.2
+        ],
+        "cc": [
+          9.4,
+          22.9,
+          14.7
+        ],
+        "srBold": [
+          0,
+          1,
+          0
+        ],
+        "ccBold": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          1.0,
+          0.76,
+          0.2
+        ],
+        "cc": [
+          0,
+          7.6,
+          4.6
+        ],
+        "srBold": [
+          1,
+          1,
+          0
+        ],
+        "ccBold": [
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.8,
+          0.56,
+          0.1
+        ],
+        "cc": [
+          8.8,
+          3.7,
+          1.8
+        ],
+        "srBold": [
+          1,
+          0,
+          0
+        ],
+        "ccBold": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.0,
+          0.2
+        ],
+        "srBold": [
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.54,
+          0.4
+        ],
+        "srBold": [
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.62,
+          0.18,
+          0.0
+        ],
+        "srBold": [
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.74,
+          0.0,
+          0.0
+        ],
+        "srBold": [
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.6,
+          0.4,
+          0.2
+        ],
+        "srBold": [
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.8,
+          0.0,
+          0.0
+        ],
+        "srBold": [
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  ]
+}

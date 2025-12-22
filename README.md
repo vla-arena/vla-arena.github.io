@@ -119,8 +119,6 @@ cat > data/results/my-vla.json << 'EOF'
       "data": {
         "sr": [0.85, 0.72, 0.45],
         "cc": [0, 12.5, 35.2],
-        "srBold": [0, 0, 0],
-        "ccBold": [1, 0, 0]
       }
     },
     {

@@ -1060,12 +1060,44 @@
     </table>
                 </div>
 
-                <div style="margin-top: 2rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
-                    <h3 style="margin-bottom: 0.5rem;">Legend</h3>
-                    <p style="margin: 0.25rem 0;"><strong>SR</strong> (Success Rate): Blue line, shown below sparkline</p>
-                    <p style="margin: 0.25rem 0;"><strong>CC</strong> (Cumulative Cost): Orange line, shown above sparkline (Safety tasks only)</p>
-                    <p style="margin: 0.25rem 0;"><strong>Bold numbers</strong> indicate the best performance at that difficulty level</p>
-                    <p style="margin: 0.25rem 0;">Click on column headers to sort by that task's average performance</p>
+                <div style="margin-top: 2rem; padding: 1.8rem; background: #fafafa; border: 1px solid #e0e0e0; border-radius: 6px; line-height: 1.7;">
+                    <h3 style="margin: 0 0 1.2rem 0; font-size: 1.15em; font-weight: 600; color: #333; border-bottom: 2px solid #ddd; padding-bottom: 0.5rem;">Legend</h3>
+                    <ul style="margin: 0; padding-left: 1.5rem; list-style: none; font-size: 0.95em; color: #444;">
+                        <li style="margin: 0.75rem 0; padding-left: 0.5rem; position: relative;">
+                            <span style="position: absolute; left: -1.2rem; color: #666;">•</span>
+                            The VLA-Arena benchmark evaluates VLA models across four dimensions: 
+                            <span style="color: #d32f2f; font-weight: 600;">Safety</span>, 
+                            <span style="color: #1976d2; font-weight: 600;">Distractor</span>, 
+                            <span style="color: #388e3c; font-weight: 600;">Extrapolation</span>, and 
+                            <span style="color: #f57c00; font-weight: 600;">Long Horizon</span>.
+                        </li>
+                        <li style="margin: 0.75rem 0; padding-left: 0.5rem; position: relative;">
+                            <span style="position: absolute; left: -1.2rem; color: #666;">•</span>
+                            Performance trends over three difficulty levels (<strong>L0–L2</strong>) are shown as sparklines with a 
+                            <strong>unified y-axis (0.0–1.0)</strong> for cross-model comparison.
+                        </li>
+                        <li style="margin: 0.75rem 0; padding-left: 0.5rem; position: relative;">
+                            <span style="position: absolute; left: -1.2rem; color: #666;">•</span>
+                            <strong>Safety tasks</strong> report both <strong>Cumulative Cost (CC)</strong> 
+                            <span style="color: #ff8c00;">(orange, above sparkline)</span> and 
+                            <strong>Success Rate (SR)</strong> <span style="color: #0096cc;">(blue, below sparkline)</span>. 
+                            Other tasks report only <strong>SR</strong>.
+                        </li>
+                        <li style="margin: 0.75rem 0; padding-left: 0.5rem; position: relative;">
+                            <span style="position: absolute; left: -1.2rem; color: #666;">•</span>
+                            <strong>Bold numbers</strong> mark the highest CC or SR per difficulty level across all models.
+                        </li>
+                        <li style="margin: 0.75rem 0; padding-left: 0.5rem; position: relative;">
+                            <span style="position: absolute; left: -1.2rem; color: #666;">•</span>
+                            <span style="color: #006699; font-size: 1.1em;">●</span> and 
+                            <span style="color: #c83232; font-size: 1.1em;">●</span> denote each model's 
+                            <span style="color: #006699; font-weight: 600;">maximum</span> and 
+                            <span style="color: #c83232; font-weight: 600;">minimum</span> SR values, respectively.
+                        </li>
+                    </ul>
+                    <p style="margin: 1rem 0 0 0; padding-top: 0.75rem; font-size: 0.9em; color: #666; font-style: italic; border-top: 1px solid #e0e0e0;">
+                        <em>Tip:</em> Click on column headers to sort by that task's average performance.
+                    </p>
         </div>
             </div>
     </div>
@@ -1558,9 +1590,9 @@
                     
                     if (taskData) {
                         if (task.hasCC) {
-                            taskCell.appendChild(createDualSparkline(taskData, task.name, false));
+                            taskCell.appendChild(createDualSparkline(taskData, task.name, false, model.id));
                         } else {
-                            taskCell.appendChild(createSingleSparkline(taskData, task.name));
+                            taskCell.appendChild(createSingleSparkline(taskData, task.name, model.id));
                         }
                     } else {
                         taskCell.textContent = '-';
@@ -1588,9 +1620,9 @@
                         if (taskData) {
                             if (task.hasCC) {
                                 // 对于未选中的 Safety 任务，显示所有指标（CC 和 SR）
-                                taskCell.appendChild(createDualSparkline(taskData, task.name, true));
+                                taskCell.appendChild(createDualSparkline(taskData, task.name, true, model.id));
                             } else {
-                                taskCell.appendChild(createSingleSparkline(taskData, task.name));
+                                taskCell.appendChild(createSingleSparkline(taskData, task.name, model.id));
                             }
                         } else {
                             taskCell.textContent = '-';
@@ -1647,7 +1679,38 @@
         }
 
         // 创建单线 sparkline（SR only）
-        function createSingleSparkline(data, taskName) {
+        // 计算某个任务的某个指标在所有模型中的最高值，返回该值对应的模型ID数组（可能有多个模型并列最高）
+        function getBestModelsForMetric(taskName, metricType, levelIndex) {
+            if (!vlaArenaData) return [];
+            
+            const task = vlaArenaData.tasks.find(t => t.name === taskName);
+            if (!task) return [];
+            
+            const values = [];
+            vlaArenaData.models.forEach(model => {
+                const taskData = task.data[model.id];
+                if (taskData && taskData[metricType] && taskData[metricType][levelIndex] !== undefined) {
+                    values.push({
+                        modelId: model.id,
+                        value: taskData[metricType][levelIndex]
+                    });
+                }
+            });
+            
+            if (values.length === 0) return [];
+            
+            // 找出最高值（对于 SR 和 CC 都是越大越好，但用户说"值最高的"）
+            const maxValue = Math.max(...values.map(v => v.value));
+            return values.filter(v => v.value === maxValue).map(v => v.modelId);
+        }
+        
+        // 检查某个模型的某个指标值是否应该加粗
+        function shouldBeBold(modelId, taskName, metricType, levelIndex) {
+            const bestModels = getBestModelsForMetric(taskName, metricType, levelIndex);
+            return bestModels.includes(modelId);
+        }
+
+        function createSingleSparkline(data, taskName, modelId) {
             const container = document.createElement('div');
             container.className = 'sparkline-container';
             
@@ -1706,7 +1769,7 @@
             points.forEach((point, i) => {
                 const isMax = point.val === Math.max(...data.sr);
                 const isMin = point.val === Math.min(...data.sr);
-                const isBold = data.srBold && data.srBold[i] === 1;
+                const isBold = modelId ? shouldBeBold(modelId, taskName, 'sr', i) : false;
                 
                 // 外圈（最大值/最小值）
                 if (isMax || isMin) {
@@ -1747,7 +1810,7 @@
 
         // 创建双线 sparkline（CC 和 SR），根据控制面板选择显示
         // showAllMetrics: 如果为 true，显示所有指标（CC 和 SR），用于未选中的任务
-        function createDualSparkline(data, taskName, showAllMetrics = false) {
+        function createDualSparkline(data, taskName, showAllMetrics = false, modelId = null) {
             const container = document.createElement('div');
             container.className = 'dual-chart-container';
             
@@ -1819,7 +1882,7 @@
                 
                 // CC 点和标签
                 ccPoints.forEach((point, i) => {
-                    const isBold = data.ccBold && data.ccBold[i] === 1;
+                    const isBold = modelId ? shouldBeBold(modelId, taskName, 'cc', i) : false;
                     
                     const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     dot.setAttribute('cx', point.x);
@@ -1863,7 +1926,7 @@
                 srPoints.forEach((point, i) => {
                     const isMax = point.val === Math.max(...data.sr);
                     const isMin = point.val === Math.min(...data.sr);
-                    const isBold = data.srBold && data.srBold[i] === 1;
+                    const isBold = modelId ? shouldBeBold(modelId, taskName, 'sr', i) : false;
                     
                     if (isMax || isMin) {
                         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');

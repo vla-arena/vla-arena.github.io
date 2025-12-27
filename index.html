@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VLA-Arena</title>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWV023WWP4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -21,7 +20,7 @@
     </script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="icon" href="https://raw.githubusercontent.com/tatsu-lab/alpaca_eval/main/docs/AlpacaFarm_small.png">
+    <link rel="icon" href="figures/logo.png">
     <link href="https://cdn.jsdelivr.net/css-toggle-switch/latest/toggle-switch.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -38,7 +37,6 @@
             color: #000000;
         }
 
-        /* 导航栏样式 */
         .navbar {
             background: linear-gradient(90deg, #e8f4f8 0%, #ffffff 25%, #ffffff 60%, #f0e8f8 100%);
             padding: 1.2rem 1.5rem;
@@ -84,7 +82,6 @@
             border-bottom: 3px solid #0073a8;
         }
 
-        /* 内容区域 */
         .content-wrapper {
             min-height: calc(100vh - 80px);
             padding: 50px 20px;
@@ -98,7 +95,6 @@
             display: block;
         }
 
-        /* 首页样式 */
         .home-page {
             max-width: 1200px;
             margin: 0 auto;
@@ -257,7 +253,6 @@
             margin: 0;
         }
 
-        /* Leaderboard 页面样式 */
         .leaderboard-page {
             max-width: 98%;
             width: 100%;
@@ -311,8 +306,8 @@
 
         .vla-arena-table th {
             background: #f5f5f5;
-            padding: 1rem 0.75rem;
-            text-align: center;
+            padding: 1rem;
+            text-align: center !important;
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
             border-right: 1px solid #ddd;
@@ -322,7 +317,7 @@
             top: 0;
             z-index: 10;
             white-space: nowrap;
-            min-width: 150px;
+            min-width: 200px;
         }
 
         .vla-arena-table th:first-child {
@@ -336,15 +331,16 @@
         }
 
         .vla-arena-table td {
-            padding: 1rem 0.75rem;
+            padding: 0.75rem;
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
             border-right: 1px solid #ddd;
+            vertical-align: middle;
             border-left: 1px solid #ddd;
             text-align: center;
             vertical-align: middle;
             white-space: nowrap;
-            min-width: 150px;
+            min-width: 200px;
         }
 
         .vla-arena-table td:first-child {
@@ -361,7 +357,6 @@
             background-color: #f9f9f9;
         }
 
-        /* 行和列高亮效果 */
         .vla-arena-table tbody tr.row-highlight {
             background-color: #f0f7ff !important;
         }
@@ -400,16 +395,17 @@
         .long-horizon-category { background: rgba(200, 140, 60, 0.15) !important; color: rgb(200, 140, 60); }
 
         .model-name {
-            font-weight: 600;
-            text-align: left;
+            font-weight: normal;
+            text-align: left !important;
             padding-left: 1rem;
             width: 180px;
             min-width: 180px;
             max-width: 180px;
-            white-space: nowrap;
+            white-space: normal;
             position: sticky;
             left: 0;
             z-index: 20;
+            line-height: 1.4;
             box-shadow: 2px 0 4px rgba(0,0,0,0.1);
             margin-left: 0;
         }
@@ -417,6 +413,7 @@
         .vla-arena-table th.model-name {
             background-color: #f5f5f5;
             z-index: 30;
+            font-weight: 600;
         }
 
         .vla-arena-table tbody .model-name {
@@ -438,24 +435,24 @@
         }
 
         .sparkline-container {
-            display: inline-block;
+            display: block;
             position: relative;
-            width: 140px;
-            height: 80px;
+            width: 180px;
+            height: 100px;
             margin: 0 auto;
             flex-shrink: 0;
         }
 
         .sparkline-svg {
-            width: 140px;
-            height: 80px;
+            width: 180px;
+            height: 100px;
         }
 
         .dual-chart-container {
-            display: inline-block;
+            display: block;
             position: relative;
-            width: 140px;
-            height: 80px;
+            width: 180px;
+            height: 100px;
             margin: 0 auto;
             flex-shrink: 0;
         }
@@ -463,6 +460,7 @@
         .sortable {
             cursor: pointer;
             user-select: none;
+            text-align: center !important;
         }
 
         .sortable:hover {
@@ -473,13 +471,6 @@
             display: inline-block;
             margin-left: 5px;
             font-size: 0.8em;
-        }
-
-        .dual-chart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
         }
 
         .chart-label {
@@ -623,22 +614,6 @@
         .toggle-line .switch-toggle {
             margin: 0 10px;
         }
-
-        /* 第三个页面样式 */
-        .page3 {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-
-        .page3 h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #424242;
-        }
-
-        /* Leaderboard Header Styles */
         .leaderboard-header {
             text-align: center;
             margin-bottom: 2.5rem;
@@ -680,7 +655,6 @@
             font-style: italic;
         }
 
-        /* 控制面板样式 */
         .control-panel {
             background: #fafafa;
             border: 1px solid #e0e0e0;
@@ -899,16 +873,13 @@
 </head>
 
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar">
-        <a href="#" class="logo" onclick="showPage('home'); return false;">VLA-Arena</a>
-        <a href="#" class="navlink" id="nav-home" onclick="showPage('home'); return false;">首页</a>
-        <a href="#" class="navlink" id="nav-leaderboard" onclick="showPage('leaderboard'); return false;">Leaderboard</a>
-        <a href="#" class="navlink" id="nav-page3" onclick="showPage('page3'); return false;">页面3</a>
+        <a href="#home" class="logo">VLA-Arena</a>
+        <a href="#home" class="navlink" id="nav-home">首页</a>
+        <a href="#leaderboard" class="navlink" id="nav-leaderboard">Leaderboard</a>
     </nav>
 
     <div class="content-wrapper">
-        <!-- 首页 -->
         <div id="home-page" class="page active">
             <div class="home-page">
                 <h1 class="paper-title">VLA-Arena: Benchmarking Vision-Language-Action Models via Structured Task Design</h1>
@@ -937,15 +908,15 @@
                         <span class="material-icons">code</span>
                         github
                     </a>
-                    <a class="button" href="#data" target="_blank">
+                    <a class="button" href="https://huggingface.co/VLA-Arena/datasets" target="_blank">
                         <span class="material-icons">folder</span>
                         data
                     </a>
-                    <a class="button" href="#model" target="_blank">
+                    <a class="button" href="https://huggingface.co/VLA-Arena/models" target="_blank">
                         <span class="material-icons">download</span>
                         model
                     </a>
-                    <a class="button" href="#faq">
+                    <a class="button" href="https://github.com/PKU-Alignment/VLA-Arena/discussions">
                         <span class="material-icons">quiz</span>
                         FAQ
         </a>
@@ -956,12 +927,12 @@
                 <div class="abstract-section">
                     <h2>Abstract:</h2>
                     <p>
-                        While Vision-Language-Action models (VLAs) are rapidly advancing towards generalist robot policies, it remains difficult to quantitatively understand their limits and failure modes. To address this, we introduce a comprehensive benchmark called VLA-Arena. We propose a novel structured task design framework to quantify difficulty across three orthogonal axes: (1) Task Structure, (2) Language Command, and (3) Visual Observation. This allows us to systematically design tasks with fine-grained difficulty levels, enabling a precise measurement of model capability frontiers. For Task Structure, VLA-Arena's 170 tasks are grouped into four dimensions: Safety, Distractor, Extrapolation, and Long-Horizon. Each task is designed with three difficulty levels (L0-L2), with fine-tuning performed exclusively on L0 to test for extrapolation. Orthogonal to this, language (W0-W4) and visual (V0-V4) perturbations can be applied to any task to enable a decoupled analysis of robustness. Our extensive evaluation of state-of-the-art VLAs reveals several critical limitations, including a strong tendency toward memorization over generalization, asymmetric robustness, a lack of consideration for safety constraints, and an inability to compose learned skills for long-horizon tasks. To foster research addressing these challenges and ensure reproducibility, we provide the complete VLA-Arena framework, including an end-to-end toolchain from task definition to automated evaluation and the VLA-Arena-S/M/L datasets for fine-tuning.
+                        While Vision-Language-Action models (VLAs) are rapidly advancing towards generalist robot policies, it remains difficult to quantitatively understand their limits and failure modes. To address this, we introduce a comprehensive benchmark called <strong>VLA-Arena</strong>. We propose a novel structured task design framework to quantify difficulty across three orthogonal axes: <strong>(1) Task Structure</strong>, <strong>(2) Language Command</strong>, and <strong>(3) Visual Observation</strong>. This allows us to systematically design tasks with fine-grained difficulty levels, enabling a precise measurement of model capability frontiers. For Task Structure, VLA-Arena's 170 tasks are grouped into four dimensions: <strong>Safety</strong>, <strong>Distractor</strong>, <strong>Extrapolation</strong>, and <strong>Long Horizon</strong>. Each task is designed with three difficulty levels (L0-L2), with fine-tuning performed exclusively on L0 to assess general capability. Orthogonal to this, language (W0-W4) and visual (V0-V4) perturbations can be applied to any task to enable a decoupled analysis of robustness. Our extensive evaluation of state-of-the-art VLAs reveals several critical limitations, including a strong tendency toward memorization over generalization, asymmetric robustness, a lack of consideration for safety constraints, and an inability to compose learned skills for long-horizon tasks. To foster research addressing these challenges and ensure reproducibility, we provide the complete VLA-Arena framework, including an end-to-end toolchain from task definition to automated evaluation and the VLA-Arena-S/M/L datasets for fine-tuning.
                     </p>
         </div>
 
                 <div class="citation-section">
-                    <h2>引用</h2>
+                    <h2>BibTex</h2>
                     <pre>@misc{vla-arena2025,
   title={VLA-Arena},
   author={Jiahao Li, Borong Zhang, Jiachen Shen, Yishuai Cai, Yuhao Zhang, Jiaming Ji, and Yaodong Yang},
@@ -972,7 +943,6 @@
     </div>
     </div>
 
-        <!-- Leaderboard 页面 -->
         <div id="leaderboard-page" class="page">
             <div class="leaderboard-page">
                 <div class="leaderboard-header">
@@ -986,18 +956,16 @@
                     </p>
                 </div>
                 
-                <!-- Control Panel -->
                 <div class="control-panel" id="control-panel">
                     <h2>Filtering & Sorting Configuration</h2>
                     
-                    <!-- Sorting Strategy -->
                     <div class="control-section">
-                        <div class="control-section-title">Evaluation Metric</div>
+                        <div class="control-section-title">Show</div>
                         <div class="control-row">
-                            <div class="control-label">Difficulty Level:</div>
+                            <div class="control-label">Track</div>
                             <div class="control-options">
                                 <div class="control-option">
-                                    <input type="radio" name="difficulty" id="difficulty-l0" value="l0" checked>
+                                    <input type="radio" name="difficulty" id="difficulty-l0" value="l0">
                                     <label for="difficulty-l0">Memorization (L0)</label>
                                 </div>
                                 <div class="control-option">
@@ -1019,7 +987,7 @@
                             </div>
                         </div>
                         <div class="control-row" id="safety-metric-row" style="display: none;">
-                            <div class="control-label">Safety Metric:</div>
+                            <div class="control-label">Metrics:</div>
                             <div class="control-options">
                                 <div class="control-option">
                                     <input type="radio" name="safety-metric" id="metric-sr" value="sr" checked>
@@ -1046,7 +1014,6 @@
                         </div>
                     </div>
 
-                    <!-- Task Category Selection -->
                     <div class="control-section">
                         <div class="control-section-title">Task Category Selection</div>
                         <div id="category-groups" class="category-groups-container"></div>
@@ -1102,85 +1069,87 @@
             </div>
     </div>
 
-        <!-- 第三个页面 -->
-        <div id="page3" class="page">
-            <div class="page3">
-                <h2>页面3</h2>
-                <p>这是第三个页面，您可以在这里添加内容。</p>
-    </div>
-        </div>
 </div>
 
 <script>
-        // 页面切换功能
-        function showPage(pageId) {
-            // 隐藏所有页面
+        function showPage(pageId, updateHash = true) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
 
-            // 移除所有导航链接的 active 状态
+
             document.querySelectorAll('.navlink').forEach(link => {
                 link.classList.remove('active');
             });
 
-            // 显示选中的页面
+
             let pageElementId;
             if (pageId === 'home') {
                 pageElementId = 'home-page';
             } else if (pageId === 'leaderboard') {
                 pageElementId = 'leaderboard-page';
-            } else if (pageId === 'page3') {
-                pageElementId = 'page3';
-            }
+            } 
+
             
             const pageElement = document.getElementById(pageElementId);
             if (pageElement) {
                 pageElement.classList.add('active');
             }
 
-            // 添加对应导航链接的 active 状态
+
             const navId = 'nav-' + pageId;
             const navLink = document.getElementById(navId);
             if (navLink) {
                 navLink.classList.add('active');
             }
 
-            // 如果是 leaderboard 页面，初始化表格
+
+            if (updateHash && window.location.hash !== '#' + pageId) {
+                window.location.hash = pageId;
+            }
+
+
             if (pageId === 'leaderboard') {
-                // 延迟初始化，确保页面已显示
+
                 setTimeout(() => {
                     initVLArenaTable();
                 }, 100);
             }
         }
 
-        // VLA-Arena 表格数据（从 JSON 文件加载）
+
+        function loadPageFromHash() {
+            let hash = window.location.hash.substring(1);
+            if (!hash || hash === '') {
+                hash = 'home';
+            }
+            showPage(hash, false);
+        }
+
+        window.addEventListener('hashchange', loadPageFromHash);
+
         let vlaArenaData = null;
 
         let currentSortColumn = null;
         let sortDirection = 'desc';
 
-        // 加载 VLA-Arena 数据（从多个模型文件合并）
         async function loadVLArenaData() {
             if (vlaArenaData) {
-                return vlaArenaData; // 如果已经加载，直接返回
+                return vlaArenaData;
             }
             
             console.log('Starting to load VLA-Arena data from model files...');
             
-            // 模型文件列表（按模型ID）
             const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla'];
             const basePaths = [
-                'data/results/',      // 相对路径
-                './data/results/',    // 当前目录
-                '/data/results/'      // 绝对路径
+                'data/results/',
+                './data/results/',
+                '/data/results/'
             ];
             
             let basePath = null;
             const modelFiles = [];
             
-            // 尝试找到正确的路径
             for (const path of basePaths) {
                 try {
                     const testUrl = `${path}${modelIds[0]}.json`;
@@ -1200,7 +1169,6 @@
                 return null;
             }
             
-            // 读取所有模型文件
             const modelDataList = [];
             for (const modelId of modelIds) {
                 try {
@@ -1226,8 +1194,6 @@
                 return null;
             }
             
-            // 合并数据
-            // 首先收集所有任务信息（从第一个模型文件获取任务结构）
             const firstModel = modelDataList[0];
             const tasks = firstModel.tasks.map(task => ({
                 name: task.name,
@@ -1236,7 +1202,6 @@
                 data: {}
             }));
             
-            // 为每个模型填充数据
             const models = [];
             for (const modelData of modelDataList) {
                 models.push({
@@ -1244,18 +1209,16 @@
                     id: modelData.id
                 });
                 
-                // 为每个任务填充该模型的数据
                 for (let i = 0; i < tasks.length; i++) {
                     const task = tasks[i];
                     const modelTask = modelData.tasks.find(t => t.name === task.name);
                     if (modelTask && modelTask.data) {
                         task.data[modelData.id] = modelTask.data;
                     }
-                    // 如果没有数据，不设置 task.data[modelData.id]，这样在显示时会显示 "-"
                 }
             }
             
-            // 构建最终的数据结构
+
             vlaArenaData = {
                 models: models,
                 tasks: tasks
@@ -1270,14 +1233,14 @@
             return vlaArenaData;
         }
 
-        // 初始化 VLA-Arena 表格
+
         async function initVLArenaTable() {
             const thead = document.getElementById('vla-table-head');
             const tbody = document.getElementById('vla-table-body');
             
             if (!thead || !tbody) return;
 
-            // 加载数据
+
             const data = await loadVLArenaData();
             if (!data) {
                 const errorMsg = `
@@ -1300,17 +1263,17 @@
                 return;
             }
 
-            // 确保 vlaArenaData 已设置（供其他函数使用）
+
             vlaArenaData = data;
 
-            // 初始化控制面板
+
             initControlPanel(data);
 
-            // 更新表格
+
             updateTable();
         }
 
-        // 控制面板状态
+
         let controlState = {
             difficulty: 'l0',
             safetyMetric: 'sr',
@@ -1319,17 +1282,33 @@
             showOtherData: true
         };
 
-        // 标记是否已执行默认排序
         let hasDefaultSorted = false;
 
-        // 初始化控制面板
         function initControlPanel(data) {
             const categoryGroups = document.getElementById('category-groups');
             if (!categoryGroups) return;
 
             categoryGroups.innerHTML = '';
+            
 
-            // 按类别分组任务
+            const difficultyOptions = ['l0', 'l1l2', 'l1', 'l2', 'avg'];
+            const randomDifficulty = difficultyOptions[Math.floor(Math.random() * difficultyOptions.length)];
+            
+
+            const randomRadio = document.getElementById(`difficulty-${randomDifficulty}`);
+            if (randomRadio) {
+
+                document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
+                    radio.checked = false;
+                });
+
+                randomRadio.checked = true;
+                controlState.difficulty = randomDifficulty;
+                
+                console.log('Randomly selected difficulty:', randomDifficulty);
+            }
+
+
             const tasksByCategory = {};
             data.tasks.forEach(task => {
                 if (!tasksByCategory[task.category]) {
@@ -1338,7 +1317,7 @@
                 tasksByCategory[task.category].push(task);
             });
 
-            // 为每个类别创建组
+
             Object.keys(tasksByCategory).forEach(category => {
                 const categoryClass = category.toLowerCase().replace(/\s+/g, '-');
                 const group = document.createElement('div');
@@ -1399,7 +1378,7 @@
                     taskItem.appendChild(label);
                     taskList.appendChild(taskItem);
                     
-                    // 添加到选中集合
+
                     controlState.selectedTasks.add(task.name);
                 });
                 
@@ -1408,20 +1387,32 @@
                 categoryGroups.appendChild(group);
             });
 
-            // 绑定难度级别选择
+
             document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
                 radio.onchange = () => {
                     controlState.difficulty = radio.value;
                     updateSafetyMetricVisibility();
                     updateTable();
+
+                    setTimeout(() => {
+
+                        currentSortColumn = null;
+                        sortByModel();
+                    }, 100);
                 };
             });
 
-            // 绑定Safety指标选择
+
             document.querySelectorAll('input[name="safety-metric"]').forEach(radio => {
                 radio.onchange = () => {
                     controlState.safetyMetric = radio.value;
                     updateTable();
+
+                    setTimeout(() => {
+
+                        currentSortColumn = null;
+                        sortByModel();
+                    }, 100);
                 };
             });
 
@@ -1580,6 +1571,7 @@
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
                 nameCell.textContent = model.name;
+                nameCell.dataset.modelName = model.name; // 存储原始模型名称
                 row.appendChild(nameCell);
 
                 // 选中的任务数据列
@@ -1663,18 +1655,13 @@
                 }, 100);
             }
 
-            // 默认按第一个选中的任务排序（仅首次加载时）
-            if (selectedTasks.length > 0 && !hasDefaultSorted && currentSortColumn === null) {
-                const firstTaskIndex = vlaArenaData.tasks.indexOf(selectedTasks[0]);
-                if (firstTaskIndex >= 0) {
-                    hasDefaultSorted = true;
-                    currentSortColumn = firstTaskIndex;
-                    sortDirection = 'desc';
-                    // 触发排序
-                    setTimeout(() => {
-                        sortByTask(firstTaskIndex);
-                    }, 100);
-                }
+            // 默认按Model排序（仅首次加载时）
+            if (!hasDefaultSorted && currentSortColumn === null) {
+                hasDefaultSorted = true;
+                // 触发按Model排序
+                setTimeout(() => {
+                    sortByModel();
+                }, 100);
             }
         }
 
@@ -1716,13 +1703,13 @@
             
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'sparkline-svg');
-            svg.setAttribute('viewBox', '0 0 140 80');
-            svg.setAttribute('width', '140');
-            svg.setAttribute('height', '80');
+            svg.setAttribute('viewBox', '0 -5 180 115');
+            svg.setAttribute('width', '180');
+            svg.setAttribute('height', '100');
             
-            const width = 140;
-            const height = 80;
-            const margin = 12;
+            const width = 180;
+            const height = 105;
+            const margin = 15;
             const chartWidth = width - 2 * margin;
             const chartHeight = height - 2 * margin;
             
@@ -1795,9 +1782,9 @@
                 // 标签
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', point.x);
-                text.setAttribute('y', height - 3);
+                text.setAttribute('y', height - 1);
                 text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('font-size', '11');
+                text.setAttribute('font-size', '10');
                 text.setAttribute('fill', isBold ? '#000' : '#666');
                 text.setAttribute('font-weight', isBold ? 'bold' : 'normal');
                 text.textContent = point.val.toFixed(2);
@@ -1816,13 +1803,13 @@
             
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('class', 'sparkline-svg');
-            svg.setAttribute('viewBox', '0 0 140 80');
-            svg.setAttribute('width', '140');
-            svg.setAttribute('height', '80');
+            svg.setAttribute('viewBox', '0 -5 180 115');
+            svg.setAttribute('width', '180');
+            svg.setAttribute('height', '100');
             
-            const width = 140;
-            const height = 80;
-            const margin = 12;
+            const width = 180;
+            const height = 105;
+            const margin = 15;
             const chartWidth = width - 2 * margin;
             const chartHeight = height - 2 * margin;
             
@@ -1894,7 +1881,7 @@
                     
                     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     text.setAttribute('x', point.x);
-                    text.setAttribute('y', margin - 3);
+                    text.setAttribute('y', margin - 7);
                     text.setAttribute('text-anchor', 'middle');
                     text.setAttribute('font-size', '10');
                     text.setAttribute('fill', isBold ? '#000' : '#666');
@@ -1949,7 +1936,7 @@
                     
                     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     text.setAttribute('x', point.x);
-                    text.setAttribute('y', height - 3);
+                    text.setAttribute('y', height + 2);
                     text.setAttribute('text-anchor', 'middle');
                     text.setAttribute('font-size', '11');
                     text.setAttribute('fill', isBold ? '#000' : '#666');
@@ -2024,26 +2011,149 @@
             
             if (!tbody) return;
             
-            // 切换排序方向
-            currentModelSortDirection = currentModelSortDirection === 'asc' ? 'desc' : 'asc';
+            // 切换排序方向（如果已经按Model排序过）
+            // 否则使用默认排序方向（降序，分数从高到低）
+            if (currentSortColumn === null) {
+                // 首次按Model排序，使用默认降序（分数高的在前）
+                currentModelSortDirection = 'desc';
+            } else if (currentSortColumn === 'model') {
+                // 再次点击Model列，切换排序方向
+                currentModelSortDirection = currentModelSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                // 从任务列切换到Model列，使用降序（分数高的在前）
+                currentModelSortDirection = 'desc';
+            }
             
             // 获取所有行
             const rows = Array.from(tbody.children);
             
-            // 按模型名称排序
-            rows.sort((a, b) => {
-                const nameA = a.firstChild.textContent.trim();
-                const nameB = b.firstChild.textContent.trim();
-                if (currentModelSortDirection === 'asc') {
-                    return nameA.localeCompare(nameB);
+            // 计算每个模型的平均得分（基于选中的任务）
+            const modelAvgScores = rows.map(row => {
+                const modelNameCell = row.firstChild;
+                const modelName = modelNameCell.dataset.modelName;
+                const model = vlaArenaData.models.find(m => m.name === modelName);
+                
+                if (!model) return { row, modelName, avgScore: -1 };
+                
+                // 获取选中的任务
+                const selectedTasks = vlaArenaData.tasks.filter(task => 
+                    controlState.selectedTasks.has(task.name)
+                );
+                
+                // 获取当前设置
+                const selectedDifficultyRadio = document.querySelector('input[name="difficulty"]:checked');
+                const currentDifficulty = selectedDifficultyRadio ? selectedDifficultyRadio.value : 'l0';
+                
+                const selectedMetricRadio = document.querySelector('input[name="safety-metric"]:checked');
+                const currentSafetyMetric = selectedMetricRadio ? selectedMetricRadio.value : 'sr';
+                
+                // 计算平均得分
+                // 注意：如果选择了CC，只计算Safety任务的平均CC；否则计算所有任务的平均SR
+                let totalScore = 0;
+                let validTaskCount = 0;
+                
+                selectedTasks.forEach(task => {
+                    const taskData = task.data[model.id];
+                    if (taskData) {
+                        let score;
+                        
+                        // 如果选择了CC指标，只考虑Safety任务
+                        if (currentSafetyMetric === 'cc') {
+                            if (task.hasCC) {
+                                // Safety任务使用CC指标
+                                if (currentDifficulty === 'l0') {
+                                    score = taskData.cc[0];
+                                } else if (currentDifficulty === 'l1l2') {
+                                    score = (taskData.cc[1] + taskData.cc[2]) / 2;
+                                } else if (currentDifficulty === 'l1') {
+                                    score = taskData.cc[1];
+                                } else if (currentDifficulty === 'l2') {
+                                    score = taskData.cc[2];
+                                } else if (currentDifficulty === 'avg') {
+                                    // 平均 (L0+L1+L2)
+                                    score = taskData.cc.reduce((a, b) => a + b, 0) / taskData.cc.length;
+                                }
+                            }
+                            // 非Safety任务不参与CC平均分计算
+                        } else {
+                            // 使用SR指标（所有任务）
+                            if (currentDifficulty === 'l0') {
+                                score = taskData.sr[0];
+                            } else if (currentDifficulty === 'l1l2') {
+                                score = (taskData.sr[1] + taskData.sr[2]) / 2;
+                            } else if (currentDifficulty === 'l1') {
+                                score = taskData.sr[1];
+                            } else if (currentDifficulty === 'l2') {
+                                score = taskData.sr[2];
+                            } else if (currentDifficulty === 'avg') {
+                                // 平均 (L0+L1+L2)
+                                score = taskData.sr.reduce((a, b) => a + b, 0) / taskData.sr.length;
+                            }
+                        }
+                        
+                        if (score !== undefined && score !== null) {
+                            totalScore += score;
+                            validTaskCount++;
+                        }
+                    }
+                });
+                
+                const avgScore = validTaskCount > 0 ? totalScore / validTaskCount : -1;
+                return { row, modelName, avgScore };
+            });
+            
+            // 按平均分排序
+            // 获取当前指标类型
+            const selectedMetricRadio2 = document.querySelector('input[name="safety-metric"]:checked');
+            const currentSafetyMetric2 = selectedMetricRadio2 ? selectedMetricRadio2.value : 'sr';
+            const isCC = currentSafetyMetric2 === 'cc';
+            
+            modelAvgScores.sort((a, b) => {
+                // 缺失数据排到最后
+                if (a.avgScore === -1 && b.avgScore === -1) return 0;
+                if (a.avgScore === -1) return 1;
+                if (b.avgScore === -1) return -1;
+                
+                if (isCC) {
+                    // CC越小越好
+                    if (currentModelSortDirection === 'asc') {
+                        // 升序：从大到小（最差到最好）
+                        return b.avgScore - a.avgScore;
+                    } else {
+                        // 降序：从小到大（最好到最差）- leaderboard默认显示最好的在前
+                        return a.avgScore - b.avgScore;
+                    }
                 } else {
-                    return nameB.localeCompare(nameA);
+                    // SR越大越好
+                    if (currentModelSortDirection === 'asc') {
+                        // 升序：从低到高（最差到最好）
+                        return a.avgScore - b.avgScore;
+                    } else {
+                        // 降序：从高到低（最好到最差）
+                        return b.avgScore - a.avgScore;
+                    }
                 }
             });
             
-            // 重新排列
+            // 重新排列并显示平均分
             tbody.innerHTML = '';
-            rows.forEach(row => tbody.appendChild(row));
+            
+            // 获取当前选择的指标，用于显示标签
+            const selectedMetricRadio = document.querySelector('input[name="safety-metric"]:checked');
+            const currentSafetyMetric = selectedMetricRadio ? selectedMetricRadio.value : 'sr';
+            const metricLabel = currentSafetyMetric.toUpperCase();
+            
+            modelAvgScores.forEach(({ row, modelName, avgScore }) => {
+                if (row && row.firstChild) {
+                    const nameCell = row.firstChild;
+                    const scoreText = avgScore === -1 ? 'N/A' : avgScore.toFixed(2);
+                    nameCell.innerHTML = `
+                        <div style="font-weight: 600;">${modelName}</div>
+                        <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} (Avg ${metricLabel})</div>
+                    `;
+                }
+                tbody.appendChild(row);
+            });
             
             // 更新排序指示器
             const modelHeader = document.querySelector('.model-name.sortable');
@@ -2059,7 +2169,8 @@
                 }
             });
             
-            currentSortColumn = null;
+            // 标记当前排序列为Model
+            currentSortColumn = 'model';
         }
 
         // 按任务排序
@@ -2160,9 +2271,9 @@
                 
                 if (a.isCC && b.isCC) {
                     // CC 排序：越小越好
-                    // 降序时：CC 从大到小排列（最差的在前），所以 b.score - a.score
-                    // 升序时：CC 从小到大排列（最好的在前），所以 a.score - b.score
-                    return sortDirection === 'desc' ? b.score - a.score : a.score - b.score;
+                    // 降序时：应该显示最好的在前（小的在前），所以 a.score - b.score
+                    // 升序时：应该显示最差的在前（大的在前），所以 b.score - a.score
+                    return sortDirection === 'desc' ? a.score - b.score : b.score - a.score;
                 } else {
                     // SR 排序：越大越好
                     // 降序时：SR 从大到小排列（最好的在前），所以 b.score - a.score
@@ -2179,7 +2290,7 @@
             }
             
             const sortedRows = modelScores.map(ms => {
-                const row = rows.find(row => row.firstChild && row.firstChild.textContent.trim() === ms.model.name);
+                const row = rows.find(row => row.firstChild && row.firstChild.dataset.modelName === ms.model.name);
                 return row;
             }).filter(row => row !== undefined);
             
@@ -2190,7 +2301,21 @@
             
             console.log('Sorting', sortedRows.length, 'rows, scores:', modelScores.map(ms => ({name: ms.model.name, score: ms.score, isCC: ms.isCC})));
             tbody.innerHTML = '';
-            sortedRows.forEach(row => tbody.appendChild(row));
+            
+            // 更新模型名称列并添加排序值
+            sortedRows.forEach((row, idx) => {
+                if (row && row.firstChild && modelScores[idx]) {
+                    const nameCell = row.firstChild;
+                    const ms = modelScores[idx];
+                    const scoreText = ms.score === -1 ? 'N/A' : ms.score.toFixed(2);
+                    const metricLabel = ms.isCC ? '(CC)' : '(SR)';
+                    nameCell.innerHTML = `
+                        <div style="font-weight: 600;">${ms.model.name}</div>
+                        <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} ${metricLabel}</div>
+                    `;
+                }
+                tbody.appendChild(row);
+            });
             
             // 更新排序指示器
             const modelHeader = document.querySelector('.model-name.sortable');
@@ -2216,8 +2341,8 @@
 
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 默认显示首页
-            showPage('home');
+            // 根据 URL hash 显示对应页面
+            loadPageFromHash();
         });
 </script>
 

@@ -648,7 +648,6 @@
             font-size: 1.2rem;
         }
 
-        /* 浮动按钮样式 */
         .floating-btn {
             position: fixed;
             right: 2rem;
@@ -1198,7 +1197,7 @@
 
         .task-detail-table-wrapper {
             padding:  1rem 5rem 5rem 5rem; 
-            /* 表格的 padding 大小 */
+            
         }
 
         .task-modal-close {
@@ -1619,7 +1618,6 @@ url={https://arxiv.org/abs/2512.22539},
                 <div class="task-gallery" id="task-gallery"></div>
             </div>
 
-            <!-- Task Detail Modal -->
             <div class="task-modal" id="task-modal">
                 <div class="task-modal-content">
                     <button class="task-modal-close" onclick="closeTaskModal()">×</button>
@@ -1631,10 +1629,8 @@ url={https://arxiv.org/abs/2512.22539},
             </div>
         </div>
 
-        <!-- Toast Notification -->
         <div class="toast" id="toast"></div>
 
-        <!-- Floating Buttons -->
         <a href="https://github.com/vla-arena/vla-arena.github.io#contributing-your-model-results" target="_blank" class="floating-btn" id="floating-contribute">
             <span class="icon" id="floating-contribute-icon">🚀</span>
             <span>Contribute</span>
@@ -1652,11 +1648,9 @@ url={https://arxiv.org/abs/2512.22539},
                 page.classList.remove('active');
             });
 
-
             document.querySelectorAll('.navlink').forEach(link => {
                 link.classList.remove('active');
             });
-
 
             let pageElementId;
             if (pageId === 'home') {
@@ -1667,12 +1661,10 @@ url={https://arxiv.org/abs/2512.22539},
                 pageElementId = 'taskstore-page';
             }
 
-            
             const pageElement = document.getElementById(pageElementId);
             if (pageElement) {
                 pageElement.classList.add('active');
             }
-
 
             const navId = 'nav-' + pageId;
             const navLink = document.getElementById(navId);
@@ -1680,11 +1672,9 @@ url={https://arxiv.org/abs/2512.22539},
                 navLink.classList.add('active');
             }
 
-
             if (updateHash && window.location.hash !== '#' + pageId) {
                 window.location.hash = pageId;
             }
-
 
             if (pageId === 'leaderboard') {
 
@@ -1697,7 +1687,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }, 100);
             }
         }
-
 
         function loadPageFromHash() {
             let hash = window.location.hash.substring(1);
@@ -1799,7 +1788,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
             }
             
-
             vlaArenaData = {
                 models: models,
                 tasks: tasks
@@ -1814,13 +1802,11 @@ url={https://arxiv.org/abs/2512.22539},
             return vlaArenaData;
         }
 
-
         async function initVLArenaTable() {
             const thead = document.getElementById('vla-table-head');
             const tbody = document.getElementById('vla-table-body');
             
             if (!thead || !tbody) return;
-
 
             const data = await loadVLArenaData();
             if (!data) {
@@ -1844,16 +1830,12 @@ url={https://arxiv.org/abs/2512.22539},
                 return;
             }
 
-
             vlaArenaData = data;
-
 
             initControlPanel(data);
 
-
             updateTable();
         }
-
 
         let controlState = {
             difficulty: 'l0',
@@ -1871,11 +1853,9 @@ url={https://arxiv.org/abs/2512.22539},
 
             categoryGroups.innerHTML = '';
             
-
             const difficultyOptions = ['l0', 'l1l2', 'l1', 'l2', 'avg'];
             const randomDifficulty = difficultyOptions[Math.floor(Math.random() * difficultyOptions.length)];
             
-
             const randomRadio = document.getElementById(`difficulty-${randomDifficulty}`);
             if (randomRadio) {
 
@@ -1889,7 +1869,6 @@ url={https://arxiv.org/abs/2512.22539},
                 console.log('Randomly selected difficulty:', randomDifficulty);
             }
 
-
             const tasksByCategory = {};
             data.tasks.forEach(task => {
                 if (!tasksByCategory[task.category]) {
@@ -1897,7 +1876,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tasksByCategory[task.category].push(task);
             });
-
 
             Object.keys(tasksByCategory).forEach(category => {
                 const categoryClass = category.toLowerCase().replace(/\s+/g, '-');
@@ -1941,7 +1919,7 @@ url={https://arxiv.org/abs/2512.22539},
                     checkbox.type = 'checkbox';
                     checkbox.id = `task-${task.name}`;
                     checkbox.value = task.name;
-                    checkbox.checked = true; // 默认全选
+                    checkbox.checked = true;
                     checkbox.onchange = () => {
                         if (checkbox.checked) {
                             controlState.selectedTasks.add(task.name);
@@ -1959,7 +1937,6 @@ url={https://arxiv.org/abs/2512.22539},
                     taskItem.appendChild(label);
                     taskList.appendChild(taskItem);
                     
-
                     controlState.selectedTasks.add(task.name);
                 });
                 
@@ -1967,7 +1944,6 @@ url={https://arxiv.org/abs/2512.22539},
                 group.appendChild(taskList);
                 categoryGroups.appendChild(group);
             });
-
 
             document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
                 radio.onchange = () => {
@@ -1983,7 +1959,6 @@ url={https://arxiv.org/abs/2512.22539},
                 };
             });
 
-
             document.querySelectorAll('input[name="safety-metric"]').forEach(radio => {
                 radio.onchange = () => {
                     controlState.safetyMetric = radio.value;
@@ -1997,7 +1972,6 @@ url={https://arxiv.org/abs/2512.22539},
                 };
             });
 
-            // 绑定显示其他Safety指标选项
             const showOtherSafetyMetricCheckbox = document.getElementById('show-other-safety-metric');
             if (showOtherSafetyMetricCheckbox) {
                 showOtherSafetyMetricCheckbox.onchange = () => {
@@ -2006,7 +1980,6 @@ url={https://arxiv.org/abs/2512.22539},
                 };
             }
 
-            // 绑定显示其他数据选项
             const showOtherDataCheckbox = document.getElementById('show-other-data');
             if (showOtherDataCheckbox) {
                 showOtherDataCheckbox.onchange = () => {
@@ -2015,11 +1988,9 @@ url={https://arxiv.org/abs/2512.22539},
                 };
             }
 
-            // 初始化Safety指标显示
             updateSafetyMetricVisibility();
         }
 
-        // 切换类别任务选择
         function toggleCategoryTasks(category, select) {
             if (!vlaArenaData) return;
             
@@ -2039,12 +2010,10 @@ url={https://arxiv.org/abs/2512.22539},
             updateTable();
         }
 
-        // 更新Safety指标显示
         function updateSafetyMetricVisibility() {
             const safetyMetricRow = document.getElementById('safety-metric-row');
             if (!safetyMetricRow || !vlaArenaData) return;
             
-            // 检查是否有选中的Safety任务
             const hasSafetyTask = Array.from(controlState.selectedTasks).some(taskName => {
                 const task = vlaArenaData.tasks.find(t => t.name === taskName);
                 return task && task.hasCC;
@@ -2053,7 +2022,6 @@ url={https://arxiv.org/abs/2512.22539},
             safetyMetricRow.style.display = hasSafetyTask ? 'flex' : 'none';
         }
 
-        // 更新表格显示
         function updateTable() {
             if (!vlaArenaData) return;
 
@@ -2062,11 +2030,9 @@ url={https://arxiv.org/abs/2512.22539},
             
             if (!thead || !tbody) return;
 
-            // 清空表格
             thead.innerHTML = '';
             tbody.innerHTML = '';
 
-            // 筛选任务
             const selectedTasks = vlaArenaData.tasks.filter(task => 
                 controlState.selectedTasks.has(task.name)
             );
@@ -2074,7 +2040,6 @@ url={https://arxiv.org/abs/2512.22539},
                 !controlState.selectedTasks.has(task.name)
             );
 
-            // 计算每个类别的任务数量（仅选中的任务）
             const categoryCounts = {};
             selectedTasks.forEach(task => {
                 if (!categoryCounts[task.category]) {
@@ -2083,7 +2048,6 @@ url={https://arxiv.org/abs/2512.22539},
                 categoryCounts[task.category]++;
             });
 
-            // 创建第一行表头（类别行）
             const categoryRow = document.createElement('tr');
             const modelCategoryCell = document.createElement('th');
             modelCategoryCell.className = 'model-name sortable';
@@ -2105,7 +2069,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
             });
 
-            // 如果显示其他数据，添加"其他"列
             if (controlState.showOtherData && otherTasks.length > 0) {
                 const otherCell = document.createElement('th');
                 otherCell.className = 'task-category-header';
@@ -2118,7 +2081,6 @@ url={https://arxiv.org/abs/2512.22539},
 
             thead.appendChild(categoryRow);
 
-            // 创建第二行表头（任务行）
             const taskRow = document.createElement('tr');
             selectedTasks.forEach((task, idx) => {
                 const taskHeader = document.createElement('th');
@@ -2129,7 +2091,6 @@ url={https://arxiv.org/abs/2512.22539},
                 taskRow.appendChild(taskHeader);
             });
 
-            // 添加其他任务列头
             if (controlState.showOtherData && otherTasks.length > 0) {
                 otherTasks.forEach((task, idx) => {
                     const taskHeader = document.createElement('th');
@@ -2143,19 +2104,16 @@ url={https://arxiv.org/abs/2512.22539},
 
             thead.appendChild(taskRow);
 
-            // 创建表格行
             vlaArenaData.models.forEach((model, modelIdx) => {
                 const row = document.createElement('tr');
                 row.dataset.rowIndex = modelIdx;
                 
-                // 模型名称列
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
                 nameCell.textContent = model.name;
-                nameCell.dataset.modelName = model.name; // 存储原始模型名称
+                nameCell.dataset.modelName = model.name;
                 row.appendChild(nameCell);
 
-                // 选中的任务数据列
                 selectedTasks.forEach((task, taskIdx) => {
                     const taskCell = document.createElement('td');
                     taskCell.dataset.columnIndex = taskIdx;
@@ -2171,7 +2129,6 @@ url={https://arxiv.org/abs/2512.22539},
                         taskCell.textContent = '-';
                     }
                     
-                    // 添加鼠标悬停事件
                     taskCell.addEventListener('mouseenter', function() {
                         highlightRowAndColumn(this);
                     });
@@ -2182,7 +2139,6 @@ url={https://arxiv.org/abs/2512.22539},
                     row.appendChild(taskCell);
                 });
 
-                // 其他任务数据列
                 if (controlState.showOtherData && otherTasks.length > 0) {
                     otherTasks.forEach((task, taskIdx) => {
                         const taskCell = document.createElement('td');
@@ -2192,7 +2148,7 @@ url={https://arxiv.org/abs/2512.22539},
                         
                         if (taskData) {
                             if (task.hasCC) {
-                                // 对于未选中的 Safety 任务，显示所有指标（CC 和 SR）
+
                                 taskCell.appendChild(createDualSparkline(taskData, task.name, true, model.id));
                             } else {
                                 taskCell.appendChild(createSingleSparkline(taskData, task.name, model.id));
@@ -2201,7 +2157,6 @@ url={https://arxiv.org/abs/2512.22539},
                             taskCell.textContent = '-';
                         }
                         
-                        // 添加鼠标悬停事件
                         taskCell.addEventListener('mouseenter', function() {
                             highlightRowAndColumn(this);
                         });
@@ -2216,7 +2171,6 @@ url={https://arxiv.org/abs/2512.22539},
                 tbody.appendChild(row);
             });
             
-            // 为表头也添加悬停事件
             const headerCells = thead.querySelectorAll('th[data-task-index]');
             headerCells.forEach((headerCell, idx) => {
                 headerCell.addEventListener('mouseenter', function() {
@@ -2227,7 +2181,6 @@ url={https://arxiv.org/abs/2512.22539},
                 });
             });
 
-            // 确保表格容器滚动到最左侧
             const wrapper = document.querySelector('.vla-arena-table-wrapper');
             if (wrapper) {
                 wrapper.scrollLeft = 0;
@@ -2236,18 +2189,15 @@ url={https://arxiv.org/abs/2512.22539},
                 }, 100);
             }
 
-            // 默认按Model排序（仅首次加载时）
             if (!hasDefaultSorted && currentSortColumn === null) {
                 hasDefaultSorted = true;
-                // 触发按Model排序
+
                 setTimeout(() => {
                     sortByModel();
                 }, 100);
             }
         }
 
-        // 创建单线 sparkline（SR only）
-        // 计算某个任务的某个指标在所有模型中的最高值，返回该值对应的模型ID数组（可能有多个模型并列最高）
         function getBestModelsForMetric(taskName, metricType, levelIndex) {
             if (!vlaArenaData) return [];
             
@@ -2267,12 +2217,10 @@ url={https://arxiv.org/abs/2512.22539},
             
             if (values.length === 0) return [];
             
-            // 找出最高值（对于 SR 和 CC 都是越大越好，但用户说"值最高的"）
             const maxValue = Math.max(...values.map(v => v.value));
             return values.filter(v => v.value === maxValue).map(v => v.modelId);
         }
         
-        // 检查某个模型的某个指标值是否应该加粗
         function shouldBeBold(modelId, taskName, metricType, levelIndex) {
             const bestModels = getBestModelsForMetric(taskName, metricType, levelIndex);
             return bestModels.includes(modelId);
@@ -2294,7 +2242,6 @@ url={https://arxiv.org/abs/2512.22539},
             const chartWidth = width - 2 * margin;
             const chartHeight = height - 2 * margin;
             
-            // 背景
             const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             bg.setAttribute('x', margin);
             bg.setAttribute('y', margin);
@@ -2304,7 +2251,6 @@ url={https://arxiv.org/abs/2512.22539},
             bg.setAttribute('rx', '3');
             svg.appendChild(bg);
             
-            // 50% 参考线
             const refLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             refLine.setAttribute('x1', margin);
             refLine.setAttribute('y1', margin + chartHeight / 2);
@@ -2316,14 +2262,12 @@ url={https://arxiv.org/abs/2512.22539},
             refLine.setAttribute('opacity', '0.5');
             svg.appendChild(refLine);
             
-            // 计算点位置
             const points = data.sr.map((val, i) => {
                 const x = margin + (i * chartWidth) / 2;
                 const y = margin + chartHeight - (val * chartHeight);
                 return { x, y, val };
             });
             
-            // 绘制折线
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             const pathData = `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y} L ${points[2].x} ${points[2].y}`;
             path.setAttribute('d', pathData);
@@ -2333,13 +2277,11 @@ url={https://arxiv.org/abs/2512.22539},
             path.setAttribute('stroke-linecap', 'round');
             svg.appendChild(path);
             
-            // 绘制点和标签
             points.forEach((point, i) => {
                 const isMax = point.val === Math.max(...data.sr);
                 const isMin = point.val === Math.min(...data.sr);
                 const isBold = modelId ? shouldBeBold(modelId, taskName, 'sr', i) : false;
                 
-                // 外圈（最大值/最小值）
                 if (isMax || isMin) {
                     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                     circle.setAttribute('cx', point.x);
@@ -2352,7 +2294,6 @@ url={https://arxiv.org/abs/2512.22539},
                     svg.appendChild(circle);
                 }
                 
-                // 点
                 const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
                 dot.setAttribute('cx', point.x);
                 dot.setAttribute('cy', point.y);
@@ -2360,7 +2301,6 @@ url={https://arxiv.org/abs/2512.22539},
                 dot.setAttribute('fill', isMax ? 'rgb(0, 100, 150)' : isMin ? 'rgb(200, 50, 50)' : 'rgb(0, 150, 200)');
                 svg.appendChild(dot);
                 
-                // 标签
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', point.x);
                 text.setAttribute('y', height - 1);
@@ -2376,8 +2316,6 @@ url={https://arxiv.org/abs/2512.22539},
             return container;
         }
 
-        // 创建双线 sparkline（CC 和 SR），根据控制面板选择显示
-        // showAllMetrics: 如果为 true，显示所有指标（CC 和 SR），用于未选中的任务
         function createDualSparkline(data, taskName, showAllMetrics = false, modelId = null) {
             const container = document.createElement('div');
             container.className = 'dual-chart-container';
@@ -2394,15 +2332,11 @@ url={https://arxiv.org/abs/2512.22539},
             const chartWidth = width - 2 * margin;
             const chartHeight = height - 2 * margin;
             
-            // 获取当前选择的指标（默认为 SR）
-            // 如果 showAllMetrics 为 true，则显示所有指标
-            // 如果 showOtherSafetyMetric 为 true，则同时显示另一个指标
             let selectedMetric = showAllMetrics ? 'all' : (controlState.safetyMetric || 'sr');
             if (!showAllMetrics && controlState.showOtherSafetyMetric) {
-                selectedMetric = 'all'; // 同时显示两个指标
+                selectedMetric = 'all';
             }
             
-            // 背景
             const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             bg.setAttribute('x', margin);
             bg.setAttribute('y', margin);
@@ -2412,7 +2346,6 @@ url={https://arxiv.org/abs/2512.22539},
             bg.setAttribute('rx', '3');
             svg.appendChild(bg);
             
-            // 50% 参考线（仅当显示 SR 或显示所有指标时显示）
             if (selectedMetric === 'sr' || selectedMetric === 'all') {
                 const refLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
                 refLine.setAttribute('x1', margin);
@@ -2426,18 +2359,15 @@ url={https://arxiv.org/abs/2512.22539},
                 svg.appendChild(refLine);
             }
             
-            // 计算 CC 归一化值
             const ccMax = Math.max(...data.cc);
             const ccNormalized = data.cc.map(cc => cc / (ccMax + 0.0001));
             
-            // CC 点
             const ccPoints = ccNormalized.map((val, i) => {
                 const x = margin + (i * chartWidth) / 2;
                 const y = margin + chartHeight - (val * chartHeight);
                 return { x, y, val: data.cc[i] };
             });
             
-            // 绘制 CC 折线（当选择 CC 或显示所有指标时显示）
             if (selectedMetric === 'cc' || selectedMetric === 'all') {
                 const ccPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 const ccPathData = `M ${ccPoints[0].x} ${ccPoints[0].y} L ${ccPoints[1].x} ${ccPoints[1].y} L ${ccPoints[2].x} ${ccPoints[2].y}`;
@@ -2448,7 +2378,6 @@ url={https://arxiv.org/abs/2512.22539},
                 ccPath.setAttribute('opacity', '0.8');
                 svg.appendChild(ccPath);
                 
-                // CC 点和标签
                 ccPoints.forEach((point, i) => {
                     const isBold = modelId ? shouldBeBold(modelId, taskName, 'cc', i) : false;
                     
@@ -2472,14 +2401,12 @@ url={https://arxiv.org/abs/2512.22539},
                 });
             }
             
-            // SR 点
             const srPoints = data.sr.map((val, i) => {
                 const x = margin + (i * chartWidth) / 2;
                 const y = margin + chartHeight - (val * chartHeight);
                 return { x, y, val };
             });
             
-            // 绘制 SR 折线（当选择 SR 或显示所有指标时显示）
             if (selectedMetric === 'sr' || selectedMetric === 'all') {
                 const srPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 const srPathData = `M ${srPoints[0].x} ${srPoints[0].y} L ${srPoints[1].x} ${srPoints[1].y} L ${srPoints[2].x} ${srPoints[2].y}`;
@@ -2490,7 +2417,6 @@ url={https://arxiv.org/abs/2512.22539},
                 srPath.setAttribute('stroke-linecap', 'round');
                 svg.appendChild(srPath);
                 
-                // SR 点和标签
                 srPoints.forEach((point, i) => {
                     const isMax = point.val === Math.max(...data.sr);
                     const isMin = point.val === Math.min(...data.sr);
@@ -2533,25 +2459,22 @@ url={https://arxiv.org/abs/2512.22539},
 
         let currentModelSortDirection = 'asc';
 
-        // 高亮行和列
         function highlightRowAndColumn(cell) {
             const row = cell.closest('tr');
             const columnIndex = parseInt(cell.dataset.columnIndex);
             
             if (row) {
-                // 高亮整行
+
                 row.classList.add('row-highlight');
                 
-                // 高亮整列
                 const allRows = document.querySelectorAll('#vla-table-body tr');
                 allRows.forEach(r => {
                     const cells = r.querySelectorAll('td');
-                    if (cells[columnIndex + 1]) { // +1 因为第一列是模型名称
+                    if (cells[columnIndex + 1]) {
                         cells[columnIndex + 1].classList.add('column-highlight');
                     }
                 });
                 
-                // 高亮表头
                 const headerCells = document.querySelectorAll('#vla-table-head th[data-task-index]');
                 if (headerCells[columnIndex]) {
                     headerCells[columnIndex].classList.add('column-highlight');
@@ -2559,24 +2482,21 @@ url={https://arxiv.org/abs/2512.22539},
             }
         }
 
-        // 高亮列（仅表头悬停时）
         function highlightColumnByIndex(columnIndex) {
             const allRows = document.querySelectorAll('#vla-table-body tr');
             allRows.forEach(r => {
                 const cells = r.querySelectorAll('td');
-                if (cells[columnIndex + 1]) { // +1 因为第一列是模型名称
+                if (cells[columnIndex + 1]) {
                     cells[columnIndex + 1].classList.add('column-highlight');
                 }
             });
             
-            // 高亮表头
             const headerCells = document.querySelectorAll('#vla-table-head th[data-task-index]');
             if (headerCells[columnIndex]) {
                 headerCells[columnIndex].classList.add('column-highlight');
             }
         }
 
-        // 移除行和列高亮
         function removeRowAndColumnHighlight() {
             document.querySelectorAll('.row-highlight').forEach(el => {
                 el.classList.remove('row-highlight');
@@ -2586,29 +2506,24 @@ url={https://arxiv.org/abs/2512.22539},
             });
         }
 
-        // 按模型排序
         function sortByModel() {
             const tbody = document.getElementById('vla-table-body');
             
             if (!tbody) return;
             
-            // 切换排序方向（如果已经按Model排序过）
-            // 否则使用默认排序方向（降序，分数从高到低）
             if (currentSortColumn === null) {
-                // 首次按Model排序，使用默认降序（分数高的在前）
+
                 currentModelSortDirection = 'desc';
             } else if (currentSortColumn === 'model') {
-                // 再次点击Model列，切换排序方向
+
                 currentModelSortDirection = currentModelSortDirection === 'asc' ? 'desc' : 'asc';
             } else {
-                // 从任务列切换到Model列，使用降序（分数高的在前）
+
                 currentModelSortDirection = 'desc';
             }
             
-            // 获取所有行
             const rows = Array.from(tbody.children);
             
-            // 计算每个模型的平均得分（基于选中的任务）
             const modelAvgScores = rows.map(row => {
                 const modelNameCell = row.firstChild;
                 const modelName = modelNameCell.dataset.modelName;
@@ -2616,20 +2531,16 @@ url={https://arxiv.org/abs/2512.22539},
                 
                 if (!model) return { row, modelName, avgScore: -1 };
                 
-                // 获取选中的任务
                 const selectedTasks = vlaArenaData.tasks.filter(task => 
                     controlState.selectedTasks.has(task.name)
                 );
                 
-                // 获取当前设置
                 const selectedDifficultyRadio = document.querySelector('input[name="difficulty"]:checked');
                 const currentDifficulty = selectedDifficultyRadio ? selectedDifficultyRadio.value : 'l0';
                 
                 const selectedMetricRadio = document.querySelector('input[name="safety-metric"]:checked');
                 const currentSafetyMetric = selectedMetricRadio ? selectedMetricRadio.value : 'sr';
                 
-                // 计算平均得分
-                // 注意：如果选择了CC，只计算Safety任务的平均CC；否则计算所有任务的平均SR
                 let totalScore = 0;
                 let validTaskCount = 0;
                 
@@ -2638,10 +2549,9 @@ url={https://arxiv.org/abs/2512.22539},
                     if (taskData) {
                         let score;
                         
-                        // 如果选择了CC指标，只考虑Safety任务
                         if (currentSafetyMetric === 'cc') {
                             if (task.hasCC) {
-                                // Safety任务使用CC指标
+
                                 if (currentDifficulty === 'l0') {
                                     score = taskData.cc[0];
                                 } else if (currentDifficulty === 'l1l2') {
@@ -2651,13 +2561,13 @@ url={https://arxiv.org/abs/2512.22539},
                                 } else if (currentDifficulty === 'l2') {
                                     score = taskData.cc[2];
                                 } else if (currentDifficulty === 'avg') {
-                                    // 平均 (L0+L1+L2)
+
                                     score = taskData.cc.reduce((a, b) => a + b, 0) / taskData.cc.length;
                                 }
                             }
-                            // 非Safety任务不参与CC平均分计算
+
                         } else {
-                            // 使用SR指标（所有任务）
+
                             if (currentDifficulty === 'l0') {
                                 score = taskData.sr[0];
                             } else if (currentDifficulty === 'l1l2') {
@@ -2667,7 +2577,7 @@ url={https://arxiv.org/abs/2512.22539},
                             } else if (currentDifficulty === 'l2') {
                                 score = taskData.sr[2];
                             } else if (currentDifficulty === 'avg') {
-                                // 平均 (L0+L1+L2)
+
                                 score = taskData.sr.reduce((a, b) => a + b, 0) / taskData.sr.length;
                             }
                         }
@@ -2683,43 +2593,39 @@ url={https://arxiv.org/abs/2512.22539},
                 return { row, modelName, avgScore };
             });
             
-            // 按平均分排序
-            // 获取当前指标类型
             const selectedMetricRadio2 = document.querySelector('input[name="safety-metric"]:checked');
             const currentSafetyMetric2 = selectedMetricRadio2 ? selectedMetricRadio2.value : 'sr';
             const isCC = currentSafetyMetric2 === 'cc';
             
             modelAvgScores.sort((a, b) => {
-                // 缺失数据排到最后
+
                 if (a.avgScore === -1 && b.avgScore === -1) return 0;
                 if (a.avgScore === -1) return 1;
                 if (b.avgScore === -1) return -1;
                 
                 if (isCC) {
-                    // CC越小越好
+
                     if (currentModelSortDirection === 'asc') {
-                        // 升序：从大到小（最差到最好）
+
                         return b.avgScore - a.avgScore;
                     } else {
-                        // 降序：从小到大（最好到最差）- leaderboard默认显示最好的在前
+
                         return a.avgScore - b.avgScore;
                     }
                 } else {
-                    // SR越大越好
+
                     if (currentModelSortDirection === 'asc') {
-                        // 升序：从低到高（最差到最好）
+
                         return a.avgScore - b.avgScore;
                     } else {
-                        // 降序：从高到低（最好到最差）
+
                         return b.avgScore - a.avgScore;
                     }
                 }
             });
             
-            // 重新排列并显示平均分
             tbody.innerHTML = '';
             
-            // 获取当前选择的指标，用于显示标签
             const selectedMetricRadio = document.querySelector('input[name="safety-metric"]:checked');
             const currentSafetyMetric = selectedMetricRadio ? selectedMetricRadio.value : 'sr';
             const metricLabel = currentSafetyMetric.toUpperCase();
@@ -2736,13 +2642,11 @@ url={https://arxiv.org/abs/2512.22539},
                 tbody.appendChild(row);
             });
             
-            // 更新排序指示器
             const modelHeader = document.querySelector('.model-name.sortable');
             if (modelHeader) {
                 modelHeader.textContent = 'Model' + (currentModelSortDirection === 'desc' ? ' ↓' : ' ↑');
             }
             
-            // 清除任务列的排序指示器
             document.querySelectorAll('[data-task-index]').forEach(th => {
                 if (th.dataset.taskIndex) {
                     const task = vlaArenaData.tasks[parseInt(th.dataset.taskIndex)];
@@ -2750,11 +2654,9 @@ url={https://arxiv.org/abs/2512.22539},
                 }
             });
             
-            // 标记当前排序列为Model
             currentSortColumn = 'model';
         }
 
-        // 按任务排序
         function sortByTask(taskIndex) {
             if (!vlaArenaData) {
                 console.error('Data not loaded yet');
@@ -2766,7 +2668,6 @@ url={https://arxiv.org/abs/2512.22539},
             
             if (!tbody || !task) return;
             
-            // 切换排序方向
             if (currentSortColumn === taskIndex) {
                 sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
             } else {
@@ -2774,63 +2675,58 @@ url={https://arxiv.org/abs/2512.22539},
                 sortDirection = 'desc';
             }
             
-            // 获取当前选择的 Safety Metric（如果任务有 CC）
-            // 从 DOM 中获取当前选中的 radio button 值
             let currentSafetyMetric = 'sr';
             if (task.hasCC) {
                 const selectedMetricRadio = document.querySelector('input[name="safety-metric"]:checked');
                 if (selectedMetricRadio) {
                     currentSafetyMetric = selectedMetricRadio.value;
                 } else {
-                    // 如果没有找到，使用 controlState 的值
+
                     currentSafetyMetric = controlState.safetyMetric || 'sr';
                 }
             }
             
-            // 获取当前选择的 difficulty（从 DOM 中获取）
             const selectedDifficultyRadio = document.querySelector('input[name="difficulty"]:checked');
             const currentDifficulty = selectedDifficultyRadio ? selectedDifficultyRadio.value : (controlState.difficulty || 'l0');
             
             console.log('Sorting by task:', task.name, 'Metric:', currentSafetyMetric, 'Difficulty:', currentDifficulty);
             
-            // 计算每个模型的性能（根据控制面板设置）
             const modelScores = vlaArenaData.models.map(model => {
                 const taskData = task.data[model.id];
-                if (!taskData) return { model, score: -1, isCC: false }; // 缺失数据设为 -1，排序时排到最后
+                if (!taskData) return { model, score: -1, isCC: false };
                 
                 let score;
                 let isCC = false;
                 
-                // 对于 Safety 任务，根据选择的指标排序
                 if (task.hasCC && currentSafetyMetric === 'cc') {
-                    // 使用CC指标
+
                     isCC = true;
                     if (currentDifficulty === 'l0') {
                         score = taskData.cc[0];
                     } else if (currentDifficulty === 'l1l2') {
-                        // L1+L2 平均
+
                         score = (taskData.cc[1] + taskData.cc[2]) / 2;
                     } else if (currentDifficulty === 'l1') {
                         score = taskData.cc[1];
                     } else if (currentDifficulty === 'l2') {
                         score = taskData.cc[2];
                     } else {
-                        // 平均 (L0+L1+L2)
+
                         score = taskData.cc.reduce((a, b) => a + b, 0) / taskData.cc.length;
                     }
                 } else {
-                    // 使用SR指标（默认或明确选择SR）
+
                     if (currentDifficulty === 'l0') {
                         score = taskData.sr[0];
                     } else if (currentDifficulty === 'l1l2') {
-                        // L1+L2 平均
+
                         score = (taskData.sr[1] + taskData.sr[2]) / 2;
                     } else if (currentDifficulty === 'l1') {
                         score = taskData.sr[1];
                     } else if (currentDifficulty === 'l2') {
                         score = taskData.sr[2];
                     } else {
-                        // 平均 (L0+L1+L2)
+
                         score = taskData.sr.reduce((a, b) => a + b, 0) / taskData.sr.length;
                     }
                 }
@@ -2838,32 +2734,24 @@ url={https://arxiv.org/abs/2512.22539},
                 return { model, score: score, isCC: isCC };
             });
             
-            // 检查是否所有 score 都相同（无法排序）
             const uniqueScores = new Set(modelScores.filter(ms => ms.score !== -1).map(ms => ms.score));
             if (uniqueScores.size <= 1 && modelScores.some(ms => ms.score !== -1)) {
                 console.warn('All models have the same score, cannot sort meaningfully');
             }
             
-            // 排序
-            // CC 越小越好，SR 越大越好
             modelScores.sort((a, b) => {
-                if (a.score === -1) return 1; // 缺失数据排最后
+                if (a.score === -1) return 1;
                 if (b.score === -1) return -1;
                 
                 if (a.isCC && b.isCC) {
-                    // CC 排序：越小越好
-                    // 降序时：应该显示最好的在前（小的在前），所以 a.score - b.score
-                    // 升序时：应该显示最差的在前（大的在前），所以 b.score - a.score
+
                     return sortDirection === 'desc' ? a.score - b.score : b.score - a.score;
                 } else {
-                    // SR 排序：越大越好
-                    // 降序时：SR 从大到小排列（最好的在前），所以 b.score - a.score
-                    // 升序时：SR 从小到大排列（最差的在前），所以 a.score - b.score
+
                     return sortDirection === 'desc' ? b.score - a.score : a.score - b.score;
                 }
             });
             
-            // 重新排列表格行
             const rows = Array.from(tbody.children);
             if (rows.length === 0) {
                 console.warn('No rows found in table body');
@@ -2883,7 +2771,6 @@ url={https://arxiv.org/abs/2512.22539},
             console.log('Sorting', sortedRows.length, 'rows, scores:', modelScores.map(ms => ({name: ms.model.name, score: ms.score, isCC: ms.isCC})));
             tbody.innerHTML = '';
             
-            // 更新模型名称列并添加排序值
             sortedRows.forEach((row, idx) => {
                 if (row && row.firstChild && modelScores[idx]) {
                     const nameCell = row.firstChild;
@@ -2898,7 +2785,6 @@ url={https://arxiv.org/abs/2512.22539},
                 tbody.appendChild(row);
             });
             
-            // 更新排序指示器
             const modelHeader = document.querySelector('.model-name.sortable');
             if (modelHeader) {
                 modelHeader.textContent = 'Model';
@@ -2919,18 +2805,14 @@ url={https://arxiv.org/abs/2512.22539},
             }
         }
 
-
-        // Task Store functionality
         let taskStoreData = [];
 
-        // Load task data from JSON files
         async function loadTaskData() {
             try {
-                // First load the task list
+
                 const taskListResponse = await fetch('data/tasks/tasks.json');
                 const taskList = await taskListResponse.json();
                 
-                // Then load each task's data
                 const taskPromises = taskList.map(taskId => 
                     fetch(`data/tasks/${taskId}.json`).then(res => res.json())
                 );
@@ -2950,7 +2832,6 @@ url={https://arxiv.org/abs/2512.22539},
             if (taskStoreInitialized) return;
             taskStoreInitialized = true;
 
-            // Load task data if not already loaded
             if (taskStoreData.length === 0) {
                 await loadTaskData();
             }
@@ -3065,12 +2946,10 @@ url={https://arxiv.org/abs/2512.22539},
                 const task = taskStoreData.find(t => t.id === taskId);
                 const categoryPrefix = task.category.toLowerCase().replace(/\s+/g, '_');
                 
-                // 如果有subtasks，直接使用subtasks（不加category前缀）
                 if (task.subtasks && task.subtasks.length > 0) {
                     return task.subtasks;
                 }
                 
-                // 普通任务：类型_任务ID
                 return `${categoryPrefix}_${taskId}`;
             }).join(' ');
             const command = `vla-arena.download-tasks install ${taskNames} --repo vla-arena/tasks`;
@@ -3120,9 +2999,8 @@ url={https://arxiv.org/abs/2512.22539},
                 <tbody>
             `;
 
-            // Render based on layout type
             if (task.layout === 'simple') {
-                // Simple layout: L0, L1, L2, then one Instruction row
+
                 ['L0', 'L1', 'L2'].forEach(level => {
                     tableHTML += `<tr><td><strong>${level}</strong></td>`;
                     for (let i = 1; i <= 5; i++) {
@@ -3138,7 +3016,6 @@ url={https://arxiv.org/abs/2512.22539},
                     tableHTML += `</tr>`;
                 });
                 
-                // Add single instruction row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.all.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3146,7 +3023,7 @@ url={https://arxiv.org/abs/2512.22539},
                 tableHTML += `</tr>`;
                 
             } else if (task.layout === 'split_l0l1_l2') {
-                // Split layout: L0, L1, Instruction, then L2, Instruction
+
                 ['L0', 'L1'].forEach(level => {
                     tableHTML += `<tr><td><strong>${level}</strong></td>`;
                     for (let i = 1; i <= 5; i++) {
@@ -3162,14 +3039,12 @@ url={https://arxiv.org/abs/2512.22539},
                     tableHTML += `</tr>`;
                 });
                 
-                // L0/L1 instruction row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.l0l1.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L2 row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L2</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L2_${i}_1`);
@@ -3183,7 +3058,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L2 instruction row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.l2.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3191,7 +3065,7 @@ url={https://arxiv.org/abs/2512.22539},
                 tableHTML += `</tr>`;
                 
             } else if (task.layout === 'each_level') {
-                // Each level layout: L0, Instruction, L1, Instruction, L2, Instruction
+
                 ['L0', 'L1', 'L2'].forEach(level => {
                     const levelKey = level.toLowerCase();
                     
@@ -3208,7 +3082,6 @@ url={https://arxiv.org/abs/2512.22539},
                     }
                     tableHTML += `</tr>`;
                     
-                    // Instruction row for this level
                     tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                     task.instructions[levelKey].forEach(instruction => {
                         tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3217,7 +3090,7 @@ url={https://arxiv.org/abs/2512.22539},
                 });
                 
             } else if (task.layout === 'preposition') {
-                // Preposition layout: L0 & L1 Visual (shared images), L0 Instr., L1 Instr., L2, Instruction
+
                 tableHTML += `<tr><td><strong>L0 & L1 Visual</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L0_${i}_1`);
@@ -3231,21 +3104,18 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L0 Instruction
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L0 Instr.</strong></td>`;
                 task.instructions.l0.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L1 Instruction
                 tableHTML += `<tr><td><strong>L1 Instr.</strong></td>`;
                 task.instructions.l1.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L2 row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L2</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L2_${i}_1`);
@@ -3259,7 +3129,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L2 Instruction
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.l2.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3267,7 +3136,7 @@ url={https://arxiv.org/abs/2512.22539},
                 tableHTML += `</tr>`;
                 
             } else if (task.layout === 'no_l0l1_instructions') {
-                // No L0/L1 instruction layout: L0, L1, L2, then one Instruction row
+
                 ['L0', 'L1', 'L2'].forEach(level => {
                     tableHTML += `<tr><td><strong>${level}</strong></td>`;
                     for (let i = 1; i <= 5; i++) {
@@ -3283,7 +3152,6 @@ url={https://arxiv.org/abs/2512.22539},
                     tableHTML += `</tr>`;
                 });
                 
-                // Add single instruction row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.all.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3291,7 +3159,7 @@ url={https://arxiv.org/abs/2512.22539},
                 tableHTML += `</tr>`;
                 
             } else if (task.layout === 'task_workflows') {
-                // TaskWorkflows layout: Visual row (shared), then L0 Instr., L1 Instr., L2 Instr.
+
                 tableHTML += `<tr><td><strong>Visual</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L0_${i}_1`);
@@ -3305,21 +3173,18 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L0 Instruction
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L0 Instr.</strong></td>`;
                 task.instructions.l0.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L1 Instruction
                 tableHTML += `<tr><td><strong>L1 Instr.</strong></td>`;
                 task.instructions.l1.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L2 Instruction
                 tableHTML += `<tr><td><strong>L2 Instr.</strong></td>`;
                 task.instructions.l2.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3327,7 +3192,7 @@ url={https://arxiv.org/abs/2512.22539},
                 tableHTML += `</tr>`;
                 
             } else if (task.layout === 'unseen_objects') {
-                // UnseenObjects layout: L0, L1, Instruction, then L2, Instruction
+
                 ['L0', 'L1'].forEach(level => {
                     tableHTML += `<tr><td><strong>${level}</strong></td>`;
                     for (let i = 1; i <= 5; i++) {
@@ -3343,14 +3208,12 @@ url={https://arxiv.org/abs/2512.22539},
                     tableHTML += `</tr>`;
                 });
                 
-                // L0/L1 instruction row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.l0l1.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L2 row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L2</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L2_${i}_1`);
@@ -3364,7 +3227,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L2 instruction row
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Instruction</strong></td>`;
                 task.instructions.l2.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3372,10 +3234,7 @@ url={https://arxiv.org/abs/2512.22539},
                 tableHTML += `</tr>`;
                 
             } else if (task.layout === 'long_horizon') {
-                // LongHorizon layout: Tasks 1-5 with L0, L1, L2 + instructions, then Tasks 6-10 with L0 only
-                
-                // First section: Task 1-5
-                // L0 Visual
+
                 tableHTML += `<tr><td><strong>L0 Visual</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L0_${i}_1`);
@@ -3389,14 +3248,12 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L0 Instruction (1-5)
                 tableHTML += `<tr><td><strong>L0 Instr.</strong></td>`;
                 task.instructions.l0_1_5.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L1 Visual
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L1 Visual</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L1_${i}_1`);
@@ -3410,14 +3267,12 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L1 Instruction (1-5)
                 tableHTML += `<tr><td><strong>L1 Instr.</strong></td>`;
                 task.instructions.l1_1_5.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // L2 Visual
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>L2 Visual</strong></td>`;
                 for (let i = 1; i <= 5; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L2_${i}_1`);
@@ -3431,18 +3286,15 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L2 Instruction (1-5)
                 tableHTML += `<tr><td><strong>L2 Instr.</strong></td>`;
                 task.instructions.l2_1_5.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
                 });
                 tableHTML += `</tr>`;
                 
-                // Section divider - change header to Task 6-10
                 tableHTML += `<tr style="border-top: 2px solid #999;"><td><strong>Level</strong></td>
                     <th>Task 6</th><th>Task 7</th><th>Task 8</th><th>Task 9</th><th>Task 10</th></tr>`;
                 
-                // L0 Visual (6-10)
                 tableHTML += `<tr><td><strong>L0 Visual</strong></td>`;
                 for (let i = 6; i <= 10; i++) {
                     const imagePath = task.imagePath.replace('_L0_1_1', `_L0_${i}_1`);
@@ -3456,7 +3308,6 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 tableHTML += `</tr>`;
                 
-                // L0 Instruction (6-10)
                 tableHTML += `<tr><td><strong>L0 Instr.</strong></td>`;
                 task.instructions.l0_6_10.forEach(instruction => {
                     tableHTML += `<td class="task-detail-instruction">${instruction}</td>`;
@@ -3467,9 +3318,8 @@ url={https://arxiv.org/abs/2512.22539},
             tableHTML += `</tbody>`;
             table.innerHTML = tableHTML;
 
-            // Show modal with animation
             modal.style.display = 'block';
-            // Force reflow to ensure the transition works
+
             modal.offsetHeight;
             modal.classList.add('active');
         }
@@ -3477,7 +3327,7 @@ url={https://arxiv.org/abs/2512.22539},
         function closeTaskModal() {
             const modal = document.getElementById('task-modal');
             modal.classList.remove('active');
-            // Wait for animation to complete before hiding
+
             setTimeout(() => {
                 if (!modal.classList.contains('active')) {
                     modal.style.display = 'none';
@@ -3485,7 +3335,6 @@ url={https://arxiv.org/abs/2512.22539},
             }, 150);
         }
 
-        // Close modal when clicking outside
         document.addEventListener('click', (e) => {
             const modal = document.getElementById('task-modal');
             if (e.target === modal) {
@@ -3493,7 +3342,6 @@ url={https://arxiv.org/abs/2512.22539},
             }
         });
 
-        // Floating button functionality
         function handleFloatingButtons() {
             const currentHash = window.location.hash.substring(1) || 'leaderboard';
             const floatingContribute = document.getElementById('floating-contribute');
@@ -3501,7 +3349,7 @@ url={https://arxiv.org/abs/2512.22539},
             const floatingDownload = document.getElementById('floating-download');
             
             if (currentHash === 'leaderboard') {
-                // Leaderboard页面显示Contribute按钮（火箭图标）
+
                 floatingContribute.href = 'https://github.com/vla-arena/vla-arena.github.io#contributing-your-model-results';
                 floatingContributeIcon.textContent = '🚀';
                 
@@ -3521,14 +3369,13 @@ url={https://arxiv.org/abs/2512.22539},
                 floatingDownload.classList.remove('show');
                 
             } else if (currentHash === 'taskstore') {
-                // Task Store页面显示Contribute和Download按钮（星星图标）
+
                 floatingContribute.href = 'https://github.com/vla-arena/vla-arena.github.io#contributing-your-tasks';
                 floatingContributeIcon.textContent = '✨';
                 
                 const taskStoreHeader = document.querySelector('.task-store-header');
                 const downloadBtn = document.querySelector('.task-store-controls .download-btn');
                 
-                // 检查Task Store header (包含Contribute按钮)
                 if (taskStoreHeader) {
                     const headerRect = taskStoreHeader.getBoundingClientRect();
                     if (headerRect.top < 0) {
@@ -3538,7 +3385,6 @@ url={https://arxiv.org/abs/2512.22539},
                     }
                 }
                 
-                // 检查Download按钮
                 if (downloadBtn) {
                     const rect = downloadBtn.getBoundingClientRect();
                     const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
@@ -3553,25 +3399,22 @@ url={https://arxiv.org/abs/2512.22539},
                 }
                 
             } else {
-                // 其他页面隐藏所有浮动按钮
+
                 floatingContribute.classList.remove('show');
                 floatingDownload.classList.remove('show');
             }
         }
 
-        // 监听滚动事件
         window.addEventListener('scroll', handleFloatingButtons);
         
-        // 监听hash变化
         window.addEventListener('hashchange', () => {
             setTimeout(handleFloatingButtons, 100);
         });
 
-        // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 根据 URL hash 显示对应页面
+
             loadPageFromHash();
-            // 初始化浮动按钮状态
+
             setTimeout(handleFloatingButtons, 100);
         });
 </script>

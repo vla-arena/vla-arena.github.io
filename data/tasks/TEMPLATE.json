@@ -4,6 +4,7 @@
     "category": "Safety|Distractor|Extrapolation|Long Horizon|LIBERO",
     "imagePath": "figures/rollouts/task_identifier_L0_1_1.png",
     "layout": "simple",
+    "repo": "vla-arena/tasks",
     "instructions": {
         "all": [
             "Instruction 1",

@@ -3018,20 +3018,32 @@ url={https://arxiv.org/abs/2512.22539},
                 return;
             }
 
-            const taskNames = Array.from(selectedTasks).flatMap(taskId => {
+            const tasksByRepo = {};
+            
+            Array.from(selectedTasks).forEach(taskId => {
                 const task = taskStoreData.find(t => t.id === taskId);
+                const repo = task.repo || 'vla-arena/tasks';
                 const categoryPrefix = task.category.toLowerCase().replace(/\s+/g, '_');
                 
-                if (task.subtasks && task.subtasks.length > 0) {
-                    return task.subtasks;
+                if (!tasksByRepo[repo]) {
+                    tasksByRepo[repo] = [];
                 }
                 
-                return `${categoryPrefix}_${taskId}`;
-            }).join(' ');
-            const command = `vla-arena.download-tasks install ${taskNames} --repo vla-arena/tasks`;
+                if (task.subtasks && task.subtasks.length > 0) {
+                    tasksByRepo[repo].push(...task.subtasks);
+                } else {
+                    tasksByRepo[repo].push(`${categoryPrefix}_${taskId}`);
+                }
+            });
+            
+            const commands = Object.entries(tasksByRepo).map(([repo, tasks]) => {
+                return `vla-arena.download-tasks install ${tasks.join(' ')} --repo ${repo}`;
+            });
+            
+            const commandText = commands.join('\n');
 
-            navigator.clipboard.writeText(command).then(() => {
-                showToast(`Copied to clipboard: ${command}`, 'success');
+            navigator.clipboard.writeText(commandText).then(() => {
+                showToast(`Copied ${commands.length} command(s) to clipboard`, 'success');
             }).catch(() => {
                 showToast('Failed to copy to clipboard', 'error');
             });

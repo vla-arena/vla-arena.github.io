@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<parameter name="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLA-Arena</title>
+    <title>VLA-Arena: Comprehensive Benchmark for Vision-Language-Action Models | Leaderboard & Task Store</title>
+    
+    <meta name="description" content="VLA-Arena is a comprehensive benchmark platform for evaluating Vision-Language-Action (VLA) models. Explore model performance leaderboards, browse task datasets including Safety, Distractor, Extrapolation, Long Horizon, and LIBERO tasks.">
+    <meta name="keywords" content="VLA-Arena, Vision-Language-Action, VLA models, robotics benchmark, embodied AI, robot learning, leaderboard, OpenVLA, π₀, UniVLA, SmolVLA, LIBERO, manipulation tasks, robot evaluation">
+    <meta name="author" content="VLA-Arena Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vla-arena.github.io/">
+    
+    <meta property="og:title" content="VLA-Arena: Vision-Language-Action Models Benchmark">
+    <meta property="og:description" content="Comprehensive evaluation platform for VLA models across multiple task categories. Compare model performance, explore benchmark tasks, and contribute your results.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vla-arena.github.io/">
+    <meta property="og:image" content="https://vla-arena.github.io/figures/logo.png">
+    <meta property="og:site_name" content="VLA-Arena">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VLA-Arena: Vision-Language-Action Models Benchmark">
+    <meta name="twitter:description" content="Comprehensive benchmark for evaluating VLA models with leaderboard and task store.">
+    <meta name="twitter:image" content="https://vla-arena.github.io/figures/logo.png">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "VLA-Arena",
+      "alternateName": "Vision-Language-Action Arena",
+      "url": "https://vla-arena.github.io/",
+      "description": "Comprehensive benchmark platform for evaluating Vision-Language-Action models",
+      "keywords": "VLA models, robotics benchmark, embodied AI, robot learning, leaderboard",
+      "author": {
+        "@type": "Organization",
+        "name": "VLA-Arena Team"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://vla-arena.github.io/#leaderboard",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "VLA-Arena Benchmark",
+      "description": "A comprehensive benchmark suite for evaluating Vision-Language-Action models across Safety, Distractor, Extrapolation, Long Horizon, and LIBERO task categories",
+      "url": "https://vla-arena.github.io/#taskstore",
+      "keywords": [
+        "VLA models",
+        "robot manipulation",
+        "embodied AI",
+        "benchmark dataset",
+        "vision-language-action",
+        "robotics evaluation",
+        "LIBERO",
+        "safety tasks",
+        "manipulation tasks"
+      ],
+      "creator": {
+        "@type": "Organization",
+        "name": "VLA-Arena Team",
+        "url": "https://vla-arena.github.io/"
+      },
+      "distribution": {
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://vla-arena.github.io/data/tasks/"
+      },
+      "measurementTechnique": "Robot manipulation evaluation across multiple difficulty levels (L0, L1, L2)",
+      "variableMeasured": [
+        "Success Rate",
+        "Cumulative Cost",
+        "Task Completion"
+      ]
+    }
+    </script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWV023WWP4"></script>
     <script>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vla-arena.github.io/sitemap.xml
+

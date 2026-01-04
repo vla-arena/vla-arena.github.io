@@ -1,0 +1,24 @@
+{
+    "id": "dynamic_distractors",
+    "name": "DynamicDistractors",
+    "category": "Distractor",
+    "imagePath": "figures/rollouts/dynamic_distractors_L0_1_1.png",
+    "layout": "split_l0l1_l2",
+    "instructions": {
+        "l0l1": [
+            "Pick up the banana and put it on the plate",
+            "Pick up the carrot and put it on the plate",
+            "Pick up the lemon and put it on the plate",
+            "Pick up the onion and put it on the bowl",
+            "Pick up the tomato and put it on the plate"
+        ],
+        "l2": [
+            "Pick up the apple and place it on the bowl",
+            "Pick up the banana and place it on the plate",
+            "Pick up the carrot and put it on the plate",
+            "Pick up the lemon and place it on the bowl",
+            "Pick up the onion and put it on the bowl"
+        ]
+    }
+}
+

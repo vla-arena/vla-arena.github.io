@@ -1,0 +1,31 @@
+{
+    "id": "task_workflows",
+    "name": "TaskWorkflows",
+    "category": "Extrapolation",
+    "imagePath": "figures/rollouts/task_workflows_L0_1_1.png",
+    "layout": "task_workflows",
+    "instructions": {
+        "l0": [
+            "Pick up the bowl and place it on the top of the wooden shelf",
+            "Pick up the cake and place it on the plate",
+            "Pick up the cake and place it on the top of the cabinet",
+            "Pick up the egg and place it in the top layer of the cabinet",
+            "Pick up the mug and place it on the top of the cabinet"
+        ],
+        "l1": [
+            "Pick up the bowl and place it on the plate",
+            "Pick up the bowl and place it on the top of the cabinet",
+            "Pick up the cake and place it in the top layer of the cabinet",
+            "Pick up the egg and place it on the top of the wooden shelf",
+            "Pick up the mug and place it on the top of the wooden shelf"
+        ],
+        "l2": [
+            "Pick up the cake and place it on the bowl",
+            "Pick up the cake and place it on the mug",
+            "Pick up the egg and place it on the top of the cabinet",
+            "Pick up the egg and place it on the cake",
+            "Pick up the mug and place it on the bowl"
+        ]
+    }
+}
+

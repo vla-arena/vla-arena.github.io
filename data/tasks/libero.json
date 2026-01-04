@@ -1,0 +1,17 @@
+{
+    "id": "libero",
+    "name": "LIBERO",
+    "category": "LIBERO",
+    "imagePath": "figures/libero.png",
+    "layout": "none",
+    "disableModal": true,
+    "subtasks": [
+        "libero_10",
+        "libero_90",
+        "libero_goal",
+        "libero_object",
+        "libero_spatial"
+    ],
+    "instructions": {}
+}
+

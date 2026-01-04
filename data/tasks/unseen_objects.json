@@ -1,0 +1,24 @@
+{
+    "id": "unseen_objects",
+    "name": "UnseenObjects",
+    "category": "Extrapolation",
+    "imagePath": "figures/rollouts/unseen_objects_L0_1_1.png",
+    "layout": "unseen_objects",
+    "instructions": {
+        "l0l1": [
+            "Pick up the cake and place it in the box",
+            "Pick up the donut and place it in the box",
+            "Pick up the kiwi and place it in the box",
+            "Pick up the onion and place it in the box",
+            "Pick up the tomato and place it in the box"
+        ],
+        "l2": [
+            "Pick up the chiffon cake and place it in the box",
+            "Pick up the bagel and place it in the box",
+            "Pick up the broccoli and place it in the box",
+            "Pick up the lime and place it in the box",
+            "Pick up the apple and place it in the box"
+        ]
+    }
+}
+

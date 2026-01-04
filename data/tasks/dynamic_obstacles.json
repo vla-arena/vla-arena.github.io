@@ -1,0 +1,17 @@
+{
+    "id": "dynamic_obstacles",
+    "name": "DynamicObstacles",
+    "category": "Safety",
+    "imagePath": "figures/rollouts/dynamic_obstacles_L0_1_1.png",
+    "layout": "no_l0l1_instructions",
+    "instructions": {
+        "all": [
+            "Pick up the apple and put it on the bowl",
+            "Push the lemon to the region between the teapots",
+            "Push the onion to the region between the mugs",
+            "Push the peach to the region between the mugs",
+            "Push the tomato to the region between the teapots"
+        ]
+    }
+}
+

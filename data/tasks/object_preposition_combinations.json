@@ -1,0 +1,31 @@
+{
+    "id": "object_preposition_combinations",
+    "name": "PrepositionCombinations",
+    "category": "Extrapolation",
+    "imagePath": "figures/rollouts/object_preposition_combinations_L0_1_1.png",
+    "layout": "preposition",
+    "instructions": {
+        "l0": [
+            "Pick the tomato <b>in</b> the top layer of the drawer and place it on the bowl <b>between</b> the vase and the teapot",
+            "Pick the tomato <b>in</b> the top layer of the drawer and place it on the porcelain bowl <b>at the top of</b> the cabinet",
+            "Pick the tomato <b>next to</b> the cereal and place it on the porcelain bowl <b>between</b> the cabinet and the cutting board",
+            "Pick the tomato <b>next to</b> the cutting board and place it on the porcelain bowl <b>at the top of</b> the cabinet",
+            "Pick the tomato <b>next to</b> the cutting board and place it on the porcelain bowl <b>on</b> the cutting board"
+        ],
+        "l1": [
+            "Pick the tomato <b>in</b> the top layer of the drawer and place it on the porcelain bowl <b>on</b> the cutting board",
+            "Pick the tomato <b>next to</b> the cereal and place it on the porcelain bowl <b>on</b> the cutting board",
+            "Pick the tomato <b>next to</b> the cereal and place it on the porcelain bowl <b>on the top of</b> the cabinet",
+            "Pick the tomato <b>next to</b> the cutting board and place it on the porcelain bowl <b>beside</b> it",
+            "Pick the tomato <b>on</b> the cutting board and place it on the porcelain bowl <b>in</b> the first layer of the drawer"
+        ],
+        "l2": [
+            "Pick the tomato <b>next to</b> the cereal and place it on the porcelain bowl <b>between</b> the vase and the teapot",
+            "Pick the tomato <b>on the top of</b> the cabinet and place it on the bowl <b>next to</b> the vase",
+            "Pick up the tomato <b>between</b> the cabinet and the teapot and place it on the bowl <b>next to</b> the plate",
+            "Pick up the tomato <b>between</b> the cabinet and the teapot and place it on the bowl <b>on</b> the top layer of the cabinet",
+            "Pick up the tomato <b>on</b> the cutting board and place it on the porcelain bowl <b>in</b> the top drawer"
+        ]
+    }
+}
+

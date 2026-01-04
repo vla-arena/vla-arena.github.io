@@ -1,0 +1,41 @@
+{
+    "id": "long_horizon",
+    "name": "LongHorizon",
+    "category": "Long Horizon",
+    "imagePath": "figures/rollouts/long_horizon_L0_1_1.png",
+    "layout": "long_horizon",
+    "subtasks": [
+        "long_horizon"
+    ],
+    "instructions": {
+        "l0_1_5": [
+            "Close the middle layer of the cabinet",
+            "Open the top layer of the cabinet",
+            "Pick up the apple and place it in the box",
+            "Pick up the banana and place it in the box",
+            "Pick up the egg and place it in the box"
+        ],
+        "l1_1_5": [
+            "Close all of the drawer of the cabinet",
+            "Pick up all of the apples and place them in the box",
+            "Pick up the lime and the banana and place them in the box",
+            "Pick up the tomato on the plate and place it on the bowl, then pick up the orange and place it on the plate",
+            "Take the mango out of the drawer and pick up the peach and place it in the drawer"
+        ],
+        "l2_1_5": [
+            "Open the top drawer, then pick up the mango on the plate and put it on the drawer, close the drawer at last",
+            "Open the top two drawers one by one, put the strawberry in the middle layer and put the mango in the top layer, and close them afterward",
+            "Pick up the orange and the tomato and the cucumber and place them in the box",
+            "Take out the apple on the ceramic plate, pick up the carrot on the cutting board and place it on the plate, then pick up the onion and place it on the cutting board",
+            "Take the mango out of the drawer and pick up the peaches and place it in the drawer, then close the drawer"
+        ],
+        "l0_6_10": [
+            "Pick up the lime and place it in the top layer of the cabinet",
+            "Pick up the mango and place it in the top layer of the cabinet",
+            "Pick up the orange and put it in the box",
+            "Pick up the peach and place it in the top layer of the cabinet",
+            "Pick up the strawberry and place it in the box"
+        ]
+    }
+}
+

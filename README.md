@@ -166,6 +166,9 @@ Make sure to include all tasks in your JSON file. The complete task list include
 **Long Horizon Tasks:**
 - LongHorizon
 
+**LIBERO Tasks:**
+- LIBERO (includes: libero_10, libero_90, libero_goal, libero_object, libero_spatial)
+
 ### Notes
 
 - Ensure all JSON files are valid and properly formatted
@@ -173,4 +176,198 @@ Make sure to include all tasks in your JSON file. The complete task list include
 - Missing tasks will be displayed as "-" on the leaderboard
 - The leaderboard automatically loads all JSON files from `data/results/` directory
 - For questions or issues, please open an issue on the repository
+
+## Contributing Your Tasks
+
+VLA-Arena uses a decentralized task management system, making it easy to add new tasks without modifying the core codebase. Follow these steps to contribute your own tasks:
+
+### Task Data Structure
+
+Each task is stored as a separate JSON file in `data/tasks/`. The task data follows this structure:
+
+```json
+{
+    "id": "task_identifier",
+    "name": "TaskDisplayName",
+    "category": "Safety|Distractor|Extrapolation|Long Horizon|LIBERO",
+    "imagePath": "figures/rollouts/task_image.png",
+    "layout": "simple|split_l0l1_l2|each_level|preposition|task_workflows|unseen_objects|long_horizon|no_l0l1_instructions",
+    "instructions": {
+        "all": ["instruction1", "instruction2", ...],
+        // OR for different difficulty levels:
+        "l0": ["instruction1", ...],
+        "l1": ["instruction1", ...],
+        "l2": ["instruction1", ...],
+        // OR for split layouts:
+        "l0l1": ["instruction1", ...],
+        "l2": ["instruction1", ...]
+    }
+}
+```
+
+**Field Descriptions:**
+
+- `id`: Unique identifier for the task (lowercase, underscores for spaces)
+- `name`: Display name shown on the Task Store page
+- `category`: Task category (determines the type prefix in download commands)
+- `imagePath`: Path to the task's preview image (relative to the website root)
+- `layout`: Visual layout for the task detail modal. Options:
+  - `simple`: L0, L1, L2 rows, then single instruction row
+  - `split_l0l1_l2`: L0, L1, Instruction, then L2, Instruction
+  - `each_level`: Each level (L0, L1, L2) has its own instruction row
+  - `preposition`: L0 & L1 visual shared with separate instructions, then L2
+  - `task_workflows`: Visual row first, then L0, L1, L2 instruction rows
+  - `unseen_objects`: L0, L1, Instruction, then L2, Instruction
+  - `long_horizon`: Special layout for multi-step tasks
+  - `no_l0l1_instructions`: L0, L1, L2 rows, then single instruction row (no separate L0/L1 instructions)
+- `instructions`: Task instructions organized by difficulty level(s)
+
+### Steps to Add a New Task
+
+#### 1. Prepare Task Resources
+
+Create your task resources:
+
+```bash
+# 1. Create task visualization images (PNG format recommended)
+# Place them in figures/rollouts/ directory
+# Naming convention: task_id_L0_1_1.png, task_id_L1_1_1.png, task_id_L2_1_1.png, etc.
+
+# 2. Prepare task instructions for each difficulty level
+```
+
+#### 2. Create Task JSON File
+
+Create a new JSON file in `data/tasks/` directory:
+
+```bash
+cd vla-arena.github.io
+cat > data/tasks/my_new_task.json << 'EOF'
+{
+    "id": "my_new_task",
+    "name": "MyNewTask",
+    "category": "Safety",
+    "imagePath": "figures/rollouts/my_new_task_L0_1_1.png",
+    "layout": "simple",
+    "instructions": {
+        "all": [
+            "Pick up the object and place it in the container",
+            "Move the red block to the blue box",
+            "Stack the cups in ascending order",
+            "Arrange the items on the shelf",
+            "Close the drawer after placing the item"
+        ]
+    }
+}
+EOF
+```
+
+#### 3. Register the Task
+
+Add your task ID to `data/tasks/tasks.json`:
+
+```json
+[
+    "static_obstacles",
+    "risk_aware_grasping",
+    ...
+    "my_new_task"
+]
+```
+
+**Important:** Tasks are loaded in the order they appear in `tasks.json`.
+
+#### 4. Upload Task Images
+
+Place your task visualization images in `figures/rollouts/`:
+
+```bash
+# Example file structure:
+figures/rollouts/
+  ├── my_new_task_L0_1_1.png
+  ├── my_new_task_L0_2_1.png
+  ├── my_new_task_L1_1_1.png
+  ├── my_new_task_L2_1_1.png
+  └── ...
+```
+
+#### 5. Test Locally
+
+Run the local server to test your task:
+
+```bash
+python -m http.server 8000
+# Visit http://localhost:8000/index.html
+# Navigate to Task Store to verify your task appears correctly
+```
+
+#### 6. Submit Your Contribution
+
+Create a pull request with your changes:
+
+```bash
+git add data/tasks/my_new_task.json
+git add data/tasks/tasks.json
+git add figures/rollouts/my_new_task_*.png
+git commit -m "Add MyNewTask to VLA-Arena Task Store"
+git push origin main
+```
+
+Then create a pull request on GitHub with:
+- Task description and motivation
+- Category justification
+- Sample visualizations
+- Any special requirements or dependencies
+
+### Task Layout Examples
+
+**Simple Layout** (most common):
+```json
+{
+    "layout": "simple",
+    "instructions": {
+        "all": ["task1", "task2", "task3", "task4", "task5"]
+    }
+}
+```
+
+**Each Level Layout** (different instructions per level):
+```json
+{
+    "layout": "each_level",
+    "instructions": {
+        "l0": ["easy_task1", "easy_task2", ...],
+        "l1": ["medium_task1", "medium_task2", ...],
+        "l2": ["hard_task1", "hard_task2", ...]
+    }
+}
+```
+
+**Split Layout** (L0/L1 share, L2 separate):
+```json
+{
+    "layout": "split_l0l1_l2",
+    "instructions": {
+        "l0l1": ["common_task1", "common_task2", ...],
+        "l2": ["advanced_task1", "advanced_task2", ...]
+    }
+}
+```
+
+### Troubleshooting
+
+**Task doesn't appear in Task Store:**
+- Check that the task ID in `tasks.json` matches the filename
+- Verify JSON syntax is valid (use a JSON validator)
+- Ensure the task JSON file is in `data/tasks/` directory
+
+**Images not loading:**
+- Verify image paths are correct and relative to the website root
+- Check that image files exist in the specified location
+- Ensure image filenames match exactly (case-sensitive)
+
+**Layout issues:**
+- Review the layout type and ensure it matches your instruction structure
+- Check that all required instruction fields are present
+- Refer to existing task files for examples
 

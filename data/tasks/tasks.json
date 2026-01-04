@@ -1,0 +1,15 @@
+[
+    "static_obstacles",
+    "risk_aware_grasping",
+    "hazard_avoidance",
+    "object_state_preservation",
+    "dynamic_obstacles",
+    "static_distractors",
+    "dynamic_distractors",
+    "object_preposition_combinations",
+    "task_workflows",
+    "unseen_objects",
+    "long_horizon",
+    "libero"
+]
+

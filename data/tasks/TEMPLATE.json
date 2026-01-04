@@ -1,0 +1,17 @@
+{
+    "id": "task_identifier",
+    "name": "TaskDisplayName",
+    "category": "Safety|Distractor|Extrapolation|Long Horizon|LIBERO",
+    "imagePath": "figures/rollouts/task_identifier_L0_1_1.png",
+    "layout": "simple",
+    "instructions": {
+        "all": [
+            "Instruction 1",
+            "Instruction 2",
+            "Instruction 3",
+            "Instruction 4",
+            "Instruction 5"
+        ]
+    }
+}
+

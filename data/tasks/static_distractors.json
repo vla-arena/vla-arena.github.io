@@ -1,0 +1,17 @@
+{
+    "id": "static_distractors",
+    "name": "StaticDistractors",
+    "category": "Distractor",
+    "imagePath": "figures/rollouts/static_distractors_L0_1_1.png",
+    "layout": "simple",
+    "instructions": {
+        "all": [
+            "Pick the apple on the table and place it on the plate",
+            "Pick the banana on the table and place it on the plate",
+            "Pick the carrot on the table and place it on the plate",
+            "Pick the mango on the table and place it on the bowl",
+            "Pick the tomato on the table and place it on the bowl"
+        ]
+    }
+}
+

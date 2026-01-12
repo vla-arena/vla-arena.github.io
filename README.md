@@ -222,7 +222,11 @@ Each task is stored as a separate JSON file in `data/tasks/`. The task data foll
   - `no_l0l1_instructions`: L0, L1, L2 rows, then single instruction row (no separate L0/L1 instructions)
 - `instructions`: Task instructions organized by difficulty level(s)
 
-### Steps to Add a New Task
+### Steps to Add a New Task in Task Store
+
+#### Preliminary steps
+
+[Create and share](https://github.com/PKU-Alignment/VLA-Arena#-create-and-share-custom-tasks) your custom tasks to HuggingFace.
 
 #### 1. Prepare Task Resources
 

@@ -242,24 +242,25 @@ Create your task resources:
 
 #### 2. Create Task JSON File
 
-Create a new JSON file in `data/tasks/` directory:
+Create a new JSON file in `data/tasks/` directory (see data/tasks/TEMPLATE.json):
 
 ```bash
 cd vla-arena.github.io
 cat > data/tasks/my_new_task.json << 'EOF'
 {
-    "id": "my_new_task",
-    "name": "MyNewTask",
-    "category": "Safety",
-    "imagePath": "figures/rollouts/my_new_task_L0_1_1.png",
+    "id": "task_identifier",
+    "name": "TaskDisplayName",
+    "category": "Safety|Distractor|Extrapolation|Long Horizon|LIBERO",
+    "imagePath": "figures/rollouts/task_identifier_L0_1_1.png",
     "layout": "simple",
+    "repo": "vla-arena/tasks",
     "instructions": {
         "all": [
-            "Pick up the object and place it in the container",
-            "Move the red block to the blue box",
-            "Stack the cups in ascending order",
-            "Arrange the items on the shelf",
-            "Close the drawer after placing the item"
+            "Instruction 1",
+            "Instruction 2",
+            "Instruction 3",
+            "Instruction 4",
+            "Instruction 5"
         ]
     }
 }

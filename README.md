@@ -19,9 +19,13 @@ cd vla-arena.github.io
 
 Run the VLA-Arena evaluation code to generate your model's results:
 
-```sh
-# TODO: Add the command to run VLA-Arena evaluation
-# This will generate intermediate results and final results
+```bash
+vla-arena eval --model <model_name> --config <config_file_path>
+```
+
+Example:
+```bash
+vla-arena eval --model openvla --config /path/to/config.yaml
 ```
 
 The evaluation process will automatically generate:

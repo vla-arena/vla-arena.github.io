@@ -27,52 +27,61 @@ Example:
 ```bash
 vla-arena eval --model openvla --config /path/to/config.yaml
 ```
+```markdown
+### 2. Run VLA-Arena Evaluation
+
+Run the VLA-Arena evaluation code to generate your model's results:
+
+```bash
+vla-arena eval --model <model_name> --config <config_file_path>
+
+```
+
+Example:
+
+```bash
+vla-arena eval --model openvla --config /path/to/config.yaml
+
+```
 
 The evaluation process will automatically generate:
 
-#### Intermediate Results
-Intermediate evaluation results will be saved to `data/runs/<model_id>/`:
-- Raw evaluation outputs
-- Detailed logs
-- Intermediate analysis files
-
 #### Final Results
-The final results JSON file will be generated at `data/results/<model_id>.json` with the following structure:
+
+The final results JSON file will be generated in the `results/` directory with a timestamped filename (e.g., `results/openvla_json_2026_01_11-14_35_19.json`) having the following structure:
 
 ```json
 {
   "name": "Your Model Name",
-  "id": "your-model-id",
   "tasks": [
     {
       "name": "TaskName",
-      "category": "Safety|Distractor|Extrapolation|Long Horizon",
+      "category": "Safety|Distractor|Extrapolation|Long Horizon|Other",
       "hasCC": true|false,
       "data": {
         "sr": [0.0, 0.0, 0.0],
-        "cc": [0.0, 0.0, 0.0],
-        "srBold": [0, 0, 0],
-        "ccBold": [0, 0, 0]
-      }
+        "cc": [0.0, 0.0, 0.0]
+      },
+      "numEpisodes": 50,
+      "numSuccesses": 45
     }
   ]
 }
+
 ```
 
 **Field Descriptions:**
-- `name`: Display name of your model
-- `id`: Unique identifier (lowercase, use hyphens for spaces, e.g., "my-model-v2")
-- `tasks`: Array of all tasks in VLA-Arena
-  - `name`: Task name (must match existing task names)
-  - `category`: One of "Safety", "Distractor", "Extrapolation", or "Long Horizon"
-  - `hasCC`: `true` for Safety tasks, `false` for others
-  - `data`: Performance data
-    - `sr`: Success Rate array [L0, L1, L2] (values between 0.0 and 1.0)
-    - `cc`: Cumulative Cost array [L0, L1, L2] (only for Safety tasks, lower is better)
-    - `srBold`: Array indicating which difficulty levels have the best SR [0 or 1 for each level]
-    - `ccBold`: Array indicating which difficulty levels have the best CC [0 or 1 for each level]
 
-**Note:** If your model doesn't have data for a specific task, you can omit that task from the `tasks` array, or set `data` to `null`. The leaderboard will display "-" for missing data.
+* `name`: Display name of your model
+* `tasks`: Array of all tasks in VLA-Arena
+* `name`: Task name (must match existing task names)
+* `category`: Task category (e.g., "Safety", "Distractor", "Other")
+* `hasCC`: `true` for Safety tasks, `false` for others
+* `data`: Performance data
+* `sr`: Success Rate array [L0, L1, L2] (values between 0.0 and 1.0)
+* `cc`: Cumulative Cost array [L0, L1, L2] (only for Safety tasks, lower is better)
+* `numEpisodes`: Total number of episodes run for this task
+* `numSuccesses`: Total number of successful episodes
 
 ### 3. Upload Your Model Results
 

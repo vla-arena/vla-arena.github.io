@@ -1,6 +1,6 @@
 # VLA-Arena Leaderboard
 
-This repository hosts the VLA-Arena benchmark leaderboard, showcasing performance results of various Vision-Language-Action (VLA) models across multiple task categories and difficulty levels.
+This repository hosts the VLA-Arena [leaderboard](https://vla-arena.github.io/#leaderboard) and [task store](https://vla-arena.github.io/#taskstore).
 
 ## Contributing Your Model Results
 
@@ -87,7 +87,7 @@ git push origin main
 
 ### 4. Create a Pull Request
 
-1. Go to the [VLA-Arena repository](https://github.com/PKU-Alignment/VLA-Arena/pulls) (or the appropriate repository URL)
+1. Go to the [VLA-Arena leaderboard repository](https://github.com/vla-arena/vla-arena.github.io/pulls)
 2. Click "New Pull Request"
 3. Select your fork and branch
 4. Fill in the PR description with:

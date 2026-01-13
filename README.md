@@ -27,22 +27,6 @@ Example:
 ```bash
 vla-arena eval --model openvla --config /path/to/config.yaml
 ```
-```markdown
-### 2. Run VLA-Arena Evaluation
-
-Run the VLA-Arena evaluation code to generate your model's results:
-
-```bash
-vla-arena eval --model <model_name> --config <config_file_path>
-
-```
-
-Example:
-
-```bash
-vla-arena eval --model openvla --config /path/to/config.yaml
-
-```
 
 The evaluation process will automatically generate:
 

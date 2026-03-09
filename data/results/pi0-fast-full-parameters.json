@@ -1,0 +1,163 @@
+{
+  "name": "π₀-FAST-FFT",
+  "id": "pi0-fast-full-parameters",
+  "tasks": [
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          1.0,
+          0.6,
+          0.6
+        ],
+        "cc": [
+          0,
+          10.2,
+          65.6
+        ]
+      }
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.6,
+          0.52,
+          0.0
+        ],
+        "cc": [
+          1.46,
+          1.54,
+          2.02
+        ]
+      }
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.54,
+          0.02,
+          0.22
+        ],
+        "cc": [
+          7.46,
+          18.953,
+          16.618
+        ]
+      }
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          1.0,
+          0.74,
+          0.6
+        ],
+        "cc": [
+          0,
+          7.4,
+          6
+        ]
+      }
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.8,
+          0.66,
+          0.2
+        ],
+        "cc": [
+          6.8,
+          15.26,
+          54.1
+        ]
+      }
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.6,
+          0.8,
+          0.72
+        ]
+      }
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.72,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.56,
+          0.14,
+          0.2
+        ]
+      }
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.4,
+          0.2,
+          0.0
+        ]
+      }
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.8,
+          0.02,
+          0.0
+        ]
+      }
+    }
+  ]
+}

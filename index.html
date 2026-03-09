@@ -1454,6 +1454,24 @@
             color: #666;
             font-weight: 500;
         }
+
+        .full-param-icon {
+            display: inline-block;
+            width: 17px;
+            height: 17px;
+            line-height: 16px;
+            text-align: center;
+            background-color: #0073a8;
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 6px;
+            cursor: help;
+            vertical-align: middle;
+            font-family: sans-serif, Arial;
+            text-transform: lowercase;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
@@ -1786,7 +1804,7 @@ url={https://arxiv.org/abs/2512.22539},
             
             console.log('Starting to load VLA-Arena data from model files...');
             
-            const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla'];
+            const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla', 'pi0-full-parameters', 'pi0-fast-full-parameters'];
             const basePaths = [
                 'data/results/',
                 './data/results/',
@@ -2186,7 +2204,10 @@ url={https://arxiv.org/abs/2512.22539},
                 
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
-                nameCell.textContent = model.name;
+                const iconHtml = (model.id === 'pi0-full-parameters' || model.id === 'pi0-fast-full-parameters') 
+                    ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
+                    : '';
+                nameCell.innerHTML = model.name + iconHtml;
                 nameCell.dataset.modelName = model.name;
                 row.appendChild(nameCell);
 
@@ -2710,8 +2731,12 @@ url={https://arxiv.org/abs/2512.22539},
                 if (row && row.firstChild) {
                     const nameCell = row.firstChild;
                     const scoreText = avgScore === -1 ? 'N/A' : avgScore.toFixed(2);
+                    const modelObj = vlaArenaData.models.find(m => m.name === modelName);
+                    const iconHtml = (modelObj && (modelObj.id === 'pi0-full-parameters' || modelObj.id === 'pi0-fast-full-parameters')) 
+                        ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
+                        : '';
                     nameCell.innerHTML = `
-                        <div style="font-weight: 600;">${modelName}</div>
+                        <div style="font-weight: 600;">${modelName}${iconHtml}</div>
                         <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} (Avg ${metricLabel})</div>
                     `;
                 }
@@ -2853,8 +2878,11 @@ url={https://arxiv.org/abs/2512.22539},
                     const ms = modelScores[idx];
                     const scoreText = ms.score === -1 ? 'N/A' : ms.score.toFixed(2);
                     const metricLabel = ms.isCC ? '(CC)' : '(SR)';
+                    const iconHtml = (ms.model.id === 'pi0-full-parameters' || ms.model.id === 'pi0-fast-full-parameters') 
+                        ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
+                        : '';
                     nameCell.innerHTML = `
-                        <div style="font-weight: 600;">${ms.model.name}</div>
+                        <div style="font-weight: 600;">${ms.model.name}${iconHtml}</div>
                         <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} ${metricLabel}</div>
                     `;
                 }

@@ -1,0 +1,99 @@
+{
+  "name": "GR00T-N1.6",
+  "id": "groot-n1.6",
+  "tasks": [
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.72, 0.3, 0.14],
+        "cc": [0, 11.16, 38.36]
+      }
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.16, 0.02, 0.0],
+        "cc": [9.6, 41.24, 10.42]
+      }
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.64, 0.04, 0.1],
+        "cc": [6.12, 20.238, 17.937]
+      }
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.66, 0.5, 0.38],
+        "cc": [0, 5, 10.4]
+      }
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.74, 0.5, 0.02],
+        "cc": [5.72, 7.28, 56.76]
+      }
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [0.46, 0.32, 0.06]
+      }
+    },
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [0.7, 0.72, 0.18]
+      }
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [0.48, 0.0, 0.0]
+      }
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [0.42, 0.0, 0.0]
+      }
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [0.26, 0.18, 0.16]
+      }
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [0.29, 0.02, 0.0]
+      }
+    }
+  ]
+}

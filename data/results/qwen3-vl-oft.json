@@ -1,0 +1,99 @@
+{
+  "name": "Qwen3-VL-OFT",
+  "id": "qwen3-vl-oft",
+  "tasks": [
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.84, 0.14, 0.08],
+        "cc": [0, 16.06, 11.84]
+      }
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.86, 0.04, 0.0],
+        "cc": [7.14, 40.3, 6.32]
+      }
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.5, 0.12, 0.04],
+        "cc": [8.85, 20.919, 22.174]
+      }
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.9, 0.4, 0.3],
+        "cc": [0, 4, 5.2]
+      }
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [0.64, 0.48, 0.08],
+        "cc": [5.6, 12.24, 7.62]
+      }
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [0.82, 0.06, 0.02]
+      }
+    },
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [0.82, 0.48, 0.2]
+      }
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [0.54, 0.0, 0.0]
+      }
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [0.42, 0.2, 0.16]
+      }
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [0.6, 0.24, 0.06]
+      }
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [0.98, 0.0, 0.0]
+      }
+    }
+  ]
+}

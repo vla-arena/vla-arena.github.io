@@ -1804,7 +1804,7 @@ url={https://arxiv.org/abs/2512.22539},
             
             console.log('Starting to load VLA-Arena data from model files...');
             
-            const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla', 'pi0-full-parameters', 'pi0-fast-full-parameters'];
+            const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla', 'pi0-full-parameters', 'pi0-fast-full-parameters', 'pi0-5-full-parameters', 'qwen2.5-vl-oft', 'qwen3-vl-oft', 'qwen2.5-vl-gr00t', 'qwen3-vl-gr00t', 'qwen2.5-vl-pi', 'qwen3-vl-pi', 'qwen3-vl-fast', 'groot-n1.6'];
             const basePaths = [
                 'data/results/',
                 './data/results/',
@@ -2204,7 +2204,7 @@ url={https://arxiv.org/abs/2512.22539},
                 
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
-                const iconHtml = (model.id === 'pi0-full-parameters' || model.id === 'pi0-fast-full-parameters') 
+                const iconHtml = (model.id === 'pi0-full-parameters' || model.id === 'pi0-fast-full-parameters' || model.id === 'pi0-5-full-parameters') 
                     ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
                     : '';
                 nameCell.innerHTML = model.name + iconHtml;
@@ -2732,7 +2732,7 @@ url={https://arxiv.org/abs/2512.22539},
                     const nameCell = row.firstChild;
                     const scoreText = avgScore === -1 ? 'N/A' : avgScore.toFixed(2);
                     const modelObj = vlaArenaData.models.find(m => m.name === modelName);
-                    const iconHtml = (modelObj && (modelObj.id === 'pi0-full-parameters' || modelObj.id === 'pi0-fast-full-parameters')) 
+                    const iconHtml = (modelObj && (modelObj.id === 'pi0-full-parameters' || modelObj.id === 'pi0-fast-full-parameters' || modelObj.id === 'pi0-5-full-parameters')) 
                         ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
                         : '';
                     nameCell.innerHTML = `
@@ -2878,7 +2878,7 @@ url={https://arxiv.org/abs/2512.22539},
                     const ms = modelScores[idx];
                     const scoreText = ms.score === -1 ? 'N/A' : ms.score.toFixed(2);
                     const metricLabel = ms.isCC ? '(CC)' : '(SR)';
-                    const iconHtml = (ms.model.id === 'pi0-full-parameters' || ms.model.id === 'pi0-fast-full-parameters') 
+                    const iconHtml = (ms.model.id === 'pi0-full-parameters' || ms.model.id === 'pi0-fast-full-parameters' || ms.model.id === 'pi0-5-full-parameters') 
                         ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
                         : '';
                     nameCell.innerHTML = `

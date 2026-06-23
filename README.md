@@ -37,6 +37,7 @@ The final results JSON file will be generated in the `results/` directory with a
 ```json
 {
   "name": "Your Model Name",
+  "id": "your-model-id",
   "tasks": [
     {
       "name": "TaskName",
@@ -57,6 +58,7 @@ The final results JSON file will be generated in the `results/` directory with a
 **Field Descriptions:**
 
 * `name`: Display name of your model
+* `id`: Unique model ID. This must match the filename in `data/results/<model_id>.json` and the entry in `data/results/models.json`
 * `tasks`: Array of all tasks in VLA-Arena
 * `name`: Task name (must match existing task names)
 * `category`: Task category (e.g., "Safety", "Distractor", "Other")
@@ -74,6 +76,9 @@ After running the evaluation, the results will be automatically generated. Uploa
 ```sh
 # Add the final results JSON file (required)
 git add data/results/<model_id>.json
+
+# Add the model ID to the leaderboard manifest (required)
+git add data/results/models.json
 
 # Add intermediate results (optional but recommended)
 git add data/runs/<model_id>/
@@ -133,7 +138,9 @@ cat > data/results/my-vla.json << 'EOF'
 EOF
 
 # 3. Add and commit
+# Add "my-vla" to data/results/models.json
 git add data/results/my-vla.json
+git add data/results/models.json
 git commit -m "Add MyVLA to VLA-Arena leaderboard"
 git push origin main
 
@@ -171,7 +178,7 @@ Make sure to include all tasks in your JSON file. The complete task list include
 - Ensure all JSON files are valid and properly formatted
 - Model IDs should be unique and follow the naming convention (lowercase, hyphens)
 - Missing tasks will be displayed as "-" on the leaderboard
-- The leaderboard automatically loads all JSON files from `data/results/` directory
+- The leaderboard loads model result files listed in `data/results/models.json`; add your model ID there when contributing a new result file
 - For questions or issues, please open an issue on the repository
 
 ## Contributing Your Tasks
@@ -372,4 +379,3 @@ Then create a pull request on GitHub with:
 - Review the layout type and ensure it matches your instruction structure
 - Check that all required instruction fields are present
 - Refer to existing task files for examples
-

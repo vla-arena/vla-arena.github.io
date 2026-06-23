@@ -1804,7 +1804,7 @@ url={https://arxiv.org/abs/2512.22539},
             
             console.log('Starting to load VLA-Arena data from model files...');
             
-            const modelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla', 'pi0-full-parameters', 'pi0-fast-full-parameters', 'pi0-5-full-parameters', 'qwen2.5-vl-oft', 'qwen3-vl-oft', 'qwen2.5-vl-gr00t', 'qwen3-vl-gr00t', 'qwen2.5-vl-pi', 'qwen3-vl-pi', 'qwen3-vl-fast', 'groot-n1.6'];
+            const fallbackModelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla', 'pi0-full-parameters', 'pi0-fast-full-parameters', 'pi0-5-full-parameters', 'qwen2.5-vl-oft', 'qwen3-vl-oft', 'qwen2.5-vl-gr00t', 'qwen3-vl-gr00t', 'qwen2.5-vl-pi', 'qwen3-vl-pi', 'qwen3-vl-fast', 'groot-n1.6', 'lingbot-vla', 'motus'];
             const basePaths = [
                 'data/results/',
                 './data/results/',
@@ -1812,11 +1812,10 @@ url={https://arxiv.org/abs/2512.22539},
             ];
             
             let basePath = null;
-            const modelFiles = [];
             
             for (const path of basePaths) {
                 try {
-                    const testUrl = `${path}${modelIds[0]}.json`;
+                    const testUrl = `${path}${fallbackModelIds[0]}.json`;
                     const response = await fetch(testUrl);
                     if (response.ok) {
                         basePath = path;
@@ -1833,6 +1832,31 @@ url={https://arxiv.org/abs/2512.22539},
                 return null;
             }
             
+            let modelIds = fallbackModelIds;
+            try {
+                const manifestResponse = await fetch(`${basePath}models.json`, { cache: 'no-cache' });
+                if (manifestResponse.ok) {
+                    const manifest = await manifestResponse.json();
+                    const manifestEntries = Array.isArray(manifest) ? manifest : manifest.models;
+                    const manifestModelIds = Array.isArray(manifestEntries)
+                        ? manifestEntries
+                            .map(entry => typeof entry === 'string' ? entry : entry && entry.id)
+                            .filter(Boolean)
+                        : [];
+
+                    if (manifestModelIds.length > 0) {
+                        modelIds = manifestModelIds;
+                        console.log('Loaded model manifest with', modelIds.length, 'entries');
+                    } else {
+                        console.warn('Model manifest is empty or invalid, using fallback model list');
+                    }
+                } else {
+                    console.warn('Model manifest not found, using fallback model list');
+                }
+            } catch (error) {
+                console.warn('Error loading model manifest, using fallback model list:', error.message);
+            }
+
             const modelDataList = [];
             for (const modelId of modelIds) {
                 try {

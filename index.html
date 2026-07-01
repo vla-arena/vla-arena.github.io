@@ -1471,6 +1471,60 @@
             vertical-align: middle;
             font-family: sans-serif, Arial;
             text-transform: lowercase;
+            user-select: none;
+        }
+
+        .full-param-icon:focus-visible {
+            outline: 2px solid #005a87;
+            outline-offset: 2px;
+        }
+
+        .full-param-tooltip {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 3000;
+            max-width: min(260px, calc(100vw - 24px));
+            padding: 0.45rem 0.65rem;
+            border-radius: 4px;
+            background: #1f2933;
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.3;
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -100%);
+            transition: opacity 0.12s ease, visibility 0.12s ease;
+        }
+
+        .full-param-tooltip.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .full-param-tooltip::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 10px;
+            height: 10px;
+            background: #1f2933;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .full-param-tooltip.tooltip-below {
+            transform: translate(-50%, 0);
+        }
+
+        .full-param-tooltip.tooltip-below::after {
+            top: -5px;
+            bottom: auto;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
@@ -1796,6 +1850,96 @@ url={https://arxiv.org/abs/2512.22539},
 
         let currentSortColumn = null;
         let sortDirection = 'desc';
+        const FULL_PARAM_TOOLTIP_TEXT = 'Fully Fine-Tuned Model';
+        const FULL_PARAM_MODEL_IDS = new Set([
+            'pi0-full-parameters',
+            'pi0-fast-full-parameters',
+            'pi0-5-full-parameters'
+        ]);
+
+        function isFullParamModel(modelId) {
+            return FULL_PARAM_MODEL_IDS.has(modelId);
+        }
+
+        function getFullParamIconHtml() {
+            return `<span class="full-param-icon" data-tooltip="${FULL_PARAM_TOOLTIP_TEXT}" aria-label="${FULL_PARAM_TOOLTIP_TEXT}" tabindex="0">i</span>`;
+        }
+
+        function getFullParamTooltip() {
+            let tooltip = document.getElementById('full-param-tooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = 'full-param-tooltip';
+                tooltip.className = 'full-param-tooltip';
+                tooltip.setAttribute('role', 'tooltip');
+                document.body.appendChild(tooltip);
+            }
+            return tooltip;
+        }
+
+        function showFullParamTooltip(target) {
+            const tooltip = getFullParamTooltip();
+            tooltip.textContent = target.dataset.tooltip || FULL_PARAM_TOOLTIP_TEXT;
+            tooltip.classList.add('show');
+            positionFullParamTooltip(target);
+        }
+
+        function positionFullParamTooltip(target) {
+            const tooltip = getFullParamTooltip();
+            const targetRect = target.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const gap = 10;
+            const margin = 12;
+            const targetCenter = targetRect.left + targetRect.width / 2;
+            const left = Math.min(
+                Math.max(targetCenter, margin + tooltipRect.width / 2),
+                window.innerWidth - margin - tooltipRect.width / 2
+            );
+            const fitsAbove = targetRect.top >= tooltipRect.height + gap + margin;
+            const top = fitsAbove
+                ? targetRect.top - gap
+                : targetRect.bottom + gap;
+
+            tooltip.classList.toggle('tooltip-below', !fitsAbove);
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+        }
+
+        function hideFullParamTooltip() {
+            const tooltip = document.getElementById('full-param-tooltip');
+            if (tooltip) {
+                tooltip.classList.remove('show', 'tooltip-below');
+            }
+        }
+
+        document.addEventListener('mouseover', (event) => {
+            const icon = event.target.closest('.full-param-icon');
+            if (icon) {
+                showFullParamTooltip(icon);
+            }
+        });
+
+        document.addEventListener('mouseout', (event) => {
+            const icon = event.target.closest('.full-param-icon');
+            if (icon && !icon.contains(event.relatedTarget)) {
+                hideFullParamTooltip();
+            }
+        });
+
+        document.addEventListener('focusin', (event) => {
+            if (event.target.classList && event.target.classList.contains('full-param-icon')) {
+                showFullParamTooltip(event.target);
+            }
+        });
+
+        document.addEventListener('focusout', (event) => {
+            if (event.target.classList && event.target.classList.contains('full-param-icon')) {
+                hideFullParamTooltip();
+            }
+        });
+
+        window.addEventListener('scroll', hideFullParamTooltip, true);
+        window.addEventListener('resize', hideFullParamTooltip);
 
         async function loadVLArenaData() {
             if (vlaArenaData) {
@@ -2228,9 +2372,7 @@ url={https://arxiv.org/abs/2512.22539},
                 
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
-                const iconHtml = (model.id === 'pi0-full-parameters' || model.id === 'pi0-fast-full-parameters' || model.id === 'pi0-5-full-parameters') 
-                    ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
-                    : '';
+                const iconHtml = isFullParamModel(model.id) ? getFullParamIconHtml() : '';
                 nameCell.innerHTML = model.name + iconHtml;
                 nameCell.dataset.modelName = model.name;
                 row.appendChild(nameCell);
@@ -2756,9 +2898,7 @@ url={https://arxiv.org/abs/2512.22539},
                     const nameCell = row.firstChild;
                     const scoreText = avgScore === -1 ? 'N/A' : avgScore.toFixed(2);
                     const modelObj = vlaArenaData.models.find(m => m.name === modelName);
-                    const iconHtml = (modelObj && (modelObj.id === 'pi0-full-parameters' || modelObj.id === 'pi0-fast-full-parameters' || modelObj.id === 'pi0-5-full-parameters')) 
-                        ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
-                        : '';
+                    const iconHtml = (modelObj && isFullParamModel(modelObj.id)) ? getFullParamIconHtml() : '';
                     nameCell.innerHTML = `
                         <div style="font-weight: 600;">${modelName}${iconHtml}</div>
                         <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} (Avg ${metricLabel})</div>
@@ -2902,9 +3042,7 @@ url={https://arxiv.org/abs/2512.22539},
                     const ms = modelScores[idx];
                     const scoreText = ms.score === -1 ? 'N/A' : ms.score.toFixed(2);
                     const metricLabel = ms.isCC ? '(CC)' : '(SR)';
-                    const iconHtml = (ms.model.id === 'pi0-full-parameters' || ms.model.id === 'pi0-fast-full-parameters' || ms.model.id === 'pi0-5-full-parameters') 
-                        ? '<span class="full-param-icon" title="Fully Fine-Tuned Model">i</span>' 
-                        : '';
+                    const iconHtml = isFullParamModel(ms.model.id) ? getFullParamIconHtml() : '';
                     nameCell.innerHTML = `
                         <div style="font-weight: 600;">${ms.model.name}${iconHtml}</div>
                         <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} ${metricLabel}</div>

@@ -1,6 +1,5 @@
 {
   "name": "OpenVLA",
-  "id": "openvla",
   "tasks": [
     {
       "name": "StaticObstacles",

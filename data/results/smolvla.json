@@ -1,6 +1,5 @@
 {
   "name": "SmolVLA",
-  "id": "smolvla",
   "tasks": [
     {
       "name": "StaticObstacles",

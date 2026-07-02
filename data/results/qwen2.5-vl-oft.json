@@ -1,6 +1,5 @@
 {
   "name": "Qwen2.5-VL-OFT",
-  "id": "qwen2.5-vl-oft",
   "tasks": [
     {
       "name": "StaticObstacles",

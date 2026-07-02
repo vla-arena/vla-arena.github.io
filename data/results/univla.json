@@ -1,6 +1,5 @@
 {
   "name": "UniVLA",
-  "id": "univla",
   "tasks": [
     {
       "name": "StaticObstacles",

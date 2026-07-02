@@ -1989,7 +1989,15 @@ url={https://arxiv.org/abs/2512.22539},
                         : [];
 
                     if (manifestModelIds.length > 0) {
-                        modelIds = manifestModelIds;
+                        const seenModelIds = new Set();
+                        modelIds = manifestModelIds.filter(modelId => {
+                            if (seenModelIds.has(modelId)) {
+                                console.warn(`Duplicate model ID in models.json skipped: ${modelId}`);
+                                return false;
+                            }
+                            seenModelIds.add(modelId);
+                            return true;
+                        });
                         console.log('Loaded model manifest with', modelIds.length, 'entries');
                     } else {
                         console.warn('Model manifest is empty or invalid, using fallback model list');
@@ -2013,6 +2021,10 @@ url={https://arxiv.org/abs/2512.22539},
                     }
                     
                     const modelData = await response.json();
+                    if (modelData.id && modelData.id !== modelId) {
+                        console.warn(`Model ID mismatch in ${modelId}.json: found "${modelData.id}", using manifest ID "${modelId}"`);
+                    }
+                    modelData.id = modelId;
                     modelDataList.push(modelData);
                     console.log(`Successfully loaded ${modelId}.json`);
                 } catch (error) {

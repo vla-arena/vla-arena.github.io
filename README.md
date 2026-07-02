@@ -37,7 +37,6 @@ The final results JSON file will be generated in the `results/` directory with a
 ```json
 {
   "name": "Your Model Name",
-  "id": "your-model-id",
   "tasks": [
     {
       "name": "TaskName",
@@ -58,7 +57,6 @@ The final results JSON file will be generated in the `results/` directory with a
 **Field Descriptions:**
 
 * `name`: Display name of your model
-* `id`: Unique model ID. This must match the filename in `data/results/<model_id>.json` and the entry in `data/results/models.json`
 * `tasks`: Array of all tasks in VLA-Arena
 * `name`: Task name (must match existing task names)
 * `category`: Task category (e.g., "Safety", "Distractor", "Other")
@@ -74,11 +72,15 @@ The final results JSON file will be generated in the `results/` directory with a
 After running the evaluation, the results will be automatically generated. Upload them to the repository:
 
 ```sh
-# Add the final results JSON file (required)
+# Add the final results JSON file (required).
+# The filename is the model ID and must be unique.
 git add data/results/<model_id>.json
 
 # Add the model ID to the leaderboard manifest (required)
 git add data/results/models.json
+
+# Validate result files locally (recommended)
+node scripts/validate-results.js
 
 # Add intermediate results (optional but recommended)
 git add data/runs/<model_id>/
@@ -112,7 +114,6 @@ Here's a complete example for adding a model called "MyVLA":
 cat > data/results/my-vla.json << 'EOF'
 {
   "name": "MyVLA",
-  "id": "my-vla",
   "tasks": [
     {
       "name": "StaticObstacles",
@@ -176,9 +177,9 @@ Make sure to include all tasks in your JSON file. The complete task list include
 ### Notes
 
 - Ensure all JSON files are valid and properly formatted
-- Model IDs should be unique and follow the naming convention (lowercase, hyphens)
+- Model IDs come from the result filename and should be unique, lowercase, and hyphen-separated
 - Missing tasks will be displayed as "-" on the leaderboard
-- The leaderboard loads model result files listed in `data/results/models.json`; add your model ID there when contributing a new result file
+- The leaderboard loads model result files listed in `data/results/models.json`; add your unique model ID there when contributing a new result file
 - For questions or issues, please open an issue on the repository
 
 ## Contributing Your Tasks

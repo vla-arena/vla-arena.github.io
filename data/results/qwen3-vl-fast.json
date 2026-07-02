@@ -1,6 +1,5 @@
 {
   "name": "Qwen3-VL-Fast",
-  "id": "qwen3-vl-fast",
   "tasks": [
     {
       "name": "StaticObstacles",

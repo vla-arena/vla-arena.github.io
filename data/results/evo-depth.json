@@ -1,5 +1,6 @@
 {
   "name": "Evo-Depth",
+  "size": "0.9B",
   "tasks": [
     {
       "name": "StaticObstacles",

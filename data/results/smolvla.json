@@ -1,5 +1,6 @@
 {
   "name": "SmolVLA",
+  "size": "450M",
   "tasks": [
     {
       "name": "StaticObstacles",

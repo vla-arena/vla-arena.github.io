@@ -510,6 +510,24 @@
             background-color: #e0e0e0 !important;
         }
 
+        .model-title {
+            font-weight: 600;
+        }
+
+        .model-size {
+            color: #777;
+            font-size: 0.78em;
+            font-weight: normal;
+            margin-top: 3px;
+        }
+
+        .model-score {
+            color: #666;
+            font-size: 0.85em;
+            font-weight: normal;
+            margin-top: 4px;
+        }
+
         .sparkline-container {
             display: block;
             position: relative;
@@ -1866,6 +1884,18 @@ url={https://arxiv.org/abs/2512.22539},
             return `<span class="full-param-icon" data-tooltip="${FULL_PARAM_TOOLTIP_TEXT}" aria-label="${FULL_PARAM_TOOLTIP_TEXT}" tabindex="0">i</span>`;
         }
 
+        function getModelSize(model) {
+            return model && typeof model.size === 'string' && model.size.trim() ? model.size.trim() : 'Unknown';
+        }
+
+        function getModelLabelHtml(model, iconHtml = '') {
+            const modelName = model && model.name ? model.name : 'Unknown Model';
+            return `
+                <div class="model-title">${modelName}${iconHtml}</div>
+                <div class="model-size">Size: ${getModelSize(model)}</div>
+            `;
+        }
+
         function getFullParamTooltip() {
             let tooltip = document.getElementById('full-param-tooltip');
             if (!tooltip) {
@@ -2051,6 +2081,7 @@ url={https://arxiv.org/abs/2512.22539},
             for (const modelData of modelDataList) {
                 models.push({
                     name: modelData.name,
+                    size: modelData.size || 'Unknown',
                     id: modelData.id
                 });
                 
@@ -2386,7 +2417,7 @@ url={https://arxiv.org/abs/2512.22539},
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
                 const iconHtml = isFullParamModel(model.id) ? getFullParamIconHtml() : '';
-                nameCell.innerHTML = model.name + iconHtml;
+                nameCell.innerHTML = getModelLabelHtml(model, iconHtml);
                 nameCell.dataset.modelName = model.name;
                 row.appendChild(nameCell);
 
@@ -2913,8 +2944,8 @@ url={https://arxiv.org/abs/2512.22539},
                     const modelObj = vlaArenaData.models.find(m => m.name === modelName);
                     const iconHtml = (modelObj && isFullParamModel(modelObj.id)) ? getFullParamIconHtml() : '';
                     nameCell.innerHTML = `
-                        <div style="font-weight: 600;">${modelName}${iconHtml}</div>
-                        <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} (Avg ${metricLabel})</div>
+                        ${getModelLabelHtml(modelObj || { name: modelName }, iconHtml)}
+                        <div class="model-score">${scoreText} (Avg ${metricLabel})</div>
                     `;
                 }
                 tbody.appendChild(row);
@@ -3057,8 +3088,8 @@ url={https://arxiv.org/abs/2512.22539},
                     const metricLabel = ms.isCC ? '(CC)' : '(SR)';
                     const iconHtml = isFullParamModel(ms.model.id) ? getFullParamIconHtml() : '';
                     nameCell.innerHTML = `
-                        <div style="font-weight: 600;">${ms.model.name}${iconHtml}</div>
-                        <div style="color: #666; font-size: 0.85em; font-weight: normal; margin-top: 4px;">${scoreText} ${metricLabel}</div>
+                        ${getModelLabelHtml(ms.model, iconHtml)}
+                        <div class="model-score">${scoreText} ${metricLabel}</div>
                     `;
                 }
                 tbody.appendChild(row);

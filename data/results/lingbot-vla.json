@@ -1,5 +1,6 @@
 {
   "name": "LingBot-VLA",
+  "size": "4B",
   "tasks": [
     {
       "name": "StaticObstacles",

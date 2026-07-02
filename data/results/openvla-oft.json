@@ -1,5 +1,6 @@
 {
   "name": "OpenVLA-OFT",
+  "size": "7B",
   "tasks": [
     {
       "name": "StaticObstacles",

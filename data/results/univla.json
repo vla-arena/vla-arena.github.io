@@ -1,5 +1,6 @@
 {
   "name": "UniVLA",
+  "size": "8.5B",
   "tasks": [
     {
       "name": "StaticObstacles",

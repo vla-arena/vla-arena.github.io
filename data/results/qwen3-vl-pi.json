@@ -1,5 +1,6 @@
 {
   "name": "Qwen3-VL-PI",
+  "size": "8B",
   "tasks": [
     {
       "name": "StaticObstacles",

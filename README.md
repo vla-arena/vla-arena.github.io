@@ -37,6 +37,7 @@ The final results JSON file will be generated in the `results/` directory with a
 ```json
 {
   "name": "Your Model Name",
+  "size": "7B",
   "tasks": [
     {
       "name": "TaskName",
@@ -57,6 +58,7 @@ The final results JSON file will be generated in the `results/` directory with a
 **Field Descriptions:**
 
 * `name`: Display name of your model
+* `size`: Model parameter size shown on the leaderboard (for example, "7B", "450M", or "Unknown" if unavailable)
 * `tasks`: Array of all tasks in VLA-Arena
 * `name`: Task name (must match existing task names)
 * `category`: Task category (e.g., "Safety", "Distractor", "Other")
@@ -114,6 +116,7 @@ Here's a complete example for adding a model called "MyVLA":
 cat > data/results/my-vla.json << 'EOF'
 {
   "name": "MyVLA",
+  "size": "7B",
   "tasks": [
     {
       "name": "StaticObstacles",

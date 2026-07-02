@@ -1,5 +1,6 @@
 {
   "name": "Qwen2.5-VL-OFT",
+  "size": "3B",
   "tasks": [
     {
       "name": "StaticObstacles",

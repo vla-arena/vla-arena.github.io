@@ -1,5 +1,6 @@
 {
   "name": "Motus",
+  "size": "8B",
   "tasks": [
     {
       "name": "StaticObstacles",

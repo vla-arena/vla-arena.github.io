@@ -1,5 +1,6 @@
 {
   "name": "π₀-FAST",
+  "size": "3B",
   "tasks": [
     {
       "name": "StaticObstacles",

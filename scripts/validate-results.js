@@ -210,10 +210,12 @@ function validateModelFile(modelId, canonicalTasks) {
         addError(modelPath, 'Model "name" must be a non-empty string');
     }
 
-    if (!isNonEmptyString(model.size)) {
-        addError(modelPath, 'Model "size" must be a non-empty string');
-    } else if (model.size !== model.size.trim()) {
-        addError(modelPath, 'Model "size" must not contain leading or trailing whitespace');
+    if (Object.prototype.hasOwnProperty.call(model, 'size')) {
+        if (!isNonEmptyString(model.size)) {
+            addError(modelPath, 'Model "size" must be a non-empty string when present');
+        } else if (model.size !== model.size.trim()) {
+            addError(modelPath, 'Model "size" must not contain leading or trailing whitespace');
+        }
     }
 
     if (!Array.isArray(model.tasks)) {

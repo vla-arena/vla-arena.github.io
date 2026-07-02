@@ -58,7 +58,7 @@ The final results JSON file will be generated in the `results/` directory with a
 **Field Descriptions:**
 
 * `name`: Display name of your model
-* `size`: Model parameter size shown on the leaderboard (for example, "7B", "450M", or "Unknown" if unavailable)
+* `size`: Optional model parameter size shown on the leaderboard (for example, "7B" or "450M")
 * `tasks`: Array of all tasks in VLA-Arena
 * `name`: Task name (must match existing task names)
 * `category`: Task category (e.g., "Safety", "Distractor", "Other")

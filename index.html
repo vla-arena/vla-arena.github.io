@@ -514,11 +514,15 @@
             font-weight: 600;
         }
 
-        .model-size {
-            color: #777;
-            font-size: 0.78em;
-            font-weight: normal;
-            margin-top: 3px;
+        .model-size-badge {
+            position: absolute;
+            top: 5px;
+            left: 6px;
+            color: #666;
+            font-size: 0.72em;
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: 0;
         }
 
         .model-score {
@@ -1885,14 +1889,16 @@ url={https://arxiv.org/abs/2512.22539},
         }
 
         function getModelSize(model) {
-            return model && typeof model.size === 'string' && model.size.trim() ? model.size.trim() : 'Unknown';
+            return model && typeof model.size === 'string' ? model.size.trim() : '';
         }
 
         function getModelLabelHtml(model, iconHtml = '') {
             const modelName = model && model.name ? model.name : 'Unknown Model';
+            const modelSize = getModelSize(model);
+            const sizeHtml = modelSize ? `<span class="model-size-badge">${modelSize}</span>` : '';
             return `
+                ${sizeHtml}
                 <div class="model-title">${modelName}${iconHtml}</div>
-                <div class="model-size">Size: ${getModelSize(model)}</div>
             `;
         }
 
@@ -2081,7 +2087,7 @@ url={https://arxiv.org/abs/2512.22539},
             for (const modelData of modelDataList) {
                 models.push({
                     name: modelData.name,
-                    size: modelData.size || 'Unknown',
+                    size: getModelSize(modelData),
                     id: modelData.id
                 });
                 

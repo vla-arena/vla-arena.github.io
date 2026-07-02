@@ -1,0 +1,5 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VLA-Arena">
+  <rect x="6" y="6" width="52" height="52" rx="12" fill="#0f766e"/>
+  <path d="M18 44L30 18h4l12 26h-6l-2.4-5.7H26.2L23.9 44H18Zm10.3-10.8h7.2L32 24.6l-3.7 8.6Z" fill="#ffffff"/>
+  <path d="M17 50h30" stroke="#a7f3d0" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -553,10 +553,15 @@
             outline-offset: 2px;
         }
 
-        .model-link svg {
+        .model-link svg,
+        .model-link img {
             width: 15px;
             height: 15px;
             display: block;
+        }
+
+        .model-link img {
+            object-fit: contain;
         }
 
         .model-score {
@@ -1928,10 +1933,10 @@ url={https://arxiv.org/abs/2512.22539},
 
         function getModelLinks(model) {
             if (!model || !model.links || typeof model.links !== 'object') {
-                return {};
+                return model && model.id ? { arena: `data/results/${model.id}.json` } : {};
             }
 
-            const links = {};
+            const links = model.id ? { arena: `data/results/${model.id}.json` } : {};
             ['paper', 'huggingface'].forEach(key => {
                 const value = model.links[key];
                 if (typeof value === 'string' && value.trim()) {
@@ -1939,6 +1944,10 @@ url={https://arxiv.org/abs/2512.22539},
                 }
             });
             return links;
+        }
+
+        function getArenaIconHtml() {
+            return '<img src="figures/icons/vla-arena.svg" alt="" loading="lazy">';
         }
 
         function getPaperIconHtml() {
@@ -1950,18 +1959,16 @@ url={https://arxiv.org/abs/2512.22539},
         }
 
         function getHuggingFaceIconHtml() {
-            return `
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <circle cx="12" cy="12" r="9.5" fill="currentColor" opacity="0.16"/>
-                    <path fill="currentColor" d="M7.1 9.2h1.7v2h2.3v-2h1.7v5.7h-1.7v-2.2H8.8v2.2H7.1V9.2Zm7 0h4.4v1.4h-2.7v1.1h2.4V13h-2.4v1.9h-1.7V9.2Z"/>
-                </svg>
-            `;
+            return '<img src="figures/icons/huggingface.svg" alt="" loading="lazy">';
         }
 
         function getModelLinksHtml(model) {
             const links = getModelLinks(model);
             const items = [];
 
+            if (links.arena) {
+                items.push(`<a class="model-link" href="${links.arena}" target="_blank" rel="noopener noreferrer" title="VLA-Arena result" aria-label="Open VLA-Arena result">${getArenaIconHtml()}</a>`);
+            }
             if (links.paper) {
                 items.push(`<a class="model-link" href="${links.paper}" target="_blank" rel="noopener noreferrer" title="Paper" aria-label="Open paper">${getPaperIconHtml()}</a>`);
             }

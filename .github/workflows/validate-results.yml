@@ -1,0 +1,25 @@
+name: Validate model results
+
+on:
+  pull_request:
+    paths:
+      - 'data/results/**'
+      - 'data/tasks/**'
+      - 'scripts/validate-results.js'
+      - '.github/workflows/validate-results.yml'
+
+jobs:
+  validate-results:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate model result files
+        run: node scripts/validate-results.js

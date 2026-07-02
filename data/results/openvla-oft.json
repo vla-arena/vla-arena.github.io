@@ -1,6 +1,5 @@
 {
   "name": "OpenVLA-OFT",
-  "id": "openvla-oft",
   "tasks": [
     {
       "name": "StaticObstacles",

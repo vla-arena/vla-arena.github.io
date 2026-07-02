@@ -1,6 +1,5 @@
 {
   "name": "EvoDepth",
-  "id": "evo-depth",
   "tasks": [
     {
       "name": "StaticObstacles",

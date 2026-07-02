@@ -1,6 +1,5 @@
 {
   "name": "lingbot-vla",
-  "id": "lingbot-vla",
   "tasks": [
     {
       "name": "StaticObstacles",

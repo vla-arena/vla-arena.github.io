@@ -1,6 +1,9 @@
 {
   "name": "Evo-Depth",
   "size": "0.9B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2605.14950"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

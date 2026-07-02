@@ -1,6 +1,10 @@
 {
   "name": "π₀-FAST-FFT",
   "size": "3B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2501.09747",
+    "huggingface": "https://huggingface.co/lerobot/pi0fast-base"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

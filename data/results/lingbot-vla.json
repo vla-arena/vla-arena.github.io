@@ -1,6 +1,10 @@
 {
   "name": "LingBot-VLA",
   "size": "4B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2601.18692",
+    "huggingface": "https://huggingface.co/robbyant/lingbot-vla-4b"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

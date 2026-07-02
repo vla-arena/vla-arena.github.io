@@ -1,6 +1,10 @@
 {
   "name": "π₀",
   "size": "4B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2410.24164",
+    "huggingface": "https://huggingface.co/lerobot/pi0_base"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

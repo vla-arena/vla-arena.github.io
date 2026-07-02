@@ -55,6 +55,15 @@ function isNonEmptyString(value) {
     return typeof value === 'string' && value.trim().length > 0;
 }
 
+function isHttpUrl(value) {
+    try {
+        const url = new URL(value);
+        return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch {
+        return false;
+    }
+}
+
 function validateNumberArray(filePath, label, value, { min, max } = {}) {
     if (!Array.isArray(value) || value.length !== 3) {
         addError(filePath, `${label} must be an array with exactly 3 numbers`);
@@ -215,6 +224,27 @@ function validateModelFile(modelId, canonicalTasks) {
             addError(modelPath, 'Model "size" must be a non-empty string when present');
         } else if (model.size !== model.size.trim()) {
             addError(modelPath, 'Model "size" must not contain leading or trailing whitespace');
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(model, 'links')) {
+        if (!isPlainObject(model.links)) {
+            addError(modelPath, 'Model "links" must be a JSON object when present');
+        } else {
+            ['paper', 'huggingface'].forEach(key => {
+                if (!Object.prototype.hasOwnProperty.call(model.links, key)) {
+                    return;
+                }
+
+                const value = model.links[key];
+                if (!isNonEmptyString(value)) {
+                    addError(modelPath, `Model "links.${key}" must be a non-empty string when present`);
+                } else if (value !== value.trim()) {
+                    addError(modelPath, `Model "links.${key}" must not contain leading or trailing whitespace`);
+                } else if (!isHttpUrl(value)) {
+                    addError(modelPath, `Model "links.${key}" must be an http(s) URL`);
+                }
+            });
         }
     }
 

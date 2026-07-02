@@ -1,6 +1,10 @@
 {
   "name": "UniVLA",
   "size": "8.5B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2506.19850",
+    "huggingface": "https://huggingface.co/Yuqi1997/UniVLA"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

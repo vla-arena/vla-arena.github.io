@@ -1,6 +1,10 @@
 {
   "name": "SmolVLA",
   "size": "450M",
+  "links": {
+    "paper": "https://arxiv.org/abs/2506.01844",
+    "huggingface": "https://huggingface.co/lerobot/smolvla_base"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

@@ -1,6 +1,10 @@
 {
   "name": "GR00T-N1.6",
   "size": "3B",
+  "links": {
+    "paper": "https://research.nvidia.com/labs/gear/gr00t-n1_6/",
+    "huggingface": "https://huggingface.co/nvidia/GR00T-N1.6-3B"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

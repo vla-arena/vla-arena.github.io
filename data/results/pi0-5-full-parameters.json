@@ -1,6 +1,10 @@
 {
   "name": "π₀.₅-FFT",
   "size": "4B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2504.16054",
+    "huggingface": "https://huggingface.co/lerobot/pi05_base"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

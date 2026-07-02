@@ -1,6 +1,10 @@
 {
   "name": "OpenVLA",
   "size": "7B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2406.09246",
+    "huggingface": "https://huggingface.co/openvla/openvla-7b"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

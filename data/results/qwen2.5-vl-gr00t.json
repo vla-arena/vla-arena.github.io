@@ -1,6 +1,10 @@
 {
   "name": "Qwen2.5-VL-GR00T",
   "size": "3B",
+  "links": {
+    "paper": "https://arxiv.org/abs/2502.13923",
+    "huggingface": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

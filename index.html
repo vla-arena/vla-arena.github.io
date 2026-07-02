@@ -525,6 +525,40 @@
             letter-spacing: 0;
         }
 
+        .model-links {
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .model-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .model-link:hover {
+            color: #005a87;
+        }
+
+        .model-link:focus-visible {
+            outline: 2px solid #005a87;
+            outline-offset: 2px;
+        }
+
+        .model-link svg {
+            width: 15px;
+            height: 15px;
+            display: block;
+        }
+
         .model-score {
             color: #666;
             font-size: 0.85em;
@@ -1892,12 +1926,59 @@ url={https://arxiv.org/abs/2512.22539},
             return model && typeof model.size === 'string' ? model.size.trim() : '';
         }
 
+        function getModelLinks(model) {
+            if (!model || !model.links || typeof model.links !== 'object') {
+                return {};
+            }
+
+            const links = {};
+            ['paper', 'huggingface'].forEach(key => {
+                const value = model.links[key];
+                if (typeof value === 'string' && value.trim()) {
+                    links[key] = value.trim();
+                }
+            });
+            return links;
+        }
+
+        function getPaperIconHtml() {
+            return `
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path fill="currentColor" d="M6 2h8l5 5v15H6V2Zm7 1.8V8h4.2L13 3.8ZM8 11v1.5h8V11H8Zm0 4v1.5h8V15H8Zm0 4v1.5h5V19H8Z"/>
+                </svg>
+            `;
+        }
+
+        function getHuggingFaceIconHtml() {
+            return `
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="12" cy="12" r="9.5" fill="currentColor" opacity="0.16"/>
+                    <path fill="currentColor" d="M7.1 9.2h1.7v2h2.3v-2h1.7v5.7h-1.7v-2.2H8.8v2.2H7.1V9.2Zm7 0h4.4v1.4h-2.7v1.1h2.4V13h-2.4v1.9h-1.7V9.2Z"/>
+                </svg>
+            `;
+        }
+
+        function getModelLinksHtml(model) {
+            const links = getModelLinks(model);
+            const items = [];
+
+            if (links.paper) {
+                items.push(`<a class="model-link" href="${links.paper}" target="_blank" rel="noopener noreferrer" title="Paper" aria-label="Open paper">${getPaperIconHtml()}</a>`);
+            }
+            if (links.huggingface) {
+                items.push(`<a class="model-link" href="${links.huggingface}" target="_blank" rel="noopener noreferrer" title="Hugging Face" aria-label="Open Hugging Face model">${getHuggingFaceIconHtml()}</a>`);
+            }
+
+            return items.length ? `<span class="model-links">${items.join('')}</span>` : '';
+        }
+
         function getModelLabelHtml(model, iconHtml = '') {
             const modelName = model && model.name ? model.name : 'Unknown Model';
             const modelSize = getModelSize(model);
             const sizeHtml = modelSize ? `<span class="model-size-badge">${modelSize}</span>` : '';
             return `
                 ${sizeHtml}
+                ${getModelLinksHtml(model)}
                 <div class="model-title">${modelName}${iconHtml}</div>
             `;
         }
@@ -2088,6 +2169,7 @@ url={https://arxiv.org/abs/2512.22539},
                 models.push({
                     name: modelData.name,
                     size: getModelSize(modelData),
+                    links: getModelLinks(modelData),
                     id: modelData.id
                 });
                 

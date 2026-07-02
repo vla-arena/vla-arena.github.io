@@ -2,6 +2,7 @@
   "name": "OpenVLA-OFT",
   "size": "7B",
   "links": {
+    "arena": "https://huggingface.co/VLA-Arena/openvla-7b-oft-finetuned-vla-arena",
     "paper": "https://arxiv.org/abs/2502.19645"
   },
   "tasks": [

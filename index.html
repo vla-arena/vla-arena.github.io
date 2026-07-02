@@ -1933,11 +1933,11 @@ url={https://arxiv.org/abs/2512.22539},
 
         function getModelLinks(model) {
             if (!model || !model.links || typeof model.links !== 'object') {
-                return model && model.id ? { arena: `data/results/${model.id}.json` } : {};
+                return {};
             }
 
-            const links = model.id ? { arena: `data/results/${model.id}.json` } : {};
-            ['paper', 'huggingface'].forEach(key => {
+            const links = {};
+            ['arena', 'paper', 'huggingface'].forEach(key => {
                 const value = model.links[key];
                 if (typeof value === 'string' && value.trim()) {
                     links[key] = value.trim();
@@ -1967,7 +1967,7 @@ url={https://arxiv.org/abs/2512.22539},
             const items = [];
 
             if (links.arena) {
-                items.push(`<a class="model-link" href="${links.arena}" target="_blank" rel="noopener noreferrer" title="VLA-Arena result" aria-label="Open VLA-Arena result">${getArenaIconHtml()}</a>`);
+                items.push(`<a class="model-link" href="${links.arena}" target="_blank" rel="noopener noreferrer" title="VLA-Arena checkpoint" aria-label="Open VLA-Arena checkpoint">${getArenaIconHtml()}</a>`);
             }
             if (links.paper) {
                 items.push(`<a class="model-link" href="${links.paper}" target="_blank" rel="noopener noreferrer" title="Paper" aria-label="Open paper">${getPaperIconHtml()}</a>`);

@@ -231,7 +231,7 @@ function validateModelFile(modelId, canonicalTasks) {
         if (!isPlainObject(model.links)) {
             addError(modelPath, 'Model "links" must be a JSON object when present');
         } else {
-            ['paper', 'huggingface'].forEach(key => {
+            ['arena', 'paper', 'huggingface'].forEach(key => {
                 if (!Object.prototype.hasOwnProperty.call(model.links, key)) {
                     return;
                 }

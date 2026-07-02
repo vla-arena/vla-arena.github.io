@@ -39,6 +39,7 @@ The final results JSON file will be generated in the `results/` directory with a
   "name": "Your Model Name",
   "size": "7B",
   "links": {
+    "arena": "https://huggingface.co/VLA-Arena/your-arena-checkpoint",
     "paper": "https://arxiv.org/abs/xxxx.xxxxx",
     "huggingface": "https://huggingface.co/your-org/your-model"
   },
@@ -64,8 +65,9 @@ The final results JSON file will be generated in the `results/` directory with a
 * `name`: Display name of your model
 * `size`: Optional model parameter size shown on the leaderboard (for example, "7B" or "450M")
 * `links`: Optional model links shown as icons in the leaderboard model cell
+* `arena`: Optional VLA-Arena checkpoint URL that can be used directly with the VLA-Arena runtime
 * `paper`: Optional paper or project URL
-* `huggingface`: Optional Hugging Face model URL
+* `huggingface`: Optional official Hugging Face model URL
 * `tasks`: Array of all tasks in VLA-Arena
 * `name`: Task name (must match existing task names)
 * `category`: Task category (e.g., "Safety", "Distractor", "Other")
@@ -125,6 +127,7 @@ cat > data/results/my-vla.json << 'EOF'
   "name": "MyVLA",
   "size": "7B",
   "links": {
+    "arena": "https://huggingface.co/VLA-Arena/my-vla-arena-checkpoint",
     "paper": "https://arxiv.org/abs/xxxx.xxxxx",
     "huggingface": "https://huggingface.co/my-org/my-vla"
   },

@@ -2,6 +2,7 @@
   "name": "π₀-FAST",
   "size": "3B",
   "links": {
+    "arena": "https://huggingface.co/VLA-Arena/pi0-fast-vla-arena-fintuned-LoRA",
     "paper": "https://arxiv.org/abs/2501.09747",
     "huggingface": "https://huggingface.co/lerobot/pi0fast-base"
   },

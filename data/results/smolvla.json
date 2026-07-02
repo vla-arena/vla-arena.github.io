@@ -2,6 +2,7 @@
   "name": "SmolVLA",
   "size": "450M",
   "links": {
+    "arena": "https://huggingface.co/VLA-Arena/smolvla-vla-arena",
     "paper": "https://arxiv.org/abs/2506.01844",
     "huggingface": "https://huggingface.co/lerobot/smolvla_base"
   },

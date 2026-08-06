@@ -1,5 +1,9 @@
 {
   "name": "dm0.5",
+  "links": {
+    "paper": "https://www.dexmal.com/blog/dm0.5/index_en.html",
+    "huggingface": "https://huggingface.co/Dexmal/DM05"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

@@ -1,5 +1,8 @@
 {
   "name": "ACoT-VLA",
+  "links": {
+    "paper": "https://arxiv.org/abs/2601.11404"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

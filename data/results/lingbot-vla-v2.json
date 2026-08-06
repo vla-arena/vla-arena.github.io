@@ -1,5 +1,9 @@
 {
   "name": "lingbot-vla-v2",
+  "links": {
+    "paper": "https://arxiv.org/abs/2607.06403",
+    "huggingface": "https://huggingface.co/robbyant/lingbot-vla-v2-6b"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

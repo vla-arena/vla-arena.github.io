@@ -1,5 +1,9 @@
 {
   "name": "molmoact2",
+  "links": {
+    "paper": "https://arxiv.org/abs/2605.02881",
+    "huggingface": "https://huggingface.co/allenai/MolmoAct2"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",

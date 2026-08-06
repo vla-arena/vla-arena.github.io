@@ -1,5 +1,6 @@
 {
   "name": "lingbot-vla-v2",
+  "size": "6B",
   "links": {
     "paper": "https://arxiv.org/abs/2607.06403",
     "huggingface": "https://huggingface.co/robbyant/lingbot-vla-v2-6b"

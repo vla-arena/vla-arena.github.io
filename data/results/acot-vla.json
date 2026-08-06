@@ -1,5 +1,6 @@
 {
   "name": "ACoT-VLA",
+  "size": "4B",
   "links": {
     "paper": "https://arxiv.org/abs/2601.11404"
   },

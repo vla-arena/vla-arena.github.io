@@ -97,6 +97,7 @@ git add data/results/models.json
 # Validate result files locally (recommended)
 node --test scripts/model-metadata.test.js
 node scripts/validate-results.js
+node --test scripts/model-manifest.test.js scripts/site-content.test.js
 
 # Add intermediate results (optional but recommended)
 git add data/runs/<model_id>/
@@ -201,7 +202,8 @@ Make sure to include all tasks in your JSON file. The complete task list include
 ### Notes
 
 - Ensure all JSON files are valid and properly formatted
-- Model IDs come from the result filename and should be unique, lowercase, and hyphen-separated
+- Each model ID listed in `data/results/models.json` must match its result filename (without `.json`), be unique, and use only lowercase letters, numbers, dots, underscores, and hyphens
+- Model display names are loaded from the `"name"` field in each `data/results/<model_id>.json` file
 - Missing tasks will be displayed as "-" on the leaderboard
 - The leaderboard loads model result files listed in `data/results/models.json`; add your unique model ID there when contributing a new result file
 - For questions or issues, please open an issue on the repository

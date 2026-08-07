@@ -1798,6 +1798,7 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts/model-metadata.js"></script>
+    <script src="scripts/model-manifest.js"></script>
 </head>
 
 <body>
@@ -2319,66 +2320,20 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             
             console.log('Starting to load VLA-Arena data from model files...');
             
-            const fallbackModelIds = ['openvla', 'openvla-oft', 'pi0', 'pi0-fast', 'univla', 'smolvla', 'pi0-full-parameters', 'pi0-fast-full-parameters', 'pi0-5-full-parameters', 'qwen2.5-vl-oft', 'qwen3-vl-oft', 'qwen2.5-vl-gr00t', 'qwen3-vl-gr00t', 'qwen2.5-vl-pi', 'qwen3-vl-pi', 'qwen3-vl-fast', 'groot-n1.6', 'lingbot-vla', 'motus', 'evo-depth', 'acot-vla', 'dm05', 'groot-n1.7', 'lingbot-vla-v2', 'molmoact2', 'langforce'];
             const basePaths = [
                 'data/results/',
                 './data/results/',
                 '/data/results/'
             ];
-            
-            let basePath = null;
-            
-            for (const path of basePaths) {
-                try {
-                    const testUrl = `${path}${fallbackModelIds[0]}.json`;
-                    const response = await fetch(testUrl);
-                    if (response.ok) {
-                        basePath = path;
-                        console.log(`Found base path: ${basePath}`);
-                        break;
-                    }
-                } catch (error) {
-                    continue;
-                }
-            }
-            
-            if (!basePath) {
-                console.error('Failed to find data/results directory');
+
+            const manifestResult = await VLAArenaModelManifest.loadModelManifest(basePaths);
+            if (!manifestResult) {
+                console.error('Failed to load a valid data/results/models.json manifest');
                 return null;
             }
-            
-            let modelIds = fallbackModelIds;
-            try {
-                const manifestResponse = await fetch(`${basePath}models.json`, { cache: 'no-cache' });
-                if (manifestResponse.ok) {
-                    const manifest = await manifestResponse.json();
-                    const manifestEntries = Array.isArray(manifest) ? manifest : manifest.models;
-                    const manifestModelIds = Array.isArray(manifestEntries)
-                        ? manifestEntries
-                            .map(entry => typeof entry === 'string' ? entry : entry && entry.id)
-                            .filter(Boolean)
-                        : [];
 
-                    if (manifestModelIds.length > 0) {
-                        const seenModelIds = new Set();
-                        modelIds = manifestModelIds.filter(modelId => {
-                            if (seenModelIds.has(modelId)) {
-                                console.warn(`Duplicate model ID in models.json skipped: ${modelId}`);
-                                return false;
-                            }
-                            seenModelIds.add(modelId);
-                            return true;
-                        });
-                        console.log('Loaded model manifest with', modelIds.length, 'entries');
-                    } else {
-                        console.warn('Model manifest is empty or invalid, using fallback model list');
-                    }
-                } else {
-                    console.warn('Model manifest not found, using fallback model list');
-                }
-            } catch (error) {
-                console.warn('Error loading model manifest, using fallback model list:', error.message);
-            }
+            const { basePath, modelIds } = manifestResult;
+            console.log('Loaded model manifest with', modelIds.length, 'entries');
 
             const modelDataList = [];
             for (const modelId of modelIds) {

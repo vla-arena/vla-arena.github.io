@@ -1,0 +1,190 @@
+{
+  "name": "StellaVLA",
+  "size": "4B",
+  "links": {
+    "github": "https://github.com/StellEdge-AI/StellaVLA",
+    "paper": "https://github.com/StellEdge-AI/StellaVLA/tech_report.pdf",
+    "huggingface": "https://huggingface.co/StellarEdge/StellaVLA"
+  },
+  "tasks": [
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          1.0,
+          1.0,
+          0.8
+        ],
+        "cc": [
+          0.0,
+          12.8,
+          20.0
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 140
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.8,
+          0.5,
+          0.1
+        ],
+        "cc": [
+          4.82,
+          55.14,
+          9.86
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 70
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.62,
+          0.92,
+          0.7
+        ],
+        "cc": [
+          7.66,
+          8.8,
+          13.68
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 112
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.92,
+          0.9,
+          0.62
+        ],
+        "cc": [
+          0.0,
+          9.0,
+          8.4
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 122
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.8,
+          0.6,
+          0.02
+        ],
+        "cc": [
+          17.0,
+          20.32,
+          10.74
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 71
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.56,
+          0.2
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 88
+    },
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.72,
+          0.6
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 116
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.7,
+          0.14,
+          0.0
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 42
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.64,
+          0.66,
+          0.84
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 107
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.8,
+          0.8,
+          0.8
+        ]
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 120
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          1.0,
+          0.02,
+          0.0
+        ]
+      },
+      "numEpisodes": 200,
+      "numSuccesses": 101
+    }
+  ]
+}

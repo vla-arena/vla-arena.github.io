@@ -119,7 +119,7 @@
             padding: 1.2rem 1.5rem;
             display: flex;
             gap: 2rem;
-            align-items: baseline;
+            align-items: center;
             border-bottom: 2px solid #e2e2e2;
             position: sticky;
             top: 0;
@@ -127,12 +127,21 @@
         }
 
         .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
             font-size: 2rem;
             font-weight: 700;
             color: #424242;
             text-decoration: none;
             cursor: pointer;
             margin-right: auto;
+        }
+
+        .logo-image {
+            width: auto;
+            height: 2.5rem;
+            object-fit: contain;
         }
 
         .logo:hover {
@@ -162,11 +171,13 @@
 
         .navlink:hover {
             background-color: rgba(0, 0, 0, 0.05);
+            text-decoration: none;
         }
 
         .navlink.active {
             color: #0073a8;
             font-weight: 800;
+            text-decoration: none;
         }
 
         .content-wrapper {
@@ -234,13 +245,12 @@
         }
 
         .author-line a {
-            color: #2c5aa0;
+            color: inherit;
             text-decoration: none;
-            transition: color 0.2s ease;
         }
 
         .author-line a:hover {
-            color: #4a90e2;
+            color: inherit;
             text-decoration: underline;
         }
 
@@ -419,14 +429,14 @@
             border-radius: 8px;
             font-size: 14px;
             font-family: inherit;
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            transition: background-color 0.2s ease, color 0.2s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .button:hover {
             background-color: #4F75FF;
             color: #FBFBFB;
-            transform: scale(1.05);
+            text-decoration: none;
         }
 
         .material-icons {
@@ -1776,7 +1786,10 @@
 
 <body>
     <nav class="navbar">
-        <a href="#home" class="logo">VLA-Arena</a>
+        <a href="#home" class="logo">
+            <img src="figures/logo.png" alt="" class="logo-image" aria-hidden="true">
+            <span>VLA-Arena</span>
+        </a>
         <a href="#leaderboard" class="navlink" id="nav-leaderboard" data-label="Leaderboard">Leaderboard</a>
         <a href="#taskstore" class="navlink" id="nav-taskstore" data-label="Task Store">Task Store</a>
         <a href="#home" class="navlink" id="nav-home" data-label="About">About</a>
@@ -1794,12 +1807,12 @@
                     <a href="https://github.com/muchvo" target="_blank">Borong Zhang</a>, 
                     <a href="https://github.com/learnerljh" target="_blank">Jiahao Li</a>, 
                     <a href="https://github.com/propellanesjc" target="_blank">Jiachen Shen</a>, 
-                    <a href="" target="_blank">Yuhao Zhang</a>,
+                    Yuhao Zhang,
                     <a href="https://caiyishuai.github.io/" target="_blank">Yishuai Cai</a>,<br class="author-line-break">
-                    <a href="" target="_blank">Lu Liu</a>,
-                    <a href="" target="_blank">Hailu Ji</a>,
+                    Lu Liu,
+                    Hailu Ji,
                     <a href="https://cypypccpy.github.io/" target="_blank">Yuanpei Chen</a>, 
-                    <a href="" target="_blank">Juntao Dai</a>, 
+                    Juntao Dai,
                     <a href=" https://jijiaming.com/" target="_blank">Jiaming Ji</a>, 
                     and <a href="https://www.yangyaodong.com/" target="_blank">Yaodong Yang</a>
                 </p>
@@ -1947,7 +1960,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                             <div class="control-options">
                                 <div class="control-option">
                                     <input type="checkbox" id="show-other-data" checked>
-                                    <label for="show-other-data">Show unselected tasks (view only, excluded from sorting)</label>
+                                    <label for="show-other-data">Show unselected tasks</label>
                                 </div>
                             </div>
                         </div>

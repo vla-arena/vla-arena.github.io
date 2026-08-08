@@ -1,7 +1,9 @@
 {
   "name": "Motus",
   "size": "8B",
+  "releaseMonth": "2025-12",
   "links": {
+    "github": "https://github.com/thu-ml/Motus",
     "paper": "https://arxiv.org/abs/2512.13030",
     "huggingface": "https://huggingface.co/motus-robotics/Motus"
   },

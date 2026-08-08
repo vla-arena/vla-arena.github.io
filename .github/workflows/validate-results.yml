@@ -5,6 +5,8 @@ on:
     paths:
       - 'data/results/**'
       - 'data/tasks/**'
+      - 'scripts/model-metadata.js'
+      - 'scripts/model-metadata.test.js'
       - 'scripts/validate-results.js'
       - '.github/workflows/validate-results.yml'
 
@@ -22,4 +24,6 @@ jobs:
           node-version: 20
 
       - name: Validate model result files
-        run: node scripts/validate-results.js
+        run: |
+          node --test scripts/model-metadata.test.js
+          node scripts/validate-results.js

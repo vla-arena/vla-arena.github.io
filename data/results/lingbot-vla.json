@@ -1,7 +1,9 @@
 {
   "name": "LingBot-VLA",
   "size": "4B",
+  "releaseMonth": "2026-01",
   "links": {
+    "github": "https://github.com/Robbyant/lingbot-vla",
     "paper": "https://arxiv.org/abs/2601.18692",
     "huggingface": "https://huggingface.co/robbyant/lingbot-vla-4b"
   },

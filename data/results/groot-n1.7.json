@@ -1,7 +1,9 @@
 {
   "name": "groot-n1.7",
   "size": "3B",
+  "releaseMonth": "2026-03",
   "links": {
+    "github": "https://github.com/NVIDIA/Isaac-GR00T",
     "paper": "https://arxiv.org/abs/2503.14734",
     "huggingface": "https://huggingface.co/nvidia/GR00T-N1.7-3B"
   },

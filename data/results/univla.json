@@ -1,7 +1,9 @@
 {
   "name": "UniVLA",
   "size": "8.5B",
+  "releaseMonth": "2025-06",
   "links": {
+    "github": "https://github.com/OpenDriveLab/UniVLA",
     "arena": "https://huggingface.co/VLA-Arena/univla-7b-finetuned-vla-arena",
     "paper": "https://arxiv.org/abs/2506.19850",
     "huggingface": "https://huggingface.co/Yuqi1997/UniVLA"

@@ -1,7 +1,9 @@
 {
   "name": "dm0.5",
   "size": "6B",
+  "releaseMonth": "2026-07",
   "links": {
+    "github": "https://github.com/dexmal/opendm",
     "paper": "https://www.dexmal.com/blog/dm0.5/index_en.html",
     "huggingface": "https://huggingface.co/Dexmal/DM05"
   },

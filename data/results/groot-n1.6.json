@@ -1,7 +1,9 @@
 {
   "name": "GR00T-N1.6",
   "size": "3B",
+  "releaseMonth": "2025-09",
   "links": {
+    "github": "https://github.com/NVIDIA/Isaac-GR00T",
     "paper": "https://research.nvidia.com/labs/gear/gr00t-n1_6/",
     "huggingface": "https://huggingface.co/nvidia/GR00T-N1.6-3B"
   },

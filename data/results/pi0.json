@@ -1,7 +1,9 @@
 {
   "name": "π₀",
   "size": "4B",
+  "releaseMonth": "2024-10",
   "links": {
+    "github": "https://github.com/Physical-Intelligence/openpi",
     "arena": "https://huggingface.co/VLA-Arena/pi0-vla-arena-fintuned-LoRA",
     "paper": "https://arxiv.org/abs/2410.24164",
     "huggingface": "https://huggingface.co/lerobot/pi0_base"

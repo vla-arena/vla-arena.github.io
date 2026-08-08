@@ -1,7 +1,9 @@
 {
   "name": "Qwen2.5-VL-GR00T",
   "size": "3B",
+  "releaseMonth": "2025-01",
   "links": {
+    "github": "https://github.com/starVLA/starVLA",
     "paper": "https://arxiv.org/abs/2502.13923",
     "huggingface": "https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct"
   },

@@ -1,7 +1,9 @@
 {
   "name": "π₀.₅-FFT",
   "size": "4B",
+  "releaseMonth": "2025-04",
   "links": {
+    "github": "https://github.com/Physical-Intelligence/openpi",
     "arena": "https://huggingface.co/VLA-Arena/pi05-vla-arena-finetuned",
     "paper": "https://arxiv.org/abs/2504.16054",
     "huggingface": "https://huggingface.co/lerobot/pi05_base"

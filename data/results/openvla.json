@@ -1,7 +1,9 @@
 {
   "name": "OpenVLA",
   "size": "7B",
+  "releaseMonth": "2024-06",
   "links": {
+    "github": "https://github.com/openvla/openvla",
     "arena": "https://huggingface.co/VLA-Arena/openvla-7b-finetuned-vla-arena",
     "paper": "https://arxiv.org/abs/2406.09246",
     "huggingface": "https://huggingface.co/openvla/openvla-7b"

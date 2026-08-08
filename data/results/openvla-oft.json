@@ -1,7 +1,9 @@
 {
   "name": "OpenVLA-OFT",
   "size": "7B",
+  "releaseMonth": "2025-02",
   "links": {
+    "github": "https://github.com/moojink/openvla-oft",
     "arena": "https://huggingface.co/VLA-Arena/openvla-7b-oft-finetuned-vla-arena",
     "paper": "https://arxiv.org/abs/2502.19645"
   },

@@ -180,6 +180,26 @@
             text-decoration: none;
         }
 
+        @media (max-width: 600px) {
+            .navbar {
+                flex-wrap: nowrap;
+                gap: clamp(0.2rem, 1.4vw, 0.4rem);
+                padding: 0.75rem clamp(0.45rem, 2.5vw, 0.75rem);
+            }
+
+            .logo {
+                font-size: clamp(1.1rem, 5vw, 1.25rem);
+                white-space: nowrap;
+            }
+
+            .navlink {
+                flex: 0 0 auto;
+                padding: 0.4rem 0.2rem;
+                font-size: clamp(0.72rem, 3.25vw, 0.85rem);
+                white-space: nowrap;
+            }
+        }
+
         .content-wrapper {
             min-height: calc(100vh - 80px);
             padding: 50px 20px;
@@ -1057,12 +1077,6 @@
             margin-bottom: 1rem;
         }
 
-        .leaderboard-icon {
-            font-size: 2.5rem;
-            line-height: 1;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        }
-
         .leaderboard-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -1080,7 +1094,7 @@
             line-height: 1.6;
             max-width: 800px;
             margin: 0 auto;
-            font-style: italic;
+            font-style: normal;
         }
 
         .control-panel {
@@ -1912,7 +1926,6 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             <div class="leaderboard-page">
                 <div class="leaderboard-header">
                     <div class="leaderboard-title-container">
-                        <span class="leaderboard-icon">📊</span>
                         <h2 class="leaderboard-title">VLA-Arena Model Performance Leaderboard</h2>
                     </div>
                     <p class="leaderboard-description">

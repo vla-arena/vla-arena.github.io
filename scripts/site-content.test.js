@@ -41,9 +41,31 @@ test('uses the concise unselected-task display label', () => {
 
     assert.match(
         html,
-        />Show unselected tasks \(excluded from sorting\)<\/label>/
+        />Show unselected tasks<\/label>/
     );
-    assert.doesNotMatch(html, /view only, excluded from sorting/);
+    assert.doesNotMatch(html, /excluded from sorting|view only/);
+});
+
+test('uses a text-only leaderboard heading with a non-italic description', () => {
+    const html = readRootFile('index.html');
+    const descriptionRule = html.match(/\.leaderboard-description\s*{([^}]*)}/);
+
+    assert.doesNotMatch(html, /leaderboard-icon|📊/);
+    assert.ok(descriptionRule, 'leaderboard description style must exist');
+    assert.match(descriptionRule[1], /font-style:\s*normal/);
+});
+
+test('keeps the top navigation on one row at mobile widths', () => {
+    const html = readRootFile('index.html');
+
+    assert.match(
+        html,
+        /@media \(max-width: 600px\)\s*{[\s\S]*?\.navbar\s*{[^}]*flex-wrap:\s*nowrap;/
+    );
+    assert.match(
+        html,
+        /@media \(max-width: 600px\)\s*{[\s\S]*?\.navlink\s*{[^}]*white-space:\s*nowrap;/
+    );
 });
 
 test('documents the model ID manifest and display-name source', () => {

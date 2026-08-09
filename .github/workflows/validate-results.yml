@@ -31,7 +31,8 @@ jobs:
       - name: Test model manifest loading and site content
         run: node --test scripts/model-manifest.test.js scripts/site-content.test.js
 
+      - name: Test model metadata
+        run: node --test scripts/model-metadata.test.js
+
       - name: Validate model result files
-        run: |
-          node --test scripts/model-metadata.test.js
-          node scripts/validate-results.js
+        run: node scripts/validate-results.js

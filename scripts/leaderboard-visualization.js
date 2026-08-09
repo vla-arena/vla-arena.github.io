@@ -92,6 +92,73 @@
         return average(selectedValues);
     }
 
+    function getSrLevelScores(data) {
+        if (!data || !Array.isArray(data.sr) || data.sr.length < 3) {
+            return null;
+        }
+
+        const [l0, l1, l2] = data.sr;
+        if (![l0, l1, l2].every(Number.isFinite)) {
+            return null;
+        }
+
+        return { l0, l1, l2 };
+    }
+
+    function getAverageSrLevelScores(tasks, modelId) {
+        const scoresByLevel = {
+            l0: [],
+            l1: [],
+            l2: []
+        };
+
+        tasks.forEach(task => {
+            const taskData = task && task.data ? task.data[modelId] : null;
+            const levelScores = getSrLevelScores(taskData);
+            if (!levelScores) {
+                return;
+            }
+
+            scoresByLevel.l0.push(levelScores.l0);
+            scoresByLevel.l1.push(levelScores.l1);
+            scoresByLevel.l2.push(levelScores.l2);
+        });
+
+        const levelAverages = {
+            l0: average(scoresByLevel.l0),
+            l1: average(scoresByLevel.l1),
+            l2: average(scoresByLevel.l2)
+        };
+
+        return Object.values(levelAverages).every(Number.isFinite)
+            ? levelAverages
+            : null;
+    }
+
+    function getSrContributionSegments(levelScores) {
+        const levels = [
+            ['L0', 'l0'],
+            ['L1', 'l1'],
+            ['L2', 'l2']
+        ];
+
+        if (!levelScores || levels.some(([, key]) => {
+            const score = levelScores[key];
+            return !Number.isFinite(score) || score < 0 || score > 1;
+        })) {
+            return null;
+        }
+
+        return levels.map(([level, key]) => {
+            const score = levelScores[key];
+            return {
+                level,
+                score,
+                width: Number(((score / 3) * 100).toFixed(2))
+            };
+        });
+    }
+
     function getAverageMetricScores(tasks, modelId, difficulty) {
         const srScores = [];
         const ccScores = [];
@@ -126,10 +193,7 @@
             .replace(/'/g, '&#039;');
     }
 
-    function getModelHeaderHtml(tasks, selectedTasks, sortDirection = null) {
-        const sortArrow = sortDirection === 'desc'
-            ? ' ↓'
-            : (sortDirection === 'asc' ? ' ↑' : '');
+    function getTaskIndicatorMapHtml(tasks, selectedTasks) {
         const groupsHtml = getTaskIndicatorGroups(tasks, selectedTasks)
             .map(group => {
                 const taskButtons = group.tasks.map(task => {
@@ -158,11 +222,56 @@
             }).join('');
 
         return `
-            <span class="model-sort-label">Model${sortArrow}</span>
             <div class="task-indicator-map" aria-label="Selected benchmark tasks">
                 ${groupsHtml}
             </div>
         `;
+    }
+
+    function getModelHeaderHtml(tasks, selectedTasks, sortDirection = null) {
+        const sortArrow = sortDirection === 'desc'
+            ? ' ↓'
+            : (sortDirection === 'asc' ? ' ↑' : '');
+
+        return `
+            <span class="model-sort-label">Model${sortArrow}</span>
+        `;
+    }
+
+    function getFloatingTaskPanelLeft(tableLeft, panelWidth, margin = 0) {
+        if (!Number.isFinite(tableLeft)
+            || !Number.isFinite(panelWidth)
+            || !Number.isFinite(margin)
+            || tableLeft < 0
+            || panelWidth <= 0
+            || margin < 0
+            || tableLeft < panelWidth + (2 * margin)) {
+            return null;
+        }
+
+        return (tableLeft - panelWidth) / 2;
+    }
+
+    function shouldShowFloatingTaskPanel({ route, categoryBottom, visibleTop, panelLeft }) {
+        return route === 'leaderboard'
+            && Number.isFinite(categoryBottom)
+            && Number.isFinite(visibleTop)
+            && Number.isFinite(panelLeft)
+            && categoryBottom <= visibleTop;
+    }
+
+    function shouldShowStickyTableHeader({
+        route,
+        headerTop,
+        tableBottom,
+        visibleTop,
+        headerHeight
+    }) {
+        return route === 'leaderboard'
+            && [headerTop, tableBottom, visibleTop, headerHeight].every(Number.isFinite)
+            && headerHeight > 0
+            && headerTop <= visibleTop
+            && tableBottom > visibleTop + headerHeight;
     }
 
     function toggleTaskSelection(selectedTasks, taskName) {
@@ -196,15 +305,52 @@
         return bestFirst ? b - a : a - b;
     }
 
-    function getAverageBarHtml(score, metric, maxCc, tone = '', contextLabel = 'Average') {
+    function getAverageBarHtml(
+        score,
+        metric,
+        maxCc,
+        tone = '',
+        contextLabel = 'Average',
+        srLevelScores = null
+    ) {
         const normalizedMetric = metric === 'cc' ? 'cc' : 'sr';
         const metricLabel = normalizedMetric.toUpperCase();
         const hasScore = Number.isFinite(score) && score >= 0;
         const width = Number(getAverageBarWidth(score, normalizedMetric, maxCc).toFixed(2));
         const toneClass = tone ? ` ${tone}` : '';
+        const srSegments = normalizedMetric === 'sr'
+            ? getSrContributionSegments(srLevelScores)
+            : null;
         const ariaLabel = hasScore
             ? `${contextLabel} ${metricLabel}: ${score.toFixed(2)}`
             : `${contextLabel} ${metricLabel} unavailable`;
+
+        if (hasScore && srSegments) {
+            const levelDescription = srSegments
+                .map(segment => `${segment.level}: ${segment.score.toFixed(2)}`)
+                .join('; ');
+            const segmentsHtml = srSegments.map(segment => {
+                const levelClass = segment.level.toLowerCase();
+                const label = `${segment.level} SR: ${segment.score.toFixed(2)}`;
+                const visualLabel = `${segment.level}:${segment.score.toFixed(2)}`;
+                return `
+                    <span class="sr-level-segment ${levelClass}"
+                          style="width: ${segment.width}%"
+                          tabindex="0"
+                          title="${label}"
+                          data-sr-level-label="${visualLabel}"
+                          aria-label="${label}"></span>
+                `;
+            }).join('');
+
+            return `
+                <div class="model-average-bar ${normalizedMetric}${toneClass} is-segmented"
+                     role="img"
+                     aria-label="${ariaLabel}; ${levelDescription}">
+                    ${segmentsHtml}
+                </div>
+            `;
+        }
 
         return `
             <div class="model-average-bar ${normalizedMetric}${toneClass}"
@@ -215,7 +361,14 @@
         `;
     }
 
-    function getMetricSummaryHtml(scores, primaryMetric, showBoth, maxCc, contextLabel) {
+    function getMetricSummaryHtml(
+        scores,
+        primaryMetric,
+        showBoth,
+        maxCc,
+        contextLabel,
+        srLevelScores = null
+    ) {
         const primary = primaryMetric === 'cc' ? 'cc' : 'sr';
         const secondary = primary === 'sr' ? 'cc' : 'sr';
         const metrics = [primary];
@@ -233,7 +386,14 @@
             return `
                 <div class="metric-summary ${metric} ${tone}">
                     <div class="model-score">${scoreText} (${contextLabel} ${metricLabel})</div>
-                    ${getAverageBarHtml(score, metric, maxCc, tone, contextLabel)}
+                    ${getAverageBarHtml(
+                        score,
+                        metric,
+                        maxCc,
+                        tone,
+                        contextLabel,
+                        metric === 'sr' ? srLevelScores : null
+                    )}
                 </div>
             `;
         }).join('');
@@ -241,8 +401,15 @@
 
     return {
         getTaskIndicatorGroups,
+        getTaskIndicatorMapHtml,
+        getFloatingTaskPanelLeft,
+        shouldShowFloatingTaskPanel,
+        shouldShowStickyTableHeader,
         getAverageBarWidth,
         getDifficultyScore,
+        getSrLevelScores,
+        getAverageSrLevelScores,
+        getSrContributionSegments,
         getAverageMetricScores,
         getModelHeaderHtml,
         toggleTaskSelection,

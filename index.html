@@ -801,14 +801,147 @@
             transform: translate(-50%, 0);
         }
 
+        .floating-task-selector {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            z-index: 900;
+            width: max-content;
+            padding: 10px 4px;
+            border: 1px solid rgba(31, 41, 55, 0.1);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transform: translateY(-50%) scale(0.96);
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+        }
+
+        .floating-task-selector.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(-50%) scale(1);
+        }
+
+        .floating-task-selector .task-indicator-map {
+            align-items: center;
+            gap: 7px;
+            margin-top: 0;
+        }
+
+        .floating-task-selector .task-indicator-group {
+            display: grid;
+            grid-template-columns: repeat(2, 13px);
+            gap: 3px;
+        }
+
+        .floating-task-selector .task-indicator {
+            width: 13px;
+            height: 13px;
+            flex-basis: 13px;
+        }
+
+        .floating-task-selector .task-indicator-tooltip {
+            top: 50%;
+            left: calc(100% + 8px);
+            transform: translate(0, -50%);
+        }
+
+        .floating-task-selector .task-indicator:hover .task-indicator-tooltip,
+        .floating-task-selector .task-indicator:focus .task-indicator-tooltip {
+            transform: translate(0, -50%);
+        }
+
+        .sticky-table-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 850;
+            display: none;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 3px 9px rgba(0, 0, 0, 0.14);
+        }
+
+        .sticky-table-header.show {
+            display: block;
+        }
+
+        .sticky-header-table {
+            margin: 0;
+            table-layout: fixed;
+            box-shadow: none;
+        }
+
+        .sticky-header-table th {
+            position: static;
+        }
+
+        .sticky-header-table th.model-name {
+            position: sticky;
+            left: 0;
+            z-index: 32;
+        }
+
+        .model-cell-content {
+            position: relative;
+            display: flex;
+            min-height: 100px;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        .model-metadata {
+            position: static;
+            display: flex;
+            min-height: 38px;
+            margin-top: auto;
+            padding: 18px 2px 0;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .model-metadata.has-release-month {
+            min-height: 49px;
+            padding-top: 30px;
+        }
+
         .model-title {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            max-width: 100%;
             font-weight: 600;
+            line-height: 1.25;
+            text-align: center;
+            transform: translateY(-50%);
+            overflow-wrap: anywhere;
+        }
+
+        .model-cell-content.has-both-metrics .model-title {
+            font-size: 0.9em;
+            line-height: 1.15;
+        }
+
+        .model-cell-content.has-both-metrics .model-metadata {
+            min-height: 35px;
+            padding-top: 16px;
+        }
+
+        .model-cell-content.has-both-metrics .model-metadata.has-release-month {
+            min-height: 44px;
+            padding-top: 27px;
         }
 
         .model-size-badge {
             position: absolute;
-            top: 5px;
-            left: 6px;
+            top: 0;
+            left: 0;
             color: #666;
             font-size: 0.72em;
             font-weight: 700;
@@ -818,8 +951,8 @@
 
         .model-release-month {
             position: absolute;
-            top: 18px;
-            left: 6px;
+            top: 13px;
+            left: 0;
             color: #8a8a8a;
             font-size: 0.68em;
             font-weight: 600;
@@ -827,14 +960,10 @@
             letter-spacing: 0.01em;
         }
 
-        .model-title.has-release-month {
-            padding-top: 0.45rem;
-        }
-
         .model-links {
             position: absolute;
-            top: 5px;
-            right: 6px;
+            top: 0;
+            right: 0;
             display: flex;
             align-items: center;
             gap: 4px;
@@ -870,18 +999,36 @@
             object-fit: contain;
         }
 
+        .model-metric-summaries {
+            --summary-font-size: 0.85em;
+            --summary-gap: 5px;
+            --bar-width: 112px;
+            --bar-height: 6px;
+            --bar-margin-top: 5px;
+        }
+
+        .model-metric-summaries.has-both-metrics {
+            --summary-font-size: 0.72em;
+            --summary-gap: 0px;
+            --bar-width: 96px;
+            --bar-height: 4px;
+            --bar-margin-top: 1px;
+        }
+
         .model-score {
             color: #666;
-            font-size: 0.85em;
+            font-size: var(--summary-font-size, 0.85em);
             font-weight: normal;
-            margin-top: 4px;
+            margin-top: var(--bar-margin-top, 4px);
+            line-height: 1.15;
         }
 
         .model-average-bar {
-            width: 112px;
+            display: flex;
+            width: var(--bar-width, 112px);
             max-width: 100%;
-            height: 6px;
-            margin: 5px auto 0;
+            height: var(--bar-height, 6px);
+            margin: var(--bar-margin-top, 5px) auto 0;
             overflow: hidden;
             border-radius: 999px;
             background: #e5e7eb;
@@ -906,8 +1053,44 @@
             background: #9ca3af;
         }
 
+        .sr-level-segment {
+            display: block;
+            height: 100%;
+            flex: 0 0 auto;
+            transition: width 0.25s ease;
+        }
+
+        .sr-level-segment:focus-visible {
+            outline: 2px solid #111827;
+            outline-offset: 2px;
+        }
+
+        .model-average-bar.is-primary .sr-level-segment.l0 {
+            background: #7acb91;
+        }
+
+        .model-average-bar.is-primary .sr-level-segment.l1 {
+            background: #34a853;
+        }
+
+        .model-average-bar.is-primary .sr-level-segment.l2 {
+            background: #1f8f4d;
+        }
+
+        .model-average-bar.is-secondary .sr-level-segment.l0 {
+            background: #d1d5db;
+        }
+
+        .model-average-bar.is-secondary .sr-level-segment.l1 {
+            background: #9ca3af;
+        }
+
+        .model-average-bar.is-secondary .sr-level-segment.l2 {
+            background: #6b7280;
+        }
+
         .metric-summary + .metric-summary {
-            margin-top: 5px;
+            margin-top: var(--summary-gap, 5px);
         }
 
         .sparkline-container {
@@ -1920,6 +2103,51 @@
             top: -5px;
             bottom: auto;
         }
+
+        .sr-level-tooltip {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 3000;
+            max-width: calc(100vw - 24px);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            background: #1f2933;
+            color: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            line-height: 1.25;
+            text-align: center;
+            white-space: nowrap;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(2px);
+            transition: opacity 0.1s ease, visibility 0.1s ease, transform 0.1s ease;
+        }
+
+        .sr-level-tooltip.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .sr-level-tooltip::after {
+            content: '';
+            position: absolute;
+            left: var(--tooltip-arrow-left, 50%);
+            bottom: -5px;
+            width: 10px;
+            height: 10px;
+            background: #1f2933;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .sr-level-tooltip.tooltip-below::after {
+            top: -5px;
+            bottom: auto;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts/model-metadata.js"></script>
@@ -2107,7 +2335,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                         </div>
                     </div>
 
-                    <div class="control-section">
+                    <div class="control-section" id="task-category-selection">
                         <div class="control-section-title">Task Category Selection</div>
                         <div id="category-groups" class="category-groups-container"></div>
                     </div>
@@ -2203,6 +2431,14 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
         </div>
 
         <div class="toast" id="toast"></div>
+
+        <div id="sticky-table-header"
+             class="sticky-table-header"
+             aria-label="Leaderboard column headers"></div>
+
+        <aside id="floating-task-selector"
+               class="floating-task-selector"
+               aria-label="Selected benchmark tasks"></aside>
 
         <a href="https://github.com/vla-arena/vla-arena.github.io#contributing-your-model-results" target="_blank" class="floating-btn" id="floating-contribute">
             <span class="icon" id="floating-contribute-icon">🚀</span>
@@ -2355,10 +2591,12 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             const releaseMonthHtml = releaseMonth ? `<span class="model-release-month">${releaseMonth}</span>` : '';
             const releaseClass = releaseMonth ? ' has-release-month' : '';
             return `
-                ${sizeHtml}
-                ${releaseMonthHtml}
-                ${getModelLinksHtml(model)}
-                <div class="model-title${releaseClass}">${modelName}${iconHtml}</div>
+                <div class="model-metadata${releaseClass}">
+                    ${sizeHtml}
+                    ${releaseMonthHtml}
+                    ${getModelLinksHtml(model)}
+                    <div class="model-title">${modelName}${iconHtml}</div>
+                </div>
             `;
         }
 
@@ -2437,6 +2675,113 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
 
         window.addEventListener('scroll', hideFullParamTooltip, true);
         window.addEventListener('resize', hideFullParamTooltip);
+
+        let activeSrLevelSegment = null;
+
+        function getSrLevelTooltip() {
+            let tooltip = document.getElementById('sr-level-tooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = 'sr-level-tooltip';
+                tooltip.className = 'sr-level-tooltip';
+                tooltip.setAttribute('role', 'tooltip');
+                document.body.appendChild(tooltip);
+            }
+            return tooltip;
+        }
+
+        function showSrLevelTooltip(target) {
+            const label = target && target.dataset
+                ? target.dataset.srLevelLabel
+                : '';
+            if (!label) return;
+
+            if (activeSrLevelSegment && activeSrLevelSegment !== target) {
+                activeSrLevelSegment.removeAttribute('aria-describedby');
+            }
+
+            const tooltip = getSrLevelTooltip();
+            activeSrLevelSegment = target;
+            tooltip.textContent = label;
+            tooltip.classList.add('show');
+            target.setAttribute('aria-describedby', tooltip.id);
+            positionSrLevelTooltip(target);
+        }
+
+        function positionSrLevelTooltip(target) {
+            const tooltip = getSrLevelTooltip();
+            const targetRect = target.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const gap = 9;
+            const margin = 12;
+            const targetCenter = targetRect.left + targetRect.width / 2;
+            const maxLeft = Math.max(
+                margin,
+                window.innerWidth - margin - tooltipRect.width
+            );
+            const left = Math.min(
+                Math.max(targetCenter - tooltipRect.width / 2, margin),
+                maxLeft
+            );
+            const fitsAbove = targetRect.top - gap - tooltipRect.height >= margin;
+            const idealTop = fitsAbove
+                ? targetRect.top - gap - tooltipRect.height
+                : targetRect.bottom + gap;
+            const maxTop = Math.max(
+                margin,
+                window.innerHeight - margin - tooltipRect.height
+            );
+            const top = Math.min(Math.max(idealTop, margin), maxTop);
+            const arrowLeft = Math.min(
+                Math.max(targetCenter - left, 8),
+                Math.max(8, tooltipRect.width - 8)
+            );
+
+            tooltip.classList.toggle('tooltip-below', !fitsAbove);
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+            tooltip.style.setProperty('--tooltip-arrow-left', `${arrowLeft}px`);
+        }
+
+        function hideSrLevelTooltip() {
+            const tooltip = document.getElementById('sr-level-tooltip');
+            if (tooltip) {
+                tooltip.classList.remove('show', 'tooltip-below');
+            }
+            if (activeSrLevelSegment) {
+                activeSrLevelSegment.removeAttribute('aria-describedby');
+            }
+            activeSrLevelSegment = null;
+        }
+
+        document.addEventListener('mouseover', (event) => {
+            const segment = event.target.closest('.sr-level-segment');
+            if (segment) {
+                showSrLevelTooltip(segment);
+            }
+        });
+
+        document.addEventListener('mouseout', (event) => {
+            const segment = event.target.closest('.sr-level-segment');
+            if (segment && !segment.contains(event.relatedTarget)) {
+                hideSrLevelTooltip();
+            }
+        });
+
+        document.addEventListener('focusin', (event) => {
+            if (event.target.classList && event.target.classList.contains('sr-level-segment')) {
+                showSrLevelTooltip(event.target);
+            }
+        });
+
+        document.addEventListener('focusout', (event) => {
+            if (event.target.classList && event.target.classList.contains('sr-level-segment')) {
+                hideSrLevelTooltip();
+            }
+        });
+
+        window.addEventListener('scroll', hideSrLevelTooltip, true);
+        window.addEventListener('resize', hideSrLevelTooltip);
 
         async function loadVLArenaData() {
             if (vlaArenaData) {
@@ -2740,7 +3085,169 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             safetyMetricRow.style.display = hasSafetyTask ? 'flex' : 'none';
         }
 
+        function toggleTaskFromIndicator(taskName) {
+            const selected = LeaderboardVisualization.toggleTaskSelection(
+                controlState.selectedTasks,
+                taskName
+            );
+            const checkbox = document.getElementById(`task-${taskName}`);
+            if (checkbox) {
+                checkbox.checked = selected;
+            }
+            updateSafetyMetricVisibility();
+            updateTable();
+        }
+
+        function renderFloatingTaskSelector() {
+            const panel = document.getElementById('floating-task-selector');
+            if (!panel || !vlaArenaData) return;
+
+            panel.innerHTML = LeaderboardVisualization.getTaskIndicatorMapHtml(
+                vlaArenaData.tasks,
+                controlState.selectedTasks
+            );
+        }
+
+        function hideFloatingTaskSelector(panel) {
+            if (!panel) return;
+            panel.classList.remove('show');
+        }
+
+        function handleFloatingTaskSelector() {
+            const panel = document.getElementById('floating-task-selector');
+            const categorySelection = document.getElementById('task-category-selection');
+            const tableWrapper = document.querySelector('.vla-arena-table-wrapper');
+            const navbar = document.querySelector('.navbar');
+
+            if (!panel || !categorySelection || !tableWrapper || !navbar || !vlaArenaData) {
+                hideFloatingTaskSelector(panel);
+                return;
+            }
+
+            const route = window.location.hash.substring(1) || 'leaderboard';
+            const categoryRect = categorySelection.getBoundingClientRect();
+            const tableRect = tableWrapper.getBoundingClientRect();
+            const navbarRect = navbar.getBoundingClientRect();
+            const panelLeft = LeaderboardVisualization.getFloatingTaskPanelLeft(
+                tableRect.left,
+                panel.offsetWidth
+            );
+            const shouldShow = LeaderboardVisualization.shouldShowFloatingTaskPanel({
+                route,
+                categoryBottom: categoryRect.bottom,
+                visibleTop: navbarRect.bottom,
+                panelLeft
+            });
+
+            if (!shouldShow) {
+                hideFloatingTaskSelector(panel);
+                return;
+            }
+
+            panel.style.left = `${panelLeft}px`;
+            panel.classList.add('show');
+        }
+
+        function hideStickyTableHeader() {
+            const stickyViewport = document.getElementById('sticky-table-header');
+            if (stickyViewport) {
+                stickyViewport.classList.remove('show');
+            }
+        }
+
+        function syncStickyTableHeaderScroll() {
+            const stickyViewport = document.getElementById('sticky-table-header');
+            const tableWrapper = document.querySelector('.vla-arena-table-wrapper');
+            if (!stickyViewport || !tableWrapper) return;
+
+            stickyViewport.scrollLeft = tableWrapper.scrollLeft;
+        }
+
+        function renderStickyTableHeader() {
+            const stickyViewport = document.getElementById('sticky-table-header');
+            const sourceHead = document.getElementById('vla-table-head');
+            const sourceTable = document.getElementById('vla-arena-table');
+            if (!stickyViewport || !sourceHead || !sourceTable || !sourceHead.rows.length) {
+                hideStickyTableHeader();
+                return;
+            }
+
+            const clonedHead = sourceHead.cloneNode(true);
+            clonedHead.removeAttribute('id');
+            clonedHead.setAttribute('aria-hidden', 'true');
+
+            Array.from(sourceHead.rows).forEach((sourceRow, rowIndex) => {
+                const clonedRow = clonedHead.rows[rowIndex];
+                Array.from(sourceRow.cells).forEach((sourceCell, cellIndex) => {
+                    const clonedCell = clonedRow.cells[cellIndex];
+                    const width = sourceCell.getBoundingClientRect().width;
+                    const widthPx = `${width}px`;
+                    clonedCell.style.width = widthPx;
+                    clonedCell.style.minWidth = widthPx;
+                    clonedCell.style.maxWidth = widthPx;
+
+                    if (typeof sourceCell.onclick === 'function') {
+                        clonedCell.dataset.stickySourceRow = rowIndex;
+                        clonedCell.dataset.stickySourceCell = cellIndex;
+                    }
+                });
+            });
+
+            const clonedTable = document.createElement('table');
+            clonedTable.className = 'vla-arena-table sticky-header-table';
+            clonedTable.style.width = `${sourceTable.scrollWidth}px`;
+            clonedTable.appendChild(clonedHead);
+            stickyViewport.replaceChildren(clonedTable);
+            syncStickyTableHeaderScroll();
+        }
+
+        function handleStickyTableHeader() {
+            const stickyViewport = document.getElementById('sticky-table-header');
+            const sourceHead = document.getElementById('vla-table-head');
+            const sourceTable = document.getElementById('vla-arena-table');
+            const tableWrapper = document.querySelector('.vla-arena-table-wrapper');
+            const navbar = document.querySelector('.navbar');
+            if (!stickyViewport || !sourceHead || !sourceTable || !tableWrapper || !navbar) {
+                hideStickyTableHeader();
+                return;
+            }
+
+            const route = window.location.hash.substring(1) || 'leaderboard';
+            const headerRect = sourceHead.getBoundingClientRect();
+            const tableRect = sourceTable.getBoundingClientRect();
+            const wrapperRect = tableWrapper.getBoundingClientRect();
+            const navbarRect = navbar.getBoundingClientRect();
+            const shouldShow = LeaderboardVisualization.shouldShowStickyTableHeader({
+                route,
+                headerTop: headerRect.top,
+                tableBottom: tableRect.bottom,
+                visibleTop: navbarRect.bottom,
+                headerHeight: headerRect.height
+            });
+
+            if (!shouldShow) {
+                hideStickyTableHeader();
+                return;
+            }
+
+            if (!stickyViewport.querySelector('.sticky-header-table')) {
+                renderStickyTableHeader();
+            }
+
+            stickyViewport.style.top = `${navbarRect.bottom}px`;
+            stickyViewport.style.left = `${wrapperRect.left}px`;
+            stickyViewport.style.width = `${wrapperRect.width}px`;
+            stickyViewport.classList.add('show');
+            syncStickyTableHeaderScroll();
+        }
+
+        function refreshStickyTableHeader() {
+            renderStickyTableHeader();
+            handleStickyTableHeader();
+        }
+
         function updateTable() {
+            hideSrLevelTooltip();
             if (!vlaArenaData) return;
 
             const thead = document.getElementById('vla-table-head');
@@ -2774,26 +3281,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                 vlaArenaData.tasks,
                 controlState.selectedTasks
             );
-            modelCategoryCell.onclick = event => {
-                const taskIndicator = event.target.closest('.task-indicator');
-                if (taskIndicator) {
-                    event.stopPropagation();
-                    const taskName = taskIndicator.dataset.taskName;
-                    const selected = LeaderboardVisualization.toggleTaskSelection(
-                        controlState.selectedTasks,
-                        taskName
-                    );
-                    const checkbox = document.getElementById(`task-${taskName}`);
-                    if (checkbox) {
-                        checkbox.checked = selected;
-                    }
-                    updateSafetyMetricVisibility();
-                    updateTable();
-                    return;
-                }
-
-                sortByModel();
-            };
+            modelCategoryCell.onclick = sortByModel;
             categoryRow.appendChild(modelCategoryCell);
 
             let currentCategory = '';
@@ -2852,7 +3340,11 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                 const nameCell = document.createElement('td');
                 nameCell.className = 'model-name';
                 const iconHtml = isFullParamModel(model.id) ? getFullParamIconHtml() : '';
-                nameCell.innerHTML = getModelLabelHtml(model, iconHtml);
+                nameCell.innerHTML = `
+                    <div class="model-cell-content">
+                        ${getModelLabelHtml(model, iconHtml)}
+                    </div>
+                `;
                 nameCell.dataset.modelName = model.name;
                 row.appendChild(nameCell);
 
@@ -2930,6 +3422,10 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                     wrapper.scrollLeft = 0;
                 }, 100);
             }
+
+            renderFloatingTaskSelector();
+            window.requestAnimationFrame(handleFloatingTaskSelector);
+            window.requestAnimationFrame(refreshStickyTableHeader);
 
             if (currentSortColumn !== null) {
                 reapplyCurrentSort();
@@ -3316,7 +3812,14 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                 const model = vlaArenaData.models.find(m => m.name === modelName);
                 
                 if (!model) {
-                    return { row, modelName, model: null, scores: { sr: null, cc: null }, sortScore: null };
+                    return {
+                        row,
+                        modelName,
+                        model: null,
+                        scores: { sr: null, cc: null },
+                        srLevelScores: null,
+                        sortScore: null
+                    };
                 }
 
                 const scores = LeaderboardVisualization.getAverageMetricScores(
@@ -3324,11 +3827,15 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                     model.id,
                     currentDifficulty
                 );
+                const srLevelScores = currentDifficulty === 'avg'
+                    ? LeaderboardVisualization.getAverageSrLevelScores(selectedTasks, model.id)
+                    : null;
                 return {
                     row,
                     modelName,
                     model,
                     scores,
+                    srLevelScores,
                     sortScore: scores[currentSafetyMetric]
                 };
             });
@@ -3349,7 +3856,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             
             tbody.innerHTML = '';
 
-            modelAvgScores.forEach(({ row, modelName, model, scores }) => {
+            modelAvgScores.forEach(({ row, modelName, model, scores, srLevelScores }) => {
                 if (row && row.firstChild) {
                     const nameCell = row.firstChild;
                     const modelObj = model || vlaArenaData.models.find(m => m.name === modelName);
@@ -3359,11 +3866,15 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                         currentSafetyMetric,
                         showBoth,
                         maxCc,
-                        'Avg'
+                        'Avg',
+                        srLevelScores
                     );
+                    const metricClass = showBoth ? ' has-both-metrics' : '';
                     nameCell.innerHTML = `
-                        ${getModelLabelHtml(modelObj || { name: modelName }, iconHtml)}
-                        ${summaryHtml}
+                        <div class="model-cell-content${metricClass}">
+                            ${getModelLabelHtml(modelObj || { name: modelName }, iconHtml)}
+                            <div class="model-metric-summaries${metricClass}">${summaryHtml}</div>
+                        </div>
                     `;
                 }
                 tbody.appendChild(row);
@@ -3386,6 +3897,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             });
             
             currentSortColumn = 'model';
+            window.requestAnimationFrame(refreshStickyTableHeader);
         }
 
         function sortByTask(taskIndex, { preserveDirection = false } = {}) {
@@ -3420,10 +3932,14 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                         ? LeaderboardVisualization.getDifficultyScore(taskData, 'cc', currentDifficulty)
                         : null
                 };
+                const srLevelScores = currentDifficulty === 'avg'
+                    ? LeaderboardVisualization.getSrLevelScores(taskData)
+                    : null;
 
                 return {
                     model,
                     scores,
+                    srLevelScores,
                     sortScore: scores[currentSafetyMetric]
                 };
             });
@@ -3483,11 +3999,15 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                         currentSafetyMetric,
                         showBoth,
                         maxCc,
-                        'Task'
+                        'Task',
+                        ms.srLevelScores
                     );
+                    const metricClass = showBoth ? ' has-both-metrics' : '';
                     nameCell.innerHTML = `
-                        ${getModelLabelHtml(ms.model, iconHtml)}
-                        ${summaryHtml}
+                        <div class="model-cell-content${metricClass}">
+                            ${getModelLabelHtml(ms.model, iconHtml)}
+                            <div class="model-metric-summaries${metricClass}">${summaryHtml}</div>
+                        </div>
                     `;
                 }
                 tbody.appendChild(row);
@@ -3516,6 +4036,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             }
 
             currentSortColumn = taskIndex;
+            window.requestAnimationFrame(refreshStickyTableHeader);
         }
 
         let taskStoreData = [];
@@ -4150,17 +4671,57 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             }
         }
 
-        window.addEventListener('scroll', handleFloatingButtons);
+        function handleFloatingElements() {
+            handleFloatingButtons();
+            handleFloatingTaskSelector();
+            handleStickyTableHeader();
+        }
+
+        window.addEventListener('scroll', handleFloatingElements);
+        window.addEventListener('resize', handleFloatingTaskSelector);
+        window.addEventListener('resize', refreshStickyTableHeader);
         
         window.addEventListener('hashchange', () => {
-            setTimeout(handleFloatingButtons, 100);
+            setTimeout(handleFloatingElements, 100);
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            const floatingTaskSelector = document.getElementById('floating-task-selector');
+            if (floatingTaskSelector) {
+                floatingTaskSelector.addEventListener('click', event => {
+                    const taskIndicator = event.target.closest('.task-indicator');
+                    if (taskIndicator) {
+                        toggleTaskFromIndicator(taskIndicator.dataset.taskName);
+                    }
+                });
+            }
+
+            const tableWrapper = document.querySelector('.vla-arena-table-wrapper');
+            if (tableWrapper) {
+                tableWrapper.addEventListener('scroll', syncStickyTableHeaderScroll);
+            }
+
+            const stickyViewport = document.getElementById('sticky-table-header');
+            if (stickyViewport) {
+                stickyViewport.addEventListener('click', event => {
+                    const clonedHeader = event.target.closest('[data-sticky-source-row]');
+                    if (!clonedHeader) return;
+
+                    const sourceRows = document.querySelectorAll('#vla-table-head tr');
+                    const sourceRow = sourceRows[Number(clonedHeader.dataset.stickySourceRow)];
+                    const sourceHeader = sourceRow
+                        ? sourceRow.children[Number(clonedHeader.dataset.stickySourceCell)]
+                        : null;
+                    if (sourceHeader) {
+                        sourceHeader.click();
+                        window.requestAnimationFrame(refreshStickyTableHeader);
+                    }
+                });
+            }
 
             loadPageFromHash();
 
-            setTimeout(handleFloatingButtons, 100);
+            setTimeout(handleFloatingElements, 100);
         });
 </script>
 

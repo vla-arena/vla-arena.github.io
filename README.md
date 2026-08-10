@@ -38,9 +38,11 @@ The final results JSON file will be generated in the `results/` directory with a
 {
   "name": "Your Model Name",
   "size": "7B",
+  "releaseMonth": "2025-06",
   "links": {
-    "arena": "https://huggingface.co/VLA-Arena/your-arena-checkpoint",
+    "arena": "https://huggingface.co/your-org/your-evaluated-checkpoint",
     "paper": "https://arxiv.org/abs/xxxx.xxxxx",
+    "github": "https://github.com/your-org/your-model",
     "huggingface": "https://huggingface.co/your-org/your-model"
   },
   "tasks": [
@@ -64,9 +66,11 @@ The final results JSON file will be generated in the `results/` directory with a
 
 * `name`: Display name of your model
 * `size`: Optional model parameter size shown on the leaderboard (for example, "7B" or "450M")
+* `releaseMonth`: Optional first public release month in `YYYY-MM` format; omit it or use `null`/`""` when unknown
 * `links`: Optional model links shown as icons in the leaderboard model cell
-* `arena`: Optional VLA-Arena checkpoint URL that can be used directly with the VLA-Arena runtime
+* `arena`: Optional Hugging Face URL for the evaluated checkpoint; it can be hosted under your own account or organization
 * `paper`: Optional paper or project URL
+* `github`: Optional official GitHub repository URL in `https://github.com/<owner>/<repository>` format
 * `huggingface`: Optional official Hugging Face model URL
 * `tasks`: Array of all tasks in VLA-Arena
 * `name`: Task name (must match existing task names)
@@ -91,6 +95,7 @@ git add data/results/<model_id>.json
 git add data/results/models.json
 
 # Validate result files locally (recommended)
+node --test scripts/model-metadata.test.js
 node scripts/validate-results.js
 
 # Add intermediate results (optional but recommended)
@@ -126,9 +131,11 @@ cat > data/results/my-vla.json << 'EOF'
 {
   "name": "MyVLA",
   "size": "7B",
+  "releaseMonth": "2025-06",
   "links": {
-    "arena": "https://huggingface.co/VLA-Arena/my-vla-arena-checkpoint",
+    "arena": "https://huggingface.co/my-org/my-vla-evaluated-checkpoint",
     "paper": "https://arxiv.org/abs/xxxx.xxxxx",
+    "github": "https://github.com/my-org/my-vla",
     "huggingface": "https://huggingface.co/my-org/my-vla"
   },
   "tasks": [

@@ -1,7 +1,9 @@
 {
   "name": "ACoT-VLA",
   "size": "4B",
+  "releaseMonth": "2026-01",
   "links": {
+    "github": "https://github.com/AgibotTech/ACoT-VLA",
     "paper": "https://arxiv.org/abs/2601.11404"
   },
   "tasks": [

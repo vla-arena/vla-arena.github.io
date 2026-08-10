@@ -2,6 +2,10 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const {
+    getReleaseMonthValidationError,
+    isGithubRepositoryUrl
+} = require('./model-metadata.js');
 
 const rootDir = path.resolve(__dirname, '..');
 const resultsDir = path.join(rootDir, 'data', 'results');
@@ -227,11 +231,18 @@ function validateModelFile(modelId, canonicalTasks) {
         }
     }
 
+    if (Object.prototype.hasOwnProperty.call(model, 'releaseMonth')) {
+        const releaseMonthError = getReleaseMonthValidationError(model.releaseMonth);
+        if (releaseMonthError) {
+            addError(modelPath, releaseMonthError);
+        }
+    }
+
     if (Object.prototype.hasOwnProperty.call(model, 'links')) {
         if (!isPlainObject(model.links)) {
             addError(modelPath, 'Model "links" must be a JSON object when present');
         } else {
-            ['arena', 'paper', 'huggingface'].forEach(key => {
+            ['arena', 'paper', 'huggingface', 'github'].forEach(key => {
                 if (!Object.prototype.hasOwnProperty.call(model.links, key)) {
                     return;
                 }
@@ -243,6 +254,8 @@ function validateModelFile(modelId, canonicalTasks) {
                     addError(modelPath, `Model "links.${key}" must not contain leading or trailing whitespace`);
                 } else if (!isHttpUrl(value)) {
                     addError(modelPath, `Model "links.${key}" must be an http(s) URL`);
+                } else if (key === 'github' && !isGithubRepositoryUrl(value)) {
+                    addError(modelPath, 'Model "links.github" must be an https://github.com/<owner>/<repository> URL');
                 }
             });
         }

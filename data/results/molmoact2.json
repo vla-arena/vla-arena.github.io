@@ -1,7 +1,9 @@
 {
   "name": "molmoact2",
   "size": "5B",
+  "releaseMonth": "2026-05",
   "links": {
+    "github": "https://github.com/allenai/molmoact2",
     "paper": "https://arxiv.org/abs/2605.02881",
     "huggingface": "https://huggingface.co/allenai/MolmoAct2"
   },

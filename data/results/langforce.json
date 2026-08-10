@@ -1,7 +1,9 @@
 {
   "name": "LangForce",
   "size": "8B",
+  "releaseMonth": "2026-01",
   "links": {
+    "github": "https://github.com/ZGC-EmbodyAI/LangForce",
     "arena": "https://huggingface.co/LiamLian0727/LangForce_VLA_Arena",
     "paper": "https://arxiv.org/abs/2601.15197"
   },

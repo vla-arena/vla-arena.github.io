@@ -2148,6 +2148,475 @@
             top: -5px;
             bottom: auto;
         }
+
+        .table-scroll-hint {
+            display: none;
+        }
+
+        /* Responsive Leaderboard: Compact */
+        @media (max-width: 900px) {
+            .navbar {
+                flex-wrap: nowrap;
+                gap: clamp(0.4rem, 1.8vw, 1rem);
+                padding: 0.75rem clamp(0.75rem, 2.5vw, 1.25rem);
+            }
+
+            .logo {
+                min-width: 0;
+                gap: 0.45rem;
+                font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+                white-space: nowrap;
+            }
+
+            .logo-image {
+                height: 2.1rem;
+            }
+
+            .navlink {
+                flex: 0 0 auto;
+                padding: 0.4rem clamp(0.2rem, 1vw, 0.55rem);
+                font-size: clamp(0.78rem, 2vw, 0.95rem);
+                white-space: nowrap;
+            }
+
+            .content-wrapper {
+                padding: 1.25rem 0.75rem 2rem;
+            }
+
+            .leaderboard-page {
+                max-width: 100%;
+                padding: 0.75rem 0;
+            }
+
+            .leaderboard-header {
+                margin-bottom: 1.25rem;
+                padding: 0 0.5rem 1rem;
+            }
+
+            .leaderboard-title-container {
+                margin-bottom: 0.65rem;
+            }
+
+            .leaderboard-title {
+                font-size: clamp(1.65rem, 5vw, 2rem);
+                line-height: 1.15;
+                text-align: center;
+            }
+
+            .leaderboard-description {
+                font-size: 0.9rem;
+                line-height: 1.45;
+            }
+
+            .contribute-btn {
+                margin-top: 0.75rem;
+                padding: 0.55rem 1rem;
+                font-size: 0.86rem;
+            }
+
+            .control-panel {
+                margin: 0 0.5rem 1.25rem;
+                padding: 0.85rem 1rem;
+            }
+
+            .control-panel h2 {
+                margin-bottom: 0.75rem;
+                font-size: 1.05rem;
+            }
+
+            .control-section {
+                margin-bottom: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+
+            .control-label {
+                min-width: 82px;
+            }
+
+            .category-groups-container {
+                gap: 0.75rem;
+            }
+
+            .vla-arena-table-wrapper {
+                width: calc(100% - 52px);
+                max-width: calc(100% - 52px);
+                margin: 1rem 0 1.25rem 52px;
+            }
+
+            .vla-arena-table {
+                font-size: 0.86rem;
+            }
+
+            .vla-arena-table th {
+                min-width: 180px;
+                padding: 0.65rem 0.6rem;
+            }
+
+            .vla-arena-table td {
+                min-width: 180px;
+                padding: 0.6rem 0.55rem;
+            }
+
+            #vla-table-head tr:last-child th:not(.model-name),
+            .vla-arena-table tbody td:not(.model-name) {
+                width: 180px;
+                min-width: 180px;
+                max-width: 180px;
+            }
+
+            .sparkline-container,
+            .sparkline-svg,
+            .dual-chart-container {
+                width: 164px;
+            }
+
+            .vla-arena-table th.model-name,
+            .vla-arena-table td.model-name,
+            .model-name {
+                width: 160px;
+                min-width: 160px;
+                max-width: 160px;
+            }
+
+            .task-category-header {
+                padding: 0.55rem 0.4rem;
+                font-size: 0.9rem;
+            }
+
+            .floating-task-selector {
+                padding: 8px 4px;
+            }
+
+            .floating-task-selector .task-indicator-map {
+                gap: 6px;
+            }
+
+            .floating-btn {
+                right: 0.75rem;
+                padding: 0.65rem 1rem;
+                font-size: 0.84rem;
+            }
+        }
+        /* End Responsive Leaderboard: Compact */
+
+        /* Responsive Leaderboard: Portrait */
+        @media (max-width: 700px) {
+            .navbar {
+                gap: clamp(0.15rem, 1vw, 0.35rem);
+                padding: 0.6rem clamp(0.35rem, 2vw, 0.6rem);
+            }
+
+            .logo {
+                gap: 0.3rem;
+                font-size: clamp(0.95rem, 4.3vw, 1.1rem);
+            }
+
+            .logo-image {
+                height: 1.9rem;
+            }
+
+            .navlink {
+                padding: 0.35rem 0.15rem;
+                font-size: clamp(0.67rem, 3vw, 0.78rem);
+            }
+
+            .content-wrapper {
+                padding: 0.75rem 0.5rem 1.5rem;
+            }
+
+            .leaderboard-page {
+                --portrait-table-gutter: 52px;
+                --portrait-model-width: 104px;
+                --portrait-task-width: calc((100vw - 16px - var(--portrait-model-width)) / 2);
+                padding-top: 0.4rem;
+            }
+
+            .leaderboard-header {
+                margin-bottom: 1rem;
+                padding: 0 0.25rem 0.9rem;
+            }
+
+            .leaderboard-title {
+                font-size: clamp(1.45rem, 7vw, 1.7rem);
+                letter-spacing: -0.3px;
+            }
+
+            .leaderboard-description {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .control-panel {
+                margin-inline: 0;
+                padding: 0.8rem;
+            }
+
+            .control-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.35rem;
+            }
+
+            .control-label {
+                width: 100%;
+                min-width: 0;
+                font-size: 0.8rem;
+                font-weight: 700;
+            }
+
+            .control-options {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 0.4rem;
+            }
+
+            .control-option {
+                min-width: 0;
+                gap: 0.3rem;
+            }
+
+            .control-option label {
+                min-width: 0;
+                padding: 0.35rem 0.4rem;
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
+
+            .category-groups-container {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 0.65rem;
+            }
+
+            .category-group {
+                min-width: 0;
+                padding: 0.65rem;
+            }
+
+            .category-header {
+                gap: 0.35rem;
+            }
+
+            .category-toggle {
+                gap: 0.25rem;
+            }
+
+            .category-toggle-btn {
+                padding: 0.25rem 0.45rem;
+                font-size: 0.72rem;
+            }
+
+            .task-list {
+                gap: 0.3rem;
+            }
+
+            .task-item label {
+                padding: 0.3rem 0.4rem;
+                font-size: 0.8rem;
+            }
+
+            .table-scroll-hint {
+                display: flex;
+                margin: 0.1rem 0.25rem 0.4rem var(--portrait-table-gutter);
+                align-items: center;
+                justify-content: flex-end;
+                gap: 0.35rem;
+                color: #737b87;
+                font-size: 0.76rem;
+                font-weight: 700;
+                line-height: 1;
+            }
+
+            .table-scroll-hint span {
+                color: #0073a8;
+                font-size: 1rem;
+            }
+
+            .vla-arena-table-wrapper {
+                width: calc(100% - var(--portrait-table-gutter));
+                max-width: calc(100% - var(--portrait-table-gutter));
+                margin-left: var(--portrait-table-gutter);
+                margin-top: 0;
+            }
+
+            .vla-arena-table {
+                font-size: 0.82rem;
+            }
+
+            .vla-arena-table th {
+                min-width: 180px;
+                padding: 0.55rem 0.45rem;
+            }
+
+            .vla-arena-table td {
+                min-width: 180px;
+                padding: 0.5rem 0.4rem;
+            }
+
+            .vla-arena-table th.model-name,
+            .vla-arena-table td.model-name,
+            .model-name {
+                width: var(--portrait-model-width);
+                min-width: var(--portrait-model-width);
+                max-width: var(--portrait-model-width);
+            }
+
+            #vla-table-head tr:last-child th:not(.model-name),
+            .vla-arena-table tbody td:not(.model-name) {
+                width: var(--portrait-task-width);
+                min-width: var(--portrait-task-width);
+                max-width: var(--portrait-task-width);
+            }
+
+            #vla-table-head tr:last-child th:not(.model-name) {
+                white-space: normal;
+                overflow-wrap: anywhere;
+                line-height: 1.15;
+            }
+
+            .sparkline-container,
+            .sparkline-svg,
+            .dual-chart-container {
+                width: calc(var(--portrait-task-width) - 8px);
+                height: 76px;
+            }
+
+            .sparkline-svg text {
+                font-size: 13px;
+            }
+
+            .task-category-header {
+                padding: 0.45rem 0.35rem;
+                font-size: 0.82rem;
+            }
+
+            .model-links {
+                display: grid;
+                grid-template-columns: repeat(2, 15px);
+                grid-auto-rows: 15px;
+                gap: 2px;
+            }
+
+            .model-link {
+                width: 15px;
+                height: 15px;
+            }
+
+            .model-metric-summaries {
+                --bar-width: 86px;
+            }
+
+            .model-metric-summaries.has-both-metrics {
+                --bar-width: 78px;
+            }
+
+            .floating-btn {
+                width: 44px;
+                height: 44px;
+                padding: 0;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .floating-btn span:not(.icon) {
+                display: none;
+            }
+
+            .floating-btn .icon {
+                font-size: 1.15rem;
+            }
+        }
+        /* End Responsive Leaderboard: Portrait */
+
+        /* Responsive Leaderboard: Short Landscape */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .navbar {
+                gap: clamp(0.5rem, 2vw, 1.25rem);
+                padding: 0.4rem 0.8rem;
+            }
+
+            .logo {
+                font-size: 1.15rem;
+            }
+
+            .logo-image {
+                height: 1.8rem;
+            }
+
+            .navlink {
+                padding-block: 0.3rem;
+                font-size: 0.8rem;
+            }
+
+            .content-wrapper {
+                padding: 0.5rem 0.75rem 1rem;
+            }
+
+            .leaderboard-page {
+                padding-top: 0.25rem;
+            }
+
+            .leaderboard-header {
+                margin-bottom: 0.75rem;
+                padding: 0 0.5rem 0.65rem;
+            }
+
+            .leaderboard-title-container {
+                margin-bottom: 0.35rem;
+            }
+
+            .leaderboard-title {
+                font-size: 1.5rem;
+                line-height: 1.05;
+            }
+
+            .leaderboard-description {
+                max-width: 720px;
+                font-size: 0.78rem;
+                line-height: 1.25;
+            }
+
+            .contribute-btn {
+                margin-top: 0.45rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.78rem;
+            }
+
+            .control-panel {
+                margin-bottom: 0.75rem;
+                padding: 0.65rem 0.8rem;
+            }
+
+            .control-panel h2 {
+                margin-bottom: 0.5rem;
+            }
+
+            .control-section {
+                margin-bottom: 0.55rem;
+                padding-bottom: 0.55rem;
+            }
+
+            .vla-arena-table th {
+                padding: 0.4rem 0.5rem;
+            }
+
+            .task-category-header {
+                padding: 0.35rem 0.4rem;
+            }
+
+            .table-scroll-hint {
+                display: none;
+            }
+
+            .floating-btn.show {
+                display: none !important;
+            }
+
+            .floating-task-selector {
+                top: calc(50% + 22px);
+            }
+        }
+        /* End Responsive Leaderboard: Short Landscape */
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts/model-metadata.js"></script>
@@ -2340,7 +2809,10 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                         <div id="category-groups" class="category-groups-container"></div>
                     </div>
                 </div>
-                
+
+                <p class="table-scroll-hint" aria-hidden="true">
+                    Swipe to compare tasks <span aria-hidden="true">→</span>
+                </p>
                 <div class="vla-arena-table-wrapper">
                     <table id="vla-arena-table" class="vla-arena-table">
                         <thead id="vla-table-head"></thead>
@@ -2509,6 +2981,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
         window.addEventListener('hashchange', loadPageFromHash);
 
         let vlaArenaData = null;
+        let portraitTableFrame = null;
 
         let currentSortColumn = null;
         let sortDirection = 'desc';
@@ -3125,6 +3598,11 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             }
 
             const route = window.location.hash.substring(1) || 'leaderboard';
+            if (route !== 'leaderboard') {
+                hideFloatingTaskSelector(panel);
+                return;
+            }
+
             const categoryRect = categorySelection.getBoundingClientRect();
             const tableRect = tableWrapper.getBoundingClientRect();
             const navbarRect = navbar.getBoundingClientRect();
@@ -3161,6 +3639,34 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             if (!stickyViewport || !tableWrapper) return;
 
             stickyViewport.scrollLeft = tableWrapper.scrollLeft;
+        }
+
+        function updatePortraitTableViewport() {
+            const tableWrapper = document.querySelector('.vla-arena-table-wrapper');
+            const leaderboardPage = document.querySelector('#leaderboard-page .leaderboard-page');
+            if (!tableWrapper || !leaderboardPage) return;
+
+            const gutter = LeaderboardVisualization.getPortraitTableGutter({
+                viewportWidth: window.innerWidth,
+                scrollLeft: tableWrapper.scrollLeft
+            });
+            leaderboardPage.style.setProperty('--portrait-table-gutter', `${gutter}px`);
+            handleFloatingTaskSelector();
+            handleStickyTableHeader();
+            syncStickyTableHeaderScroll();
+        }
+
+        function schedulePortraitTableViewportUpdate() {
+            if (portraitTableFrame !== null) return;
+
+            portraitTableFrame = window.requestAnimationFrame(() => {
+                portraitTableFrame = null;
+                updatePortraitTableViewport();
+            });
+        }
+
+        function handleLeaderboardTableScroll() {
+            schedulePortraitTableViewportUpdate();
         }
 
         function renderStickyTableHeader() {
@@ -4622,9 +5128,17 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                 const contributeBtn = document.querySelector('.leaderboard-header .contribute-btn');
                 if (contributeBtn) {
                     const rect = contributeBtn.getBoundingClientRect();
-                    const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-                    
-                    if (!isVisible && rect.top < 0) {
+                    const controlPanel = document.getElementById('control-panel');
+                    const navbar = document.querySelector('.navbar');
+                    const compact = window.matchMedia('(max-width: 900px)').matches;
+                    const shouldShow = LeaderboardVisualization.shouldShowFloatingContribution({
+                        compact,
+                        actionTop: rect.top,
+                        controlBottom: controlPanel?.getBoundingClientRect().bottom,
+                        visibleTop: navbar?.getBoundingClientRect().bottom
+                    });
+
+                    if (shouldShow) {
                         floatingContribute.classList.add('show');
                     } else {
                         floatingContribute.classList.remove('show');
@@ -4678,7 +5192,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
         }
 
         window.addEventListener('scroll', handleFloatingElements);
-        window.addEventListener('resize', handleFloatingTaskSelector);
+        window.addEventListener('resize', schedulePortraitTableViewportUpdate);
         window.addEventListener('resize', refreshStickyTableHeader);
         
         window.addEventListener('hashchange', () => {
@@ -4698,7 +5212,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
 
             const tableWrapper = document.querySelector('.vla-arena-table-wrapper');
             if (tableWrapper) {
-                tableWrapper.addEventListener('scroll', syncStickyTableHeaderScroll);
+                tableWrapper.addEventListener('scroll', handleLeaderboardTableScroll);
             }
 
             const stickyViewport = document.getElementById('sticky-table-header');
@@ -4720,6 +5234,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             }
 
             loadPageFromHash();
+            updatePortraitTableViewport();
 
             setTimeout(handleFloatingElements, 100);
         });

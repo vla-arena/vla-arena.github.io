@@ -274,6 +274,25 @@
             && tableBottom > visibleTop + headerHeight;
     }
 
+    function shouldShowFloatingContribution({ compact, actionTop, controlBottom, visibleTop }) {
+        if (![actionTop, controlBottom, visibleTop].every(Number.isFinite)) {
+            return false;
+        }
+
+        return compact ? controlBottom < visibleTop : actionTop < 0;
+    }
+
+    function getPortraitTableGutter({ viewportWidth, scrollLeft, maxGutter = 52 }) {
+        if (![viewportWidth, scrollLeft, maxGutter].every(Number.isFinite)
+            || viewportWidth > 700
+            || scrollLeft < 0
+            || maxGutter < 0) {
+            return 0;
+        }
+
+        return Math.max(0, Math.min(maxGutter, maxGutter - scrollLeft));
+    }
+
     function toggleTaskSelection(selectedTasks, taskName) {
         if (selectedTasks.has(taskName)) {
             selectedTasks.delete(taskName);
@@ -405,6 +424,8 @@
         getFloatingTaskPanelLeft,
         shouldShowFloatingTaskPanel,
         shouldShowStickyTableHeader,
+        shouldShowFloatingContribution,
+        getPortraitTableGutter,
         getAverageBarWidth,
         getDifficultyScore,
         getSrLevelScores,

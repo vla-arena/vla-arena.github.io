@@ -11,6 +11,9 @@ on:
       - 'scripts/model-metadata.test.js'
       - 'scripts/model-manifest.js'
       - 'scripts/model-manifest.test.js'
+      - 'scripts/leaderboard-visualization.js'
+      - 'scripts/leaderboard-visualization.test.js'
+      - 'scripts/mobile-responsive.test.js'
       - 'scripts/site-content.test.js'
       - 'scripts/validate-results.js'
       - '.github/workflows/validate-results.yml'
@@ -28,11 +31,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Test model manifest loading and site content
-        run: node --test scripts/model-manifest.test.js scripts/site-content.test.js
-
-      - name: Test model metadata
-        run: node --test scripts/model-metadata.test.js
+      - name: Test site behavior
+        run: node --test scripts/*.test.js
 
       - name: Validate model result files
         run: node scripts/validate-results.js

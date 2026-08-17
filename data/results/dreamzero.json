@@ -1,0 +1,184 @@
+{
+  "name": "DreamZero",
+  "tasks": [
+    {
+      "name": "DynamicDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.72,
+          0.4667,
+          0.34
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 229
+    },
+    {
+      "name": "StaticDistractors",
+      "category": "Distractor",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.78,
+          0.36,
+          0.04
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 177
+    },
+    {
+      "name": "PrepositionCombinations",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.0133,
+          0,
+          0
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 2
+    },
+    {
+      "name": "TaskWorkflows",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.0933,
+          0.0067,
+          0.1133
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 32
+    },
+    {
+      "name": "UnseenObjects",
+      "category": "Extrapolation",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.34,
+          0.32,
+          0.22
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 132
+    },
+    {
+      "name": "LongHorizon",
+      "category": "Long Horizon",
+      "hasCC": false,
+      "data": {
+        "sr": [
+          0.5267,
+          0.12,
+          0
+        ]
+      },
+      "numEpisodes": 600,
+      "numSuccesses": 176
+    },
+    {
+      "name": "CautiousGrasp",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.3933,
+          0.1467,
+          0.0067
+        ],
+        "cc": [
+          12.9467,
+          175.1667,
+          70.8133
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 82
+    },
+    {
+      "name": "DynamicObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.42,
+          0.36,
+          0.2
+        ],
+        "cc": [
+          31.3333,
+          95.8933,
+          117.6067
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 147
+    },
+    {
+      "name": "HazardAvoidance",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.0933,
+          0.0467,
+          0
+        ],
+        "cc": [
+          38.1757,
+          52.922,
+          49.1267
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 21
+    },
+    {
+      "name": "StatePreservation",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.18,
+          0.0933,
+          0.1267
+        ],
+        "cc": [
+          0,
+          0.9333,
+          4.2
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 60
+    },
+    {
+      "name": "StaticObstacles",
+      "category": "Safety",
+      "hasCC": true,
+      "data": {
+        "sr": [
+          0.76,
+          0.38,
+          0.14
+        ],
+        "cc": [
+          0,
+          97.68,
+          254.32
+        ]
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 192
+    }
+  ]
+}

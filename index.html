@@ -945,10 +945,13 @@
             padding-top: 27px;
         }
 
-        .model-size-badge {
+        .model-size-and-type {
             position: absolute;
             top: 0;
             left: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
             color: #666;
             font-size: 0.72em;
             font-weight: 700;
@@ -2800,6 +2803,7 @@
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="scripts/model-metadata.js"></script>
+    <script src="scripts/model-label.js"></script>
     <script src="scripts/model-manifest.js"></script>
 </head>
 
@@ -3185,6 +3189,10 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
             return model && typeof model.size === 'string' ? model.size.trim() : '';
         }
 
+        function getModelType(model) {
+            return ModelMetadata.normalizeModelType(model && model.modelType);
+        }
+
         function getModelReleaseMonth(model) {
             return ModelMetadata.normalizeReleaseMonth(model && model.releaseMonth);
         }
@@ -3240,14 +3248,16 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
         function getModelLabelHtml(model, iconHtml = '') {
             const modelName = model && model.name ? model.name : 'Unknown Model';
             const modelSize = getModelSize(model);
+            const modelType = getModelType(model);
             const releaseMonth = getModelReleaseMonth(model);
             const sizeHtml = modelSize ? `<span class="model-size-badge">${modelSize}</span>` : '';
+            const sizeAndTypeHtml = `<span class="model-size-and-type">${ModelLabel.renderModelTypeText(modelType)}${sizeHtml}</span>`;
             const releaseMonthHtml = releaseMonth ? `<span class="model-release-month">${releaseMonth}</span>` : '';
             const releaseClass = releaseMonth ? ' has-release-month' : '';
             const iconLabelHtml = iconHtml ? `<wbr>${iconHtml}` : '';
             return `
                 <div class="model-metadata${releaseClass}">
-                    ${sizeHtml}
+                    ${sizeAndTypeHtml}
                     ${releaseMonthHtml}
                     ${getModelLinksHtml(model)}
                     <div class="model-title">${modelName}${iconLabelHtml}</div>
@@ -3502,6 +3512,7 @@ url={https://openreview.net/forum?id=qjeCH95rbF}
                 models.push({
                     name: modelData.name,
                     size: getModelSize(modelData),
+                    modelType: getModelType(modelData),
                     releaseMonth: getModelReleaseMonth(modelData),
                     links: getModelLinks(modelData),
                     id: modelData.id

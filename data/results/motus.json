@@ -1,6 +1,7 @@
 {
   "name": "Motus",
   "size": "8B",
+  "modelType": "wam",
   "releaseMonth": "2025-12",
   "links": {
     "github": "https://github.com/thu-ml/Motus",

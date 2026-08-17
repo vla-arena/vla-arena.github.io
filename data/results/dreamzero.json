@@ -1,6 +1,7 @@
 {
   "name": "DreamZero",
   "size": "14B",
+  "modelType": "wam",
   "releaseMonth": "2026-02",
   "links": {
     "paper": "https://arxiv.org/abs/2602.15922",

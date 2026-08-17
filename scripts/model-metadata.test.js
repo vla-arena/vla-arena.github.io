@@ -2,11 +2,34 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 
 const {
+    getModelTypeValidationError,
     getReleaseMonthValidationError,
     isGithubRepositoryUrl,
     normalizeModelLinks,
+    normalizeModelType,
     normalizeReleaseMonth
 } = require('./model-metadata.js');
+
+test('normalizes optional model types and validates explicit values', () => {
+    assert.equal(normalizeModelType(undefined), 'vla');
+    assert.equal(normalizeModelType(null), 'vla');
+    assert.equal(normalizeModelType(''), 'vla');
+    assert.equal(normalizeModelType('vla'), 'vla');
+    assert.equal(normalizeModelType('wam'), 'wam');
+    assert.equal(normalizeModelType('VLA'), 'vla');
+    assert.equal(normalizeModelType(' wam '), 'vla');
+    assert.equal(normalizeModelType('world-model'), 'vla');
+
+    assert.equal(getModelTypeValidationError(undefined), '');
+    assert.equal(getModelTypeValidationError(null), '');
+    assert.equal(getModelTypeValidationError(''), '');
+    assert.equal(getModelTypeValidationError('vla'), '');
+    assert.equal(getModelTypeValidationError('wam'), '');
+    assert.match(getModelTypeValidationError('VLA'), /lowercase/);
+    assert.match(getModelTypeValidationError(' wam '), /leading or trailing whitespace/);
+    assert.match(getModelTypeValidationError('world-model'), /vla.*wam/);
+    assert.match(getModelTypeValidationError(123), /string, null, or empty string/);
+});
 
 test('normalizes only real unpadded YYYY-MM release months', () => {
     assert.equal(normalizeReleaseMonth('2024-06'), '2024-06');

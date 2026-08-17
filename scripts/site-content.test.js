@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
+const { normalizeModelType } = require('./model-metadata.js');
 
 const rootDir = path.resolve(__dirname, '..');
 
@@ -12,6 +13,18 @@ function readRootFile(relativePath) {
 function readJson(relativePath) {
     return JSON.parse(readRootFile(relativePath));
 }
+
+test('classifies DreamZero and Motus as WAM while defaulting existing models to VLA', () => {
+    const dreamZero = readJson('data/results/dreamzero.json');
+    const motus = readJson('data/results/motus.json');
+    const openVla = readJson('data/results/openvla.json');
+
+    assert.equal(dreamZero.modelType, 'wam');
+    assert.equal(motus.modelType, 'wam');
+    assert.equal(normalizeModelType(dreamZero.modelType), 'wam');
+    assert.equal(normalizeModelType(motus.modelType), 'wam');
+    assert.equal(normalizeModelType(openVla.modelType), 'vla');
+});
 
 test('uses the approved display names for upstream models', () => {
     const expectedNames = new Map([
@@ -273,6 +286,8 @@ test('runs site tests in CI when model-loading content changes', () => {
     const watchedPaths = [
         'index.html',
         'README.md',
+        'scripts/model-label.js',
+        'scripts/model-label.test.js',
         'scripts/model-manifest.js',
         'scripts/model-manifest.test.js',
         'scripts/site-content.test.js'

@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {
+    getModelTypeValidationError,
     getReleaseMonthValidationError,
     isGithubRepositoryUrl
 } = require('./model-metadata.js');
@@ -228,6 +229,13 @@ function validateModelFile(modelId, canonicalTasks) {
             addError(modelPath, 'Model "size" must be a non-empty string when present');
         } else if (model.size !== model.size.trim()) {
             addError(modelPath, 'Model "size" must not contain leading or trailing whitespace');
+        }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(model, 'modelType')) {
+        const modelTypeError = getModelTypeValidationError(model.modelType);
+        if (modelTypeError) {
+            addError(modelPath, modelTypeError);
         }
     }
 

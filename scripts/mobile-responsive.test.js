@@ -4,6 +4,7 @@ const path = require('node:path');
 const test = require('node:test');
 
 const html = fs.readFileSync(path.resolve(__dirname, '..', 'index.html'), 'utf8');
+const visualization = require('./leaderboard-visualization.js');
 
 function responsiveSection(name) {
     const start = `/* Responsive Leaderboard: ${name} */`;
@@ -35,12 +36,104 @@ test('uses a single-column portrait layout without category overflow', () => {
     assert.match(css, /\.control-row\s*{[^}]*flex-direction:\s*column/);
     assert.match(css, /\.control-label\s*{[^}]*min-width:\s*0/);
     assert.match(css, /\.category-groups-container\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
-    assert.match(css, /\.leaderboard-page\s*{[^}]*--portrait-table-gutter:\s*52px;[^}]*--portrait-model-width:\s*104px;[^}]*--portrait-task-width:\s*calc\(\(100vw\s*-\s*16px\s*-\s*var\(--portrait-model-width\)\)\s*\/\s*2\)/);
-    assert.match(css, /\.vla-arena-table-wrapper\s*{[^}]*width:\s*calc\(100%\s*-\s*var\(--portrait-table-gutter\)\);[^}]*margin-left:\s*var\(--portrait-table-gutter\)/);
+    assert.match(
+        css,
+        /\.leaderboard-page\s*{[^}]*--portrait-table-leadin:\s*52px;[^}]*--portrait-table-gutter:\s*52px/
+    );
+    assert.match(
+        css,
+        /\.vla-arena-table-wrapper\s*{[^}]*display:\s*flex;[^}]*width:\s*100%;[^}]*max-width:\s*100%;[^}]*margin-left:\s*0/
+    );
+    assert.match(
+        css,
+        /\.portrait-table-leadin,\s*\.sticky-header-leadin\s*{[^}]*flex:\s*0\s+0\s+var\(--portrait-table-leadin\)/
+    );
+    assert.match(
+        css,
+        /#sticky-table-header\s*{[^}]*--portrait-table-leadin:\s*52px/
+    );
+    assert.doesNotMatch(
+        css,
+        /\.vla-arena-table-wrapper\s*{[^}]*width:\s*calc\(100%\s*-\s*var\(--portrait-table-gutter\)\)/
+    );
+    assert.match(html, /<div class="portrait-table-leadin" aria-hidden="true"><\/div>/);
+    assert.match(html, /stickyLeadIn\.className\s*=\s*'sticky-header-leadin'/);
+    assert.match(html, /stickyViewport\.replaceChildren\(stickyLeadIn,\s*clonedTable\)/);
     assert.match(css, /\.vla-arena-table (?:th|td)\.model-name[\s\S]*?width:\s*var\(--portrait-model-width\)/);
     assert.match(css, /\.table-scroll-hint\s*{[^}]*display:\s*flex/);
     assert.match(css, /\.floating-btn\s*{[^}]*width:\s*44px;[^}]*height:\s*44px;[^}]*padding:\s*0;[^}]*border-radius:\s*50%/);
-    assert.match(css, /\.floating-btn span:not\(\.icon\)\s*{[^}]*display:\s*none/);
+    assert.match(
+        css,
+        /\.floating-btn span:not\(\.icon\):not\(\.material-icons\)\s*{[^}]*display:\s*none/
+    );
+});
+
+test('uses a two-column Task Store phone layout with a narrow fallback', () => {
+    const css = responsiveSection('Portrait');
+
+    assert.match(css, /\.task-gallery\s*{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+    assert.match(css, /\.task-store-controls\s*{[^}]*flex-wrap:\s*wrap/);
+    assert.match(css, /\.task-store-select-all\s*{[^}]*display:\s*grid;[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+    assert.match(css, /\.task-card-image\s*{[^}]*height:\s*auto;[^}]*aspect-ratio:\s*4\s*\/\s*3/);
+    assert.match(css, /\.task-card-category\s*{[^}]*max-width:\s*calc\(100%\s*-\s*1rem\);[^}]*white-space:\s*normal/);
+    assert.match(css, /\.task-card-name\s*{[^}]*white-space:\s*normal;[^}]*overflow-wrap:\s*anywhere/);
+    assert.match(html, /@media \(max-width:\s*340px\)[\s\S]*?\.task-gallery\s*{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+});
+
+test('keeps the Task Store detail modal readable on phones', () => {
+    const css = responsiveSection('Portrait');
+
+    assert.match(css, /\.task-modal\s*{[^}]*padding:\s*0\.5rem\s+0\.25rem/);
+    assert.match(
+        css,
+        /\.task-modal-content\s*{[^}]*width:\s*calc\(100%\s*-\s*0\.5rem\);[^}]*max-width:\s*calc\(100%\s*-\s*0\.5rem\)/
+    );
+    assert.match(css, /\.task-modal-close\s*{[^}]*width:\s*36px;[^}]*height:\s*36px/);
+    assert.match(
+        css,
+        /\.task-modal-title\s*{[^}]*padding:\s*3\.25rem\s+0\.75rem\s+1\.25rem;[^}]*font-size:\s*1\.35rem;[^}]*line-height:\s*1\.25/
+    );
+    assert.match(
+        css,
+        /\.task-detail-table-wrapper\s*{[^}]*padding:\s*0\.5rem\s+0\s+1rem;[^}]*overflow-x:\s*auto;[^}]*overscroll-behavior-x:\s*contain;[^}]*-webkit-overflow-scrolling:\s*touch/
+    );
+    assert.match(
+        css,
+        /\.task-detail-table\s*{[^}]*width:\s*720px;[^}]*min-width:\s*720px;[^}]*overflow:\s*visible/
+    );
+    assert.match(
+        css,
+        /\.task-detail-table th,\s*\.task-detail-table td\s*{[^}]*padding:\s*0\.6rem\s+0\.4rem;[^}]*font-size:\s*0\.85rem/
+    );
+    assert.match(
+        css,
+        /\.task-detail-table th:first-child,[\s\S]*?\.task-detail-table td:first-child\s*{[^}]*width:\s*90px;[^}]*position:\s*sticky;[^}]*left:\s*0;[^}]*z-index:\s*2/
+    );
+    assert.match(css, /\.task-detail-table th:first-child\s*{[^}]*z-index:\s*3;[^}]*background:\s*#f5f5f5/);
+    assert.match(css, /\.task-detail-table td:first-child\s*{[^}]*background:\s*#fff/);
+    assert.match(
+        css,
+        /\.task-detail-table th:not\(:first-child\),\s*\.task-detail-table td:not\(:first-child\)\s*{[^}]*width:\s*126px/
+    );
+    assert.match(css, /\.task-detail-canvas-container\s*{[^}]*height:\s*140px/);
+    assert.match(
+        html,
+        /<thead>\s*<tr>\s*<th>Level<\/th>\s*<th>Task 1<\/th>\s*<th>Task 2<\/th>\s*<th>Task 3<\/th>\s*<th>Task 4<\/th>\s*<th>Task 5<\/th>\s*<\/tr>\s*<\/thead>/
+    );
+});
+
+test('resets Task Store modal scroll state whenever a task is opened', () => {
+    const openTaskModal = html.slice(
+        html.indexOf('function openTaskModal(task)'),
+        html.indexOf('function closeTaskModal()')
+    );
+
+    assert.match(
+        openTaskModal,
+        /const tableWrapper\s*=\s*modal\.querySelector\('\.task-detail-table-wrapper'\)/
+    );
+    assert.match(openTaskModal, /modal\.scrollTop\s*=\s*0/);
+    assert.match(openTaskModal, /tableWrapper\.scrollLeft\s*=\s*0/);
 });
 
 test('tracks the portrait indicator gutter directly during horizontal movement', () => {
@@ -75,6 +168,31 @@ test('tracks the portrait indicator gutter directly during horizontal movement',
     assert.doesNotMatch(html, /handlePortraitTableTransitionEnd|shouldExpandPortraitTaskViewport/);
 });
 
+test('positions the floating task selector from the scroll-moving table edge', () => {
+    const portraitLeftAt = scrollLeft => 8 + visualization.getPortraitTableGutter({
+        viewportWidth: 390,
+        scrollLeft
+    });
+    const desktopLeftAt = scrollLeft => 50 + visualization.getPortraitTableGutter({
+        viewportWidth: 1440,
+        scrollLeft
+    });
+
+    assert.equal(visualization.getFloatingTaskPanelLeft(portraitLeftAt(0), 39), 10.5);
+    assert.equal(visualization.getFloatingTaskPanelLeft(portraitLeftAt(26), 39), null);
+    assert.equal(desktopLeftAt(0), 50);
+    assert.equal(desktopLeftAt(12), 50);
+
+    const handler = html.slice(
+        html.indexOf('function handleFloatingTaskSelector()'),
+        html.indexOf('function hideStickyTableHeader()')
+    );
+    assert.match(handler, /const tableRect = tableWrapper\.getBoundingClientRect\(\)/);
+    assert.match(handler, /const floatingGutter = LeaderboardVisualization\.getPortraitTableGutter\(\{/);
+    assert.match(handler, /tableRect\.left \+ floatingGutter/);
+    assert.doesNotMatch(handler, /sourceTable\.getBoundingClientRect\(\)/);
+});
+
 test('packs portrait model links into a compact two-by-two grid', () => {
     const compactCss = responsiveSection('Compact');
     const portraitCss = responsiveSection('Portrait');
@@ -88,6 +206,22 @@ test('packs portrait model links into a compact two-by-two grid', () => {
         /\.model-link\s*{[^}]*width:\s*15px;[^}]*height:\s*15px/
     );
     assert.doesNotMatch(compactCss, /\.model-links\s*{[^}]*display:\s*grid/);
+});
+
+test('contains long model titles and their full-parameter markers', () => {
+    assert.match(
+        html,
+        /\.model-title\s*{[^}]*white-space:\s*normal;[^}]*overflow-wrap:\s*anywhere/
+    );
+    assert.match(
+        html,
+        /\.full-param-icon\s*{[^}]*display:\s*inline-flex;[^}]*min-width:\s*17px;[^}]*flex-shrink:\s*0/
+    );
+    assert.match(
+        html,
+        /const iconLabelHtml\s*=\s*iconHtml\s*\?\s*`<wbr>\$\{iconHtml\}`\s*:\s*''/
+    );
+    assert.match(html, /<div class="model-title">\$\{modelName\}\$\{iconLabelHtml\}<\/div>/);
 });
 
 test('keeps fixed actions out of short landscape content', () => {
@@ -104,6 +238,14 @@ test('provides a mobile-only horizontal swipe affordance for the table', () => {
         html,
         /<p class="table-scroll-hint"[^>]*>\s*Swipe to compare tasks\s*<span[^>]*>→<\/span>\s*<\/p>/
     );
+});
+
+test('keeps the Home summary anchor within a symmetric mobile inset', () => {
+    assert.match(
+        html,
+        /@media \(max-width:\s*600px\)[\s\S]*?\.benchmark-summary\s*{[^}]*padding:\s*0\s+1\.5rem/
+    );
+    assert.match(html, /\.summary-anchor\s*{[^}]*position:\s*absolute/);
 });
 
 test('runs responsive and visualization checks in CI', () => {

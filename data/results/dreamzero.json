@@ -1,5 +1,12 @@
 {
   "name": "DreamZero",
+  "size": "14B",
+  "releaseMonth": "2026-02",
+  "links": {
+    "paper": "https://arxiv.org/abs/2602.15922",
+    "github": "https://github.com/dreamzero0/dreamzero",
+    "huggingface": "https://huggingface.co/GEAR-Dreams/DreamZero-DROID"
+  },
   "tasks": [
     {
       "name": "DynamicDistractors",

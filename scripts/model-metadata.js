@@ -7,6 +7,30 @@
     }
 }(typeof globalThis !== 'undefined' ? globalThis : this, function () {
     const releaseMonthPattern = /^\d{4}-(0[1-9]|1[0-2])$/;
+    const modelTypes = new Set(['vla', 'wam']);
+
+    function normalizeModelType(value) {
+        return value === 'wam' ? 'wam' : 'vla';
+    }
+
+    function getModelTypeValidationError(value) {
+        if (value === undefined || value === null || value === '') {
+            return '';
+        }
+        if (typeof value !== 'string') {
+            return 'Model "modelType" must be a string, null, or empty string when present';
+        }
+        if (value !== value.trim()) {
+            return 'Model "modelType" must not contain leading or trailing whitespace';
+        }
+        if (value !== value.toLowerCase()) {
+            return 'Model "modelType" must use lowercase "vla" or "wam"';
+        }
+        if (!modelTypes.has(value)) {
+            return 'Model "modelType" must be either "vla" or "wam"';
+        }
+        return '';
+    }
 
     function normalizeReleaseMonth(value) {
         if (typeof value !== 'string' || value !== value.trim()) {
@@ -73,9 +97,11 @@
     }
 
     return {
+        getModelTypeValidationError,
         getReleaseMonthValidationError,
         isGithubRepositoryUrl,
         normalizeModelLinks,
+        normalizeModelType,
         normalizeReleaseMonth
     };
 }));

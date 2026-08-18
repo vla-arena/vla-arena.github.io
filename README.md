@@ -38,6 +38,7 @@ The final results JSON file will be generated in the `results/` directory with a
 {
   "name": "Your Model Name",
   "size": "7B",
+  "modelType": "vla",
   "releaseMonth": "2025-06",
   "links": {
     "arena": "https://huggingface.co/your-org/your-evaluated-checkpoint",
@@ -66,6 +67,7 @@ The final results JSON file will be generated in the `results/` directory with a
 
 * `name`: Display name of your model
 * `size`: Optional model parameter size shown on the leaderboard (for example, "7B" or "450M")
+* `modelType`: Optional lowercase model family, either `vla` or `wam`; omitted, `null`, or empty values default to `vla`
 * `releaseMonth`: Optional first public release month in `YYYY-MM` format; omit it or use `null`/`""` when unknown
 * `links`: Optional model links shown as icons in the leaderboard model cell
 * `arena`: Optional Hugging Face URL for the evaluated checkpoint; it can be hosted under your own account or organization
@@ -95,7 +97,7 @@ git add data/results/<model_id>.json
 git add data/results/models.json
 
 # Validate result files locally (recommended)
-node --test scripts/model-metadata.test.js
+node --test scripts/model-metadata.test.js scripts/model-label.test.js
 node scripts/validate-results.js
 node --test scripts/model-manifest.test.js scripts/site-content.test.js
 
@@ -132,6 +134,7 @@ cat > data/results/my-vla.json << 'EOF'
 {
   "name": "MyVLA",
   "size": "7B",
+  "modelType": "vla",
   "releaseMonth": "2025-06",
   "links": {
     "arena": "https://huggingface.co/my-org/my-vla-evaluated-checkpoint",

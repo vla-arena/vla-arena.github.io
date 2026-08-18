@@ -7,6 +7,8 @@ on:
       - 'data/tasks/**'
       - 'index.html'
       - 'README.md'
+      - 'scripts/model-label.js'
+      - 'scripts/model-label.test.js'
       - 'scripts/model-metadata.js'
       - 'scripts/model-metadata.test.js'
       - 'scripts/model-manifest.js'

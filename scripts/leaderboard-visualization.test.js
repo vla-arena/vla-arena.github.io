@@ -143,6 +143,45 @@ test('shows a sticky table header only while the Leaderboard table crosses the n
     }), false);
 });
 
+test('delays the compact floating contribution action until controls leave the viewport', () => {
+    assert.equal(typeof visualization.shouldShowFloatingContribution, 'function');
+
+    assert.equal(visualization.shouldShowFloatingContribution({
+        compact: true,
+        actionTop: -80,
+        controlBottom: 420,
+        visibleTop: 52
+    }), false);
+    assert.equal(visualization.shouldShowFloatingContribution({
+        compact: true,
+        actionTop: -80,
+        controlBottom: 40,
+        visibleTop: 52
+    }), true);
+    assert.equal(visualization.shouldShowFloatingContribution({
+        compact: false,
+        actionTop: -1,
+        controlBottom: 420,
+        visibleTop: 88
+    }), true);
+    assert.equal(visualization.shouldShowFloatingContribution({
+        compact: false,
+        actionTop: 12,
+        controlBottom: 40,
+        visibleTop: 88
+    }), false);
+});
+
+test('tracks the portrait table gutter directly from horizontal movement', () => {
+    assert.equal(typeof visualization.getPortraitTableGutter, 'function');
+    assert.equal(visualization.getPortraitTableGutter({ viewportWidth: 360, scrollLeft: 0 }), 52);
+    assert.equal(visualization.getPortraitTableGutter({ viewportWidth: 360, scrollLeft: 13 }), 39);
+    assert.equal(visualization.getPortraitTableGutter({ viewportWidth: 390, scrollLeft: 52 }), 0);
+    assert.equal(visualization.getPortraitTableGutter({ viewportWidth: 390, scrollLeft: 80 }), 0);
+    assert.equal(visualization.getPortraitTableGutter({ viewportWidth: 800, scrollLeft: 0 }), 0);
+    assert.equal(visualization.getPortraitTableGutter({ viewportWidth: Number.NaN, scrollLeft: 0 }), 0);
+});
+
 test('maps SR averages to a fixed zero-to-one bar scale', () => {
     assert.equal(typeof visualization.getAverageBarWidth, 'function');
     assert.equal(visualization.getAverageBarWidth(0.42, 'sr', 0), 42);

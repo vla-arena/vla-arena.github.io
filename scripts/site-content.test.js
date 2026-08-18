@@ -80,7 +80,7 @@ test('provides a responsive floating task selector without a visible heading', (
     assert.match(html, /function handleFloatingTaskSelector\(\)/);
     assert.match(
         html,
-        /window\.addEventListener\('resize', handleFloatingTaskSelector\)/
+        /window\.addEventListener\('resize', schedulePortraitTableViewportUpdate\)/
     );
     assert.match(
         html,
@@ -235,7 +235,15 @@ test('provides a synchronized two-row sticky Leaderboard header', () => {
     assert.match(html, /sourceHeader\.click\(\)/);
     assert.match(
         html,
-        /tableWrapper\.addEventListener\('scroll', syncStickyTableHeaderScroll\)/
+        /function handleLeaderboardTableScroll\(\)\s*{[\s\S]*?schedulePortraitTableViewportUpdate\(\)/
+    );
+    assert.match(
+        html,
+        /function updatePortraitTableViewport\(\)\s*{[\s\S]*?syncStickyTableHeaderScroll\(\)/
+    );
+    assert.match(
+        html,
+        /tableWrapper\.addEventListener\('scroll', handleLeaderboardTableScroll\)/
     );
 });
 
@@ -278,7 +286,7 @@ test('runs site tests in CI when model-loading content changes', () => {
     }
     assert.match(
         workflow,
-        /run: node --test scripts\/model-manifest\.test\.js scripts\/site-content\.test\.js/
+        /run: node --test scripts\/\*\.test\.js/
     );
     assert.match(workflow, /run: node scripts\/validate-results\.js/);
 });

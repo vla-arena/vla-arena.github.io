@@ -1,10 +1,10 @@
 {
   "name": "StellaVLA",
   "size": "4B",
-  "releaseMonth": null,
+  "releaseMonth": "2026-08",
   "links": {
     "github": "https://github.com/StellEdge-AI/StellaVLA",
-    "paper": "https://github.com/StellEdge-AI/StellaVLA/tech_report.pdf",
+    "paper": "https://arxiv.org/abs/2608.11671",
     "huggingface": "https://huggingface.co/StellarEdge/StellaVLA"
   },
   "tasks": [
@@ -16,16 +16,16 @@
         "sr": [
           1.0,
           1.0,
-          0.8
+          1.0
         ],
         "cc": [
           0.0,
           12.8,
-          20.0
+          24.0
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 140
+      "numSuccesses": 150
     },
     {
       "name": "CautiousGrasp",
@@ -33,18 +33,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.8,
-          0.5,
-          0.1
+          1.0,
+          0.46,
+          0.08
         ],
         "cc": [
-          4.82,
-          55.14,
-          9.86
+          4.02,
+          51.84,
+          8.6
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 70
+      "numSuccesses": 77
     },
     {
       "name": "HazardAvoidance",
@@ -52,18 +52,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.62,
-          0.92,
+          0.66,
+          0.94,
           0.7
         ],
         "cc": [
-          7.66,
-          8.8,
+          6.4,
+          8.81,
           13.68
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 112
+      "numSuccesses": 115
     },
     {
       "name": "StatePreservation",
@@ -71,18 +71,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.92,
           0.9,
-          0.62
+          0.9,
+          0.76
         ],
         "cc": [
           0.0,
           9.0,
-          8.4
+          25.2
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 122
+      "numSuccesses": 128
     },
     {
       "name": "DynamicObstacles",
@@ -91,17 +91,17 @@
       "data": {
         "sr": [
           0.8,
-          0.6,
-          0.02
+          0.62,
+          0.4
         ],
         "cc": [
           17.0,
-          20.32,
-          10.74
+          8.26,
+          7.4
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 71
+      "numSuccesses": 91
     },
     {
       "name": "StaticDistractors",
@@ -111,11 +111,11 @@
         "sr": [
           1.0,
           0.56,
-          0.2
+          0.4
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 88
+      "numSuccesses": 98
     },
     {
       "name": "DynamicDistractors",
@@ -124,12 +124,12 @@
       "data": {
         "sr": [
           1.0,
-          0.72,
-          0.6
+          0.74,
+          0.78
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 116
+      "numSuccesses": 126
     },
     {
       "name": "PrepositionCombinations",
@@ -137,13 +137,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.7,
+          0.64,
           0.14,
           0.0
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 42
+      "numSuccesses": 39
     },
     {
       "name": "TaskWorkflows",
@@ -152,12 +152,12 @@
       "data": {
         "sr": [
           0.64,
-          0.66,
+          0.72,
           0.84
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 107
+      "numSuccesses": 110
     },
     {
       "name": "UnseenObjects",
@@ -165,13 +165,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.8,
-          0.8,
+          1.0,
+          1.0,
           0.8
         ]
       },
       "numEpisodes": 150,
-      "numSuccesses": 120
+      "numSuccesses": 140
     },
     {
       "name": "LongHorizon",
@@ -180,12 +180,12 @@
       "data": {
         "sr": [
           1.0,
-          0.02,
+          0.0,
           0.0
         ]
       },
       "numEpisodes": 200,
-      "numSuccesses": 101
+      "numSuccesses": 100
     }
   ]
 }

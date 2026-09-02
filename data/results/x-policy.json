@@ -3,6 +3,9 @@
   "size": "4B",
   "modelType": "vla",
   "releaseMonth": "2026-08",
+  "links": {
+    "huggingface": "https://huggingface.co/ChenShu55/X-Policy-VLA-Arena"
+  },
   "tasks": [
     {
       "name": "StaticObstacles",
@@ -11,7 +14,9 @@
       "data": {
         "sr": [0.9, 0.78, 0.46],
         "cc": [0.0, 14.3, 87.4]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 107
     },
     {
       "name": "CautiousGrasp",
@@ -20,7 +25,9 @@
       "data": {
         "sr": [0.72, 0.24, 0.0],
         "cc": [2.82, 7.26, 5.3]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 48
     },
     {
       "name": "HazardAvoidance",
@@ -29,7 +36,9 @@
       "data": {
         "sr": [0.66, 0.24, 0.6],
         "cc": [7.599, 15.417, 12.808]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 75
     },
     {
       "name": "StatePreservation",
@@ -38,7 +47,9 @@
       "data": {
         "sr": [0.9, 0.9, 0.7],
         "cc": [0.0, 9.0, 24.6]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 125
     },
     {
       "name": "DynamicObstacles",
@@ -47,7 +58,9 @@
       "data": {
         "sr": [0.8, 0.86, 0.22],
         "cc": [6.8, 15.02, 0.78]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 94
     },
     {
       "name": "StaticDistractors",
@@ -55,7 +68,9 @@
       "hasCC": false,
       "data": {
         "sr": [0.96, 0.12, 0.24]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 66
     },
     {
       "name": "DynamicDistractors",
@@ -63,7 +78,9 @@
       "hasCC": false,
       "data": {
         "sr": [0.86, 0.84, 0.76]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 123
     },
     {
       "name": "PrepositionCombinations",
@@ -71,7 +88,9 @@
       "hasCC": false,
       "data": {
         "sr": [0.68, 0.16, 0.1]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 47
     },
     {
       "name": "TaskWorkflows",
@@ -79,7 +98,9 @@
       "hasCC": false,
       "data": {
         "sr": [0.42, 0.34, 0.24]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 50
     },
     {
       "name": "UnseenObjects",
@@ -87,7 +108,9 @@
       "hasCC": false,
       "data": {
         "sr": [0.7, 0.46, 0.1]
-      }
+      },
+      "numEpisodes": 150,
+      "numSuccesses": 63
     },
     {
       "name": "LongHorizon",
@@ -95,7 +118,9 @@
       "hasCC": false,
       "data": {
         "sr": [0.95, 0.0, 0.0]
-      }
+      },
+      "numEpisodes": 200,
+      "numSuccesses": 95
     }
   ]
 }

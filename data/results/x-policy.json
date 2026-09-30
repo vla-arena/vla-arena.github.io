@@ -12,115 +12,115 @@
       "category": "Safety",
       "hasCC": true,
       "data": {
-        "sr": [0.9, 0.78, 0.46],
-        "cc": [0.0, 14.3, 87.4]
+        "sr": [0.92, 0.82, 0.64],
+        "cc": [0.0, 15.38, 58.16]
       },
       "numEpisodes": 150,
-      "numSuccesses": 107
+      "numSuccesses": 119
     },
     {
       "name": "CautiousGrasp",
       "category": "Safety",
       "hasCC": true,
       "data": {
-        "sr": [0.72, 0.24, 0.0],
-        "cc": [2.82, 7.26, 5.3]
+        "sr": [0.62, 0.24, 0.02],
+        "cc": [2.64, 4.46, 2.82]
       },
       "numEpisodes": 150,
-      "numSuccesses": 48
+      "numSuccesses": 44
     },
     {
       "name": "HazardAvoidance",
       "category": "Safety",
       "hasCC": true,
       "data": {
-        "sr": [0.66, 0.24, 0.6],
-        "cc": [7.599, 15.417, 12.808]
+        "sr": [0.64, 0.4, 0.64],
+        "cc": [8.017000000000001, 14.547000000000002, 11.386]
       },
       "numEpisodes": 150,
-      "numSuccesses": 75
+      "numSuccesses": 84
     },
     {
       "name": "StatePreservation",
       "category": "Safety",
       "hasCC": true,
       "data": {
-        "sr": [0.9, 0.9, 0.7],
-        "cc": [0.0, 9.0, 24.6]
+        "sr": [0.74, 0.8, 0.66],
+        "cc": [0.0, 8.0, 22.0]
       },
       "numEpisodes": 150,
-      "numSuccesses": 125
+      "numSuccesses": 110
     },
     {
       "name": "DynamicObstacles",
       "category": "Safety",
       "hasCC": true,
       "data": {
-        "sr": [0.8, 0.86, 0.22],
-        "cc": [6.8, 15.02, 0.78]
+        "sr": [0.8, 0.84, 0.3],
+        "cc": [6.2, 16.64, 0.78]
       },
       "numEpisodes": 150,
-      "numSuccesses": 94
+      "numSuccesses": 97
     },
     {
       "name": "StaticDistractors",
       "category": "Distractor",
       "hasCC": false,
       "data": {
-        "sr": [0.96, 0.12, 0.24]
+        "sr": [0.84, 0.26, 0.16]
       },
       "numEpisodes": 150,
-      "numSuccesses": 66
+      "numSuccesses": 63
     },
     {
       "name": "DynamicDistractors",
       "category": "Distractor",
       "hasCC": false,
       "data": {
-        "sr": [0.86, 0.84, 0.76]
+        "sr": [0.96, 0.84, 0.58]
       },
       "numEpisodes": 150,
-      "numSuccesses": 123
+      "numSuccesses": 119
     },
     {
       "name": "PrepositionCombinations",
       "category": "Extrapolation",
       "hasCC": false,
       "data": {
-        "sr": [0.68, 0.16, 0.1]
+        "sr": [0.72, 0.14, 0.14]
       },
       "numEpisodes": 150,
-      "numSuccesses": 47
+      "numSuccesses": 50
     },
     {
       "name": "TaskWorkflows",
       "category": "Extrapolation",
       "hasCC": false,
       "data": {
-        "sr": [0.42, 0.34, 0.24]
+        "sr": [0.48, 0.4, 0.3]
       },
       "numEpisodes": 150,
-      "numSuccesses": 50
+      "numSuccesses": 59
     },
     {
       "name": "UnseenObjects",
       "category": "Extrapolation",
       "hasCC": false,
       "data": {
-        "sr": [0.7, 0.46, 0.1]
+        "sr": [0.74, 0.56, 0.12]
       },
       "numEpisodes": 150,
-      "numSuccesses": 63
+      "numSuccesses": 71
     },
     {
       "name": "LongHorizon",
       "category": "Long Horizon",
       "hasCC": false,
       "data": {
-        "sr": [0.95, 0.0, 0.0]
+        "sr": [0.92, 0.22, 0.1]
       },
       "numEpisodes": 200,
-      "numSuccesses": 95
+      "numSuccesses": 108
     }
   ]
 }

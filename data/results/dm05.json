@@ -5,7 +5,8 @@
   "links": {
     "github": "https://github.com/dexmal/opendm",
     "paper": "https://www.dexmal.com/blog/dm0.5/index_en.html",
-    "huggingface": "https://huggingface.co/Dexmal/DM05"
+    "huggingface": "https://huggingface.co/Dexmal/DM05",
+    "arena": "https://huggingface.co/Dexmal/DM05-Vla-Arena"
   },
   "tasks": [
     {
@@ -14,16 +15,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.9933,
-          0.6133,
-          0.5867
+          0.9933333333333333,
+          0.88,
+          0.7866666666666666
         ],
         "cc": [
           0.0,
-          193.5333,
-          319.7267
+          15.426666666666668,
+          32.93333333333333
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 399
     },
     {
       "name": "CautiousGrasp",
@@ -31,16 +34,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.9,
-          0.1867,
-          0.1267
+          0.9133333333333333,
+          0.31333333333333335,
+          0.16666666666666669
         ],
         "cc": [
-          4.1333,
-          8.66,
-          4.74
+          3.1533333333333333,
+          6.706666666666667,
+          9.886666666666667
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 209
     },
     {
       "name": "HazardAvoidance",
@@ -48,16 +53,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.8867,
-          0.3867,
-          0.42
+          0.92,
+          0.7133333333333334,
+          0.84
         ],
         "cc": [
-          8.7983,
-          40.168,
-          39.32
+          5.726666666666667,
+          39.70666666666666,
+          34.239999999999995
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 371
     },
     {
       "name": "StatePreservation",
@@ -65,16 +72,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.9867,
-          0.7133,
-          0.7067
+          0.98,
+          0.84,
+          0.68
         ],
         "cc": [
           0.0,
-          7.1333,
-          10.7333
+          5.733333333333333,
+          26.266666666666666
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 375
     },
     {
       "name": "DynamicObstacles",
@@ -82,16 +91,18 @@
       "hasCC": true,
       "data": {
         "sr": [
-          0.9733,
-          0.8267,
-          0.3
+          0.9666666666666667,
+          0.7866666666666666,
+          0.32
         ],
         "cc": [
-          8.1333,
-          11.3733,
-          22.0533
+          0.64,
+          26.153333333333332,
+          9.273333333333333
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 311
     },
     {
       "name": "StaticDistractors",
@@ -99,11 +110,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.98,
-          0.2867,
-          0.1933
+          0.96,
+          0.22,
+          0.22
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 210
     },
     {
       "name": "DynamicDistractors",
@@ -111,11 +124,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.9733,
-          0.78,
-          0.6933
+          0.9733333333333333,
+          0.7733333333333333,
+          0.7999999999999999
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 382
     },
     {
       "name": "PrepositionCombinations",
@@ -123,11 +138,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.72,
-          0.2067,
-          0.0067
+          0.7333333333333333,
+          0.16,
+          0.006666666666666667
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 135
     },
     {
       "name": "TaskWorkflows",
@@ -135,11 +152,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.5667,
-          0.3133,
-          0.5
+          0.68,
+          0.41333333333333333,
+          0.6133333333333334
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 256
     },
     {
       "name": "UnseenObjects",
@@ -147,11 +166,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.9533,
-          0.76,
-          0.3
+          0.88,
+          0.7933333333333333,
+          0.41333333333333333
         ]
-      }
+      },
+      "numEpisodes": 450,
+      "numSuccesses": 313
     },
     {
       "name": "LongHorizon",
@@ -159,11 +180,13 @@
       "hasCC": false,
       "data": {
         "sr": [
-          0.7833,
-          0.0,
+          0.8,
+          0.006666666666666667,
           0.0
         ]
-      }
+      },
+      "numEpisodes": 600,
+      "numSuccesses": 241
     }
   ]
 }
